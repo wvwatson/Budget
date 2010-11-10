@@ -11,6 +11,10 @@ class BudgetObject
 end
 class Dollars
 end
+#extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
+class Year
+	#roll forward
+end
 class Account
 	attr :BudgetObject #kind of thing the money is spent on e.g. chairs.  Maybe should be a list
 	attr :Account #Name of bucket where money is collected
@@ -24,6 +28,13 @@ class Organization
 	# returns money
 	def rollup 
 	end
+	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
+	def balance
+	end
+end
+#A complete list of rules for determining a budget
+#Can be all inclusive, per year, per org
+class Budget
 end
 # should also be able to freely compose adhoc orgs LevelName +  _ + Name 
 #  e.g. division_1  +  division_2
