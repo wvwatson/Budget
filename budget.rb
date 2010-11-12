@@ -1,3 +1,11 @@
+# We need a better way to track budgets within organizations
+# As expenditures roll their way up through organizations they need to be tracked
+# At each phase of the roll up there needs to be a spot for calculations to be made
+# We need to allow for percentage based budgets
+# This in the end should be a budget framework, not a budget application.  
+# This is meant to be shared with others as an example
+# export to excel
+
 class SourceOfFunds
 	attr: StartDate
 	attr: EndDate
@@ -11,13 +19,19 @@ class BudgetObject
 end
 class Dollars
 end
+class Expenditures
+  attr :Dollars
+end
 #extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
 class Year
 	#roll forward
 end
+#Name of bucket where money is collected
 class Account
-	attr :BudgetObject #kind of thing the money is spent on e.g. chairs.  Maybe should be a list
-	attr :Account #Name of bucket where money is collected
+  #kind of thing the money is spent on e.g. chairs.  Maybe should be a list
+	attr :BudgetObject 
+	#rollup account
+	attr :Account 
 	attr :Dollars
 end
 class Organization
