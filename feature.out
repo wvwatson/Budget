@@ -1,0 +1,45 @@
+Feature: Addition
+  In order to avoid silly mistakes
+  As a math idiot
+  I want to be told the sum of two numbers
+
+  Scenario: Add two numbers                     # features/additions.feature:6
+    Given I have entered 50 into the calculator # features/step_definitions/addition_steps.rb:5
+    And I have entered 70 into the calculator   # features/step_definitions/addition_steps.rb:5
+    When I press add                            # features/step_definitions/addition_steps.rb:9
+    Then the result should be 120 on the screen # features/step_definitions/addition_steps.rb:13
+
+Feature: Budget
+  In order to monitor an organization's budget
+  As a reviewer of budgets
+  I want to roll a sub-organization's numbers into its parent
+
+  Scenario: Roll-up a budget                 # features/budget.feature:6
+    Given I have an organization with $1000  # features/budget.feature:7
+    And I have a sub-organization with $500  # features/budget.feature:8
+    And I have a sub-organization with $1000 # features/budget.feature:9
+    When I select roll-up                    # features/budget.feature:10
+    Then the result should be $1200          # features/budget.feature:11
+
+2 scenarios (1 undefined, 1 passed)
+9 steps (5 undefined, 4 passed)
+0m0.007s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Given /^I have an organization with \$(\d+)$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I have a sub\-organization with \$(\d+)$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I select roll\-up$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^the result should be \$(\d+)$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
