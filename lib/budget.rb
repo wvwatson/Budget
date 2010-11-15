@@ -57,6 +57,17 @@ class Budget
   def review
   end
 end
+#collection of schedules that make a funding distribution stragety.  e.g. default general revenu distribution
+class Strategy
+  #decriptive name here helps to know the manner you are assigning percentages e.g. 
+  attr: Name
+end
+#schedule is a percentage tied to a source of funds for an org
+class Schedule
+  attr: Strategy
+  attr: Percentage
+  attr: SourceOfFunds
+end
 # should also be able to freely compose adhoc orgs LevelName +  _ + Name 
 #  e.g. division_1  +  division_2
 # and have it use their rollups
