@@ -10,20 +10,20 @@
 # and the one reviewing the budget for approval
 
 class SourceOfFunds
-	attr: StartDate
-	attr: EndDate
+	attr_accessor :StartDate
+	attr_accessor :EndDate
 	#maybe do a grant mixin
 end
-alias :SourceOfFunds :Grant
+#alias :SourceOfFunds :Grant
 
 class BudgetObject
-	attr: Name
-	attr: Description
+	attr_accessor :Name
+	attr_accessor :Description
 end
-class Dollars
-end
+# class Dollars
+# end
 class Expenditures
-  attr :Dollars
+  attr_accessor :Dollars
 end
 #extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
 class Year
@@ -32,18 +32,40 @@ end
 #Name of bucket where money is collected
 class Account
   #kind of thing the money is spent on e.g. chairs.  Maybe should be a list
-	attr :BudgetObject 
+	attr_accessor :BudgetObject 
 	#rollup account
-	attr :Account 
-	attr :Dollars
+	attr_accessor :Account 
+	attr_accessor :dollars
+	def initialize
+    @dollars = 0
+  end
 end
 class Organization
-	attr :DefaultOrganizationParent
-	attr :Name
-	attr :LevelName
+	attr_accessor :DefaultOrganizationParent
+	attr_accessor :Name
+	attr_accessor :LevelName
+	attr_accessor :Sub
+	attr_accessor :Account
+	attr_accessor :budget
+	
+	def initialize
+    @sub = []
+    @Account = Account.new
+    @budget = 0
+  end	
 	# rolls up everything to this org using the strategy of this org and the orgs below it.  
 	# returns money
-	def rollup 
+	def addsub(sub)
+	  @sub.push(sub)
+  end
+
+	def rollup
+	  @sub.each do |sub|
+	    sub.rollup
+       @budget += sub.budget
+    end
+    @budget += @Account.dollars
+	  
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
 	def balance
@@ -60,35 +82,35 @@ end
 #collection of schedules that make a funding distribution stragety.  e.g. default general revenu distribution
 class Strategy
   #decriptive name here helps to know the manner you are assigning percentages e.g. 
-  attr: Name
+  attr_accessor :Name
 end
 #schedule is a percentage tied to a source of funds for an org
 class Schedule
-  attr: Strategy
-  attr: Percentage
-  attr: SourceOfFunds
+  attr_accessor :Strategy
+  attr_accessor :Percentage
+  attr_accessor :SourceOfFunds
 end
 # should also be able to freely compose adhoc orgs LevelName +  _ + Name 
 #  e.g. division_1  +  division_2
 # and have it use their rollups
 class OrgRollupStrategy
-	attr: OrganizationGraph  #what orgs roll up into other orgs
-	attr: OrgExclusionList  #what orgs to excluded from a rollup
+	attr_accessor :OrganizationGraph  #what orgs roll up into other orgs
+	attr_accessor :OrgExclusionList  #what orgs to excluded from a rollup
 end
 class BudgetObjectRollupStrategy # master list or optional tie to Org or a Source of funds
-	attr: BudgetObjectExclusion #exclude budget objects out of the rollup
+	attr_accessor :BudgetObjectExclusion #exclude budget objects out of the rollup
 end
 class SourceOfFundRollupStrategy # master list or optional tie to Org
-	attr: SourceOfFundRedirect # redirect anything coming from a source of funds to another source
+	attr_accessor :SourceOfFundRedirect # redirect anything coming from a source of funds to another source
 end
-alias :OrgRollupStrategy :RollupStrategy :EarMark, :Appropriation
+#alias :OrgRollupStrategy :RollupStrategy :EarMark :Appropriation
 #  Rollups that aren't persistantly located in the target accounts
 class DerivedDollars
 end
 class User
 end
-class Submitter extend User
+class Submitter < User
 end
-class Reviewer extend User
+class Reviewer < User
 end
-alias :Approver :Reviewer
+#alias :Approver :Reviewer
