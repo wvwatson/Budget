@@ -8,6 +8,7 @@
 # Budgeting involves a dialog between a submitter and a reviewer/approver
 # One goal in budgeting is avoiding asymmetric information between the one submitting a budget
 # and the one reviewing the budget for approval
+# Need to implement concept of direct and indirect
 
 class SourceOfFunds
 	attr_accessor :StartDate
@@ -73,10 +74,16 @@ class Organization
 end
 #A complete list of rules for determining a budget
 #Can be all inclusive, per year, per org
+#Should be one budget proposal.  The proposal should be able to be saved and compared to other proposals
+#Proposal is probably part of a long drawn out process
 class Budget
+  # allow/notify reviewer that budget is ready for review
   def submit
   end
+  # review a specific budget
   def review
+  end
+  def compare
   end
 end
 #collection of schedules that make a funding distribution stragety.  e.g. default general revenu distribution
