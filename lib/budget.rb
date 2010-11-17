@@ -17,13 +17,17 @@ end
 #alias :SourceOfFunds :Grant
 
 class BudgetObject
-	attr_accessor :Name
+	attr_accessor :name
 	attr_accessor :Description
 end
 # class Dollars
 # end
-class Expenditures
-  attr_accessor :Dollars
+class Expenditure
+  attr_accessor :BudgetObject
+  attr_accessor :dollars
+  def initialize
+    @BudgetObject = BudgetObject.new
+  end
 end
 #extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
 class Year
@@ -31,13 +35,26 @@ class Year
 end
 #Name of bucket where money is collected
 class Account
+  attr_accessor :name
   #kind of thing the money is spent on e.g. chairs.  Maybe should be a list
-	attr_accessor :BudgetObject 
+	attr_accessor :Expenditures 
 	#rollup account
 	attr_accessor :Account 
 	attr_accessor :dollars
 	def initialize
     @dollars = 0
+    @expenditures=[]
+  end
+  def add(expenditure)
+    @expenditures << expenditure
+  end
+  #should have option to count all sub accounts too
+  def dollars
+    @dollars = 0
+    @expenditures.each do |currentexpenses|
+       @dollars += currentexpenses.dollars
+    end
+    @dollars
   end
 end
 class Organization
