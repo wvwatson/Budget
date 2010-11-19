@@ -8,7 +8,8 @@
 # Budgeting involves a dialog between a submitter and a reviewer/approver
 # One goal in budgeting is avoiding asymmetric information between the one submitting a budget
 # and the one reviewing the budget for approval
-# Need to implement concept of direct and indirect
+# Need to implement concept of direct and indirect.  direct money goes towards the product that is produced by the org.  indirect
+#   does not.  ex of indirect is administrative employee wages and buildings.
 
 class SourceOfFunds
 	attr_accessor :StartDate
