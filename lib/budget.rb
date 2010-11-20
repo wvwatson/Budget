@@ -51,7 +51,7 @@ class Account
   end
   #should have option to count all sub accounts too
   def dollars
-    @dollars = 0
+    #@dollars = 0
     @expenditures.each do |currentexpenses|
        @dollars += currentexpenses.dollars
     end
