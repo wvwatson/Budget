@@ -4,7 +4,7 @@ Before do
   @account = Account.new
 end
 Given /^I have an expenditure with \$(\d+)$/ do |arg1|
-  @expenditure.dollars = arg1
+  @expenditure.dollars = arg1.to_i
 end
 
 Given /^the expenditure has a budget object named "([^"]*)"$/ do |arg1|
@@ -16,7 +16,7 @@ Given /^I have an account named "([^"]*)"$/ do |arg1|
 end
 
 Given /^the account has \$(\d+)$/ do |arg1|
-  @account.dollars = arg1
+  @account.dollars = arg1.to_i
 end
 
 When /^I press account add$/ do
