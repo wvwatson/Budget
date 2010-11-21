@@ -10,10 +10,13 @@
 # and the one reviewing the budget for approval
 # Need to implement concept of direct and indirect.  direct money goes towards the product that is produced by the org.  indirect
 #   does not.  ex of indirect is administrative employee wages and buildings.
+#   Maybe use tagging for accounts to implement direct/indirect/other
 
 class SourceOfFunds
-	attr_accessor :StartDate
-	attr_accessor :EndDate
+	attr_accessor :startdate
+	attr_accessor :enddate
+	attr_accessor :name
+	attr_accessor :percentage
 	#maybe do a grant mixin
 end
 #alias :SourceOfFunds :Grant
@@ -43,22 +46,31 @@ class Account
 	#rollup account
 	attr_accessor :Account 
 	attr_accessor :dollars
+	attr_accessor :tag
+	
 	def initialize
     @dollars = 0
     @expenditures=[]
-  end
-  def add(expenditure)
-    @expenditures << expenditure
+    @tag=[]
   end
   #should have option to count all sub accounts too
+  def add(expenditure)
+    @expenditures.push(expenditure)
+  end
+  
+  #accumulate all of the dollars from all of the expenditure
   def dollars
-    #@dollars = 0
     @expenditures.each do |currentexpenses|
        @dollars += currentexpenses.dollars
     end
     @dollars
   end
+  #override the expenditures and set dollars manually
+  def dollars=(total)
+    @dollars=total
+  end
 end
+
 class Organization
 	attr_accessor :DefaultOrganizationParent
 	attr_accessor :Name
@@ -66,25 +78,41 @@ class Organization
 	attr_accessor :Sub
 	attr_accessor :Account
 	attr_accessor :budget
+	attr_accessor :sourceoffunds
+	attr_accessor :fundingdisttribution 
 	
 	def initialize
     @sub = []
+    @sourceoffunds = []
     @Account = Account.new
     @budget = 0
-  end	
-	# rolls up everything to this org using the strategy of this org and the orgs below it.  
-	# returns money
+ end	
+
 	def addsub(sub)
 	  @sub.push(sub)
   end
 
+	def addsof(sof)
+	  @sourceoffunds.push(sof)
+  end
+
+  #create hash of each source of funding paired with the amount
+  #of money extracted from the fund
+  def fundingdistribution
+     @fundingdistribution = {}
+     @sourceoffunds.each do |sof|
+       @fundingdistribution[sof.name] = budget * (sof.percentage.to_f / 100)
+     end
+     @fundingdistribution 
+   end
+  # rolls up everything to this org using the strategy of this org and the orgs below it.  
+	# returns money
 	def rollup
 	  @sub.each do |sub|
 	    sub.rollup
        @budget += sub.budget
     end
-    @budget += @Account.dollars
-	  
+    @budget += @Account.dollars 
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
 	def balance
