@@ -1,6 +1,6 @@
 Before do
   @expenditure = Expenditure.new
-  @suborganization1 = Organization.new
+  #@suborganization1 = Organization.new
   @account = Account.new
 end
 Given /^I have an expenditure with \$(\d+)$/ do |arg1|

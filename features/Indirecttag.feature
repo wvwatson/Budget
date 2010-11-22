@@ -4,7 +4,8 @@ Feature: Indirect
   I want indirect expenditures to roll into indirect accounts
 
   Scenario: Roll indirect expenditures into an accounts
-    Given I have a expenditure tagged as "indirect"
-	And the expenditure has $500
+    Given I have an organization's expenditure tagged as "indirect"
+	And the organization's expenditure has $500
+	And an organization's account named "indirect"
     When I roll indirect expenditures up
     Then the indirect account should be $500

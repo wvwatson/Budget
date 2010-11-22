@@ -30,9 +30,20 @@ end
 class Expenditure
   attr_accessor :BudgetObject
   attr_accessor :dollars
+  attr_accessor :tags
+  
   def initialize
     @BudgetObject = BudgetObject.new
+    @tags = []
   end
+  
+  def tags=(newtag)
+    @tags.push(newtag)   
+  end
+  def addtags(newtag)
+    @tags.push(newtag)
+  end
+  
 end
 #extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
 class Year
@@ -46,28 +57,47 @@ class Account
 	#rollup account
 	attr_accessor :Account 
 	attr_accessor :dollars
-	attr_accessor :tag
+	attr_accessor :tags
 	
 	def initialize
     @dollars = 0
     @expenditures=[]
-    @tag=[]
+    @tags=[]
   end
+  
+  def addtags(newtag)
+    @tags.push(newtag)
+  end
+  
+  def tags=(newtag)
+    @tags.push(newtag)
+  end
+  
   #should have option to count all sub accounts too
   def add(expenditure)
     @expenditures.push(expenditure)
   end
   
-  #accumulate all of the dollars from all of the expenditure
+  #accumulate all of the dollars from all of the expenditure and
+  #overwrite whatever is in the dollars variable
   def dollars
+    @dollars=0
     @expenditures.each do |currentexpenses|
        @dollars += currentexpenses.dollars
     end
     @dollars
   end
   #override the expenditures and set dollars manually
-  def dollars=(total)
-    @dollars=total
+  #accept a hash that creates a new expenditure with cash
+  def dollars=(total, exp = {})
+    newexp = Expenditure.new
+    if exp["name"]
+      newexp.BudgetObject.name = exp["name"]
+    else
+      newexp.BudgetObject.name = "cash"
+    end
+    newexp.dollars = total
+    add(newexp)
   end
 end
 
@@ -77,6 +107,7 @@ class Organization
 	attr_accessor :LevelName
 	attr_accessor :Sub
 	attr_accessor :Account
+	attr_accessor :accounts
 	attr_accessor :budget
 	attr_accessor :sourceoffunds
 	attr_accessor :fundingdisttribution 
@@ -85,6 +116,7 @@ class Organization
     @sub = []
     @sourceoffunds = []
     @Account = Account.new
+    @accounts = []
     @budget = 0
  end	
 
@@ -96,6 +128,9 @@ class Organization
 	  @sourceoffunds.push(sof)
   end
 
+  def addaccount(account)
+    @accounts.push(account)
+  end
   #create hash of each source of funding paired with the amount
   #of money extracted from the fund
   def fundingdistribution
@@ -108,10 +143,18 @@ class Organization
   # rolls up everything to this org using the strategy of this org and the orgs below it.  
 	# returns money
 	def rollup
+	  
+	  #roll up sub organization's accounts
 	  @sub.each do |sub|
 	    sub.rollup
        @budget += sub.budget
     end
+    
+    #roll up this org's accounts
+    @accounts.each do |account|
+       @budget += account.dollars
+    end
+    
     @budget += @Account.dollars 
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
