@@ -11,6 +11,7 @@
 # Need to implement concept of direct and indirect.  direct money goes towards the product that is produced by the org.  indirect
 #   does not.  ex of indirect is administrative employee wages and buildings.
 #   Maybe use tagging for accounts to implement direct/indirect/other
+#Fund Balance should be zerio.  Calculates from the funding distribution and subtracts that from the rollup total
 
 class SourceOfFunds
 	attr_accessor :startdate
