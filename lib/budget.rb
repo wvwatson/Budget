@@ -17,7 +17,9 @@ class SourceOfFunds
 	attr_accessor :startdate
 	attr_accessor :enddate
 	attr_accessor :name
+	#rip this out and put it on relationship with organization somehow
 	attr_accessor :percentage
+	attr_accessor :dollars
 	#maybe do a grant mixin
 end
 #alias :SourceOfFunds :Grant
