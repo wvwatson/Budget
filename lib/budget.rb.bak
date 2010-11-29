@@ -13,8 +13,6 @@
 #   Maybe use tagging for accounts to implement direct/indirect/other
 #Fund Balance should be zerio.  Calculates from the funding distribution and subtracts that from the rollup total
 #Possibly make this into a fragmented dsl
-#Should implement the new information retrieved from books on PART methodology
-# Have a separation from budgeting lingo and PART (performance) lingo
 
 class SourceOfFunds
 	attr_accessor :startdate
