@@ -11,10 +11,42 @@
 # Need to implement concept of direct and indirect.  direct money goes towards the product that is produced by the org.  indirect
 #   does not.  ex of indirect is administrative employee wages and buildings.
 #   Maybe use tagging for accounts to implement direct/indirect/other
-#Fund Balance should be zerio.  Calculates from the funding distribution and subtracts that from the rollup total
-#Possibly make this into a fragmented dsl
-#Should implement the new information retrieved from books on PART methodology
+# Fund Balance should be zero.  Calculates from the funding distribution and subtracts that from the rollup total
+# Possibly make this into a fragmented dsl
+# Should implement the new information retrieved from books on PART methodology
 # Have a separation from budgeting lingo and PART (performance) lingo
+# Maybe separate into three pieces, account, budgeting, and performance
+# Social Budgeting:  Allowing more people to submit a 'pull' request to the budget
+#  could limit low levels to submit stuff that would force a decrease in an expense elsewhere
+#  Managers could merge their request in to the expense where it really belongs
+
+
+
+# Performance Measurement.  Somehow make it so the specification of 
+# action plans is a human readable langauge that rides on top of the budgeting piece
+class Objective
+end
+class Goal
+end
+class Action
+end
+
+# budgeting.  Maybe make source of funds a module that these extend
+# Somehow make a budget a human readable configuration of budgeting and accounting pieces.
+class Unrestricted
+end
+class Restricted
+end
+class GrantOrContract
+end
+class TradeOrBusiness
+end
+class Asset
+end
+class PledgeOrCash
+end
+class Matching
+end
 
 class SourceOfFunds
 	attr_accessor :startdate
@@ -26,6 +58,34 @@ class SourceOfFunds
 	#maybe do a grant mixin
 end
 #alias :SourceOfFunds :Grant
+
+#Accounting.  Maybe make Journal(entry) a module and credit and debit extend it?  Or 
+# use inheritance?
+class Credit
+end
+class Debit
+end
+class Journal
+end
+class FiscalYear
+end
+#Accounting.  Maybe make account a module and these extend it.
+class Asset
+end
+class Liability
+end
+class Equity
+end
+class Revenue
+end
+class Expense
+end
+class IncomeStatement
+end
+class CashFlowStatement
+end
+class BalanceStatement
+end
 
 class BudgetObject
 	attr_accessor :name
@@ -54,6 +114,10 @@ end
 #extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
 class Year
 	#roll forward
+end
+
+#use this to list account hierarchry
+class ChartOfAccounts
 end
 #Name of bucket where money is collected
 class Account
