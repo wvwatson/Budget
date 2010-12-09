@@ -8,3 +8,9 @@ Feature: Work
 	And I have entered "Increase Income by 5%" as the second goal
     When I press show workplan
     Then the result should be "Lower costs by 10%" and "Increase Income by 5%" on the screen
+
+  Scenario: Add some actions
+    Given I have entered "Lower costs by 10%" as the first goal
+	And I have entered "Increase Income by 5%" as the second goal
+    When I press show workplan
+    Then the result should be "Lower costs by 10%" and "Increase Income by 5%" on the screen
