@@ -1,4 +1,4 @@
-Feature: Balance
+ Feature: Balance
   In order to check the balance
   As a submitter of budgets
   I want to subtract the total amount of source of funds available from the total proposed proposed budget
