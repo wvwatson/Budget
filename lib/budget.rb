@@ -20,17 +20,25 @@
 #  could limit low levels to submit stuff that would force a decrease in an expense elsewhere
 #  Managers could merge their request in to the expense where it really belongs
 
+# Assess risk by multiplying probability of occurence by impact
+class Risk
+end
+class MoneyEstimate
+	attr_accessor :probability
+end
+class Action
+end
 
+class Goal
+end
+
+class WorkPlan
+ attrib_accessor :Goal
+end
 
 # Performance Measurement.  Somehow make it so the specification of 
 # action plans is a human readable langauge that rides on top of the budgeting piece
 class Objective
-end
-class WorkPlan
-end
-class Goal
-end
-class Action
 end
 
 # budgeting.  Maybe make source of funds a module that these extend
