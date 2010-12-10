@@ -26,6 +26,8 @@
 # action plans is a human readable langauge that rides on top of the budgeting piece
 class Objective
 end
+class WorkPlan
+end
 class Goal
 end
 class Action
