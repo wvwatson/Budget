@@ -23,17 +23,38 @@
 # Assess risk by multiplying probability of occurence by impact
 class Risk
 end
-class MoneyEstimate
+
+class EstimatedMoney
 	attr_accessor :probability
+	attr_accessor :SourceOfFunds
 end
+
 class Action
+  attr_accessor :tasks
+
+  def tasks(newtask)
+    @Tasks = [] unless @Tasks
+    @Tasks.push(newtask)   
+  end
 end
 
 class Goal
+  attr_accessor :description
 end
 
 class WorkPlan
- attrib_accessor :Goal
+ attr_accessor :goals
+
+ def addgoals(newgoaldesc)
+   @Goals = [] unless @Goals
+   @newgoal = Goal.new
+   @newgoal.description = newgoaldesc
+   @Goals.push(@newgoal)
+ end
+ 
+ def show_workplan
+   @Goals
+ end
 end
 
 # Performance Measurement.  Somehow make it so the specification of 
@@ -113,9 +134,9 @@ class Expenditure
     @tags = []
   end
   
-  def tags=(newtag)
-    @tags.push(newtag)   
-  end
+  # def tags=(newtag)
+  #    @tags.push(newtag)   
+  #  end
   def addtags(newtag)
     @tags.push(newtag)
   end
