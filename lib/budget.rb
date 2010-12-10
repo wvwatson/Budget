@@ -30,16 +30,19 @@ class EstimatedMoney
 end
 
 class Action
-  attr_accessor :tasks
 
-  def tasks(newtask)
-    @Tasks = [] unless @Tasks
-    @Tasks.push(newtask)   
-  end
 end
 
 class Goal
   attr_accessor :description
+  attr_accessor :actions
+
+  def addactions(newactiondesc)
+    @Actions = [] unless @Actions
+    @newaction = Action.new
+    @newaction.description = newactiondesc
+    @Actions.push(@newaction)   
+  end
 end
 
 class WorkPlan

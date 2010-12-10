@@ -1,7 +1,7 @@
 Before do
   @workplan = WorkPlan.new
   @goals = []
-
+  @actions = []
 end
 
 Given /^I have entered "([^"]*)" as the first goal$/ do |arg1|
@@ -23,6 +23,10 @@ end
 
 Given /^I have entered "([^"]*)" and assigned it to the "([^"]*)" goal as the first action$/ do |arg1, arg2|
   pending # express the regexp above with the code you wish you had
+    # @goals = @workplan.show_workplan
+  #  @goals.each do | goal | 
+  #    goal.addactions arg1 if goal.description = arg1
+  #  end
 end
 
 Given /^I have entered "([^"]*)" and assigned it to the "([^"]*)" goal as the second action$/ do |arg1, arg2|
