@@ -30,7 +30,7 @@ class EstimatedMoney
 end
 
 class Action
-
+  attr_accessor :description
 end
 
 class Goal
@@ -42,6 +42,10 @@ class Goal
     @newaction = Action.new
     @newaction.description = newactiondesc
     @Actions.push(@newaction)   
+  end
+  
+  def show_actions
+    @Actions
   end
 end
 
@@ -67,6 +71,10 @@ end
 
 # budgeting.  Maybe make source of funds a module that these extend
 # Somehow make a budget a human readable configuration of budgeting and accounting pieces.
+# Should describe a story of logrolling.  A 'why' of the allocation between roll up organizations and
+#  peer organizations.  The story presentation should be so useful that not using this system/process
+#  is a statement unto itself.
+
 class Unrestricted
 end
 class Restricted
