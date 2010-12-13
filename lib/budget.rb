@@ -36,7 +36,9 @@ end
 class Goal
   attr_accessor :description
   attr_accessor :actions
-
+  def initialize
+    @Actions = []
+  end
   def addactions(newactiondesc)
     @Actions = [] unless @Actions
     @newaction = Action.new
@@ -51,7 +53,9 @@ end
 
 class WorkPlan
  attr_accessor :goals
-
+  def initialize
+    @Goals = []
+  end
  def addgoals(newgoaldesc)
    @Goals = [] unless @Goals
    @newgoal = Goal.new
