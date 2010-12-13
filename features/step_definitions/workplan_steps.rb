@@ -30,19 +30,19 @@ Given /^I have entered "([^"]*)" and assigned it to the "([^"]*)" goal as the fi
 end
 
 Given /^I have entered "([^"]*)" and assigned it to the "([^"]*)" goal as the second action$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
-  # @goals = @workplan.show_workplan
-  #  @goals.each do | goal | 
-  #    goal.addactions arg1 if goal.description = arg1
-  #  end
+  #pending # express the regexp above with the code you wish you had
+  @goals = @workplan.show_workplan
+   @goals.each do | goal | 
+     goal.addactions arg1 if goal.description == arg2
+   end
 end
 
 When /^I display the "([^"]*)" goal$/ do |arg1| 
-  pending # express the regexp above with the code you wish you had
-  #@goals = @workplan.show_workplan
-  # @goals.each do | goal | 
-  #      goal.show_actions.each { |action| puts action.description } if goal.description = arg1
-  #   end
+  #pending # express the regexp above with the code you wish you had
+  # @goals = @workplan.show_workplan
+  #  @goals.each do | goal | 
+  #        goal.show_actions.each { |action| puts action.description } if goal.description = arg1
+  #     end
 end
 
 Then /^the result should be "([^"]*)" and "([^"]*)" on the screen for the "([^"]*)" goal$/ do |arg1, arg2, arg3|
