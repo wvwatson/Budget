@@ -7,4 +7,4 @@ Feature: Estimated Income
     Given I have a Source of Funds named "Red Cross" with a likelihood of funding of 70% and an amount of $10000
     And I have a Source of Funds named "United Way" with a likelihood of funding of 30% and an amount of $1000
     When I select Income Estimation
-    Then the result should be $7300
+    Then the Income Estimation result should be $7300

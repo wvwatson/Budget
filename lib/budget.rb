@@ -24,7 +24,7 @@
 class Risk
 end
 
-class EstimatedMoney
+class EstimatedIncome
 	attr_accessor :probability
 	attr_accessor :SourceOfFunds
 end
