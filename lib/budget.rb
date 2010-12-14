@@ -19,6 +19,8 @@
 # Social Budgeting:  Allowing more people to submit a 'pull' request to the budget
 #  could limit low levels to submit stuff that would force a decrease in an expense elsewhere
 #  Managers could merge their request in to the expense where it really belongs
+# Separate various types of funds, accounts, and behavior into modules so that they can be included into 
+# base source of funds/accounts or combined
 
 # Assess risk by multiplying probability of occurence by impact
 class Risk
