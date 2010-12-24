@@ -21,6 +21,10 @@
 #  Managers could merge their request in to the expense where it really belongs
 # Separate various types of funds, accounts, and behavior into modules so that they can be included into 
 # base source of funds/accounts or combined
+# on command we want to be able to see how much much we have available from the different sources of funds given estimations
+# we want a language for accounting, source of funds, and expenses.  These can be populated with sane defaults
+# there may need to be a set of income, cash, and balance statements for each restricted fund
+# Need the capability to do incremental, zero based, and activity based budgeting
 
 # Assess risk by multiplying probability of occurence by impact
 class Risk
@@ -104,6 +108,7 @@ class SourceOfFunds
 	attr_accessor :percentage
 	attr_accessor :dollars
 	#maybe do a grant mixin
+	attr_accessor :likelyhood
 end
 #alias :SourceOfFunds :Grant
 
@@ -261,7 +266,7 @@ class Organization
   # rolls up everything to this org using the strategy of this org and the orgs below it.  
 	# returns money
 	def rollup
-	  
+	  @budget = 0
 	  #roll up sub organization's accounts
 	  @sub.each do |sub|
 	    sub.rollup
@@ -273,11 +278,21 @@ class Organization
        @budget += account.dollars
     end
     
-    @budget += @Account.dollars 
+    @budget += @Account.dollars
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
 	def balance
+	  income_estimation - rollup
 	end
+	
+	#Estimation of all sources of funds and other revenue for the year
+	def income_estimation
+	  softotal = 0
+    @sourceoffunds.each do |sof|
+      softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+    end
+    softotal
+  end
 end
 #A complete list of rules for determining a budget
 #Can be all inclusive, per year, per org
