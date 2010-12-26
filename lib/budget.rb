@@ -109,6 +109,15 @@ class SourceOfFunds
 	attr_accessor :dollars
 	#maybe do a grant mixin
 	attr_accessor :likelyhood
+	attr_accessor :tags
+	
+	def initialize
+    @tags = []
+  end
+  
+	def addtags(newtag)
+    @tags.push(newtag)
+  end
 end
 #alias :SourceOfFunds :Grant
 
@@ -254,6 +263,30 @@ class Organization
   def addaccount(account)
     @accounts.push(account)
   end
+  
+  def addsoftag(sofname, tag)
+    @sourceoffunds.each do |sof|
+      if sof.name==sofname
+         sof.addtags(tag)
+      else 
+         false
+      end 
+    end
+  end
+  
+  def findsoftag(sofname, tag)
+    #debugger
+    @sourceoffunds.each do |sof|
+      if sof.name==sofname
+        sof.tags.each do |softag|
+          return true if softag == tag
+        end
+      else 
+         false
+      end 
+    end
+    false
+  end
   #create hash of each source of funding paired with the amount
   #of money extracted from the fund
   def fundingdistribution
@@ -265,7 +298,7 @@ class Organization
    end
   # rolls up everything to this org using the strategy of this org and the orgs below it.  
 	# returns money
-	def rollup
+	def rollup(*tags)
 	  @budget = 0
 	  #roll up sub organization's accounts
 	  @sub.each do |sub|
@@ -286,10 +319,14 @@ class Organization
 	end
 	
 	#Estimation of all sources of funds and other revenue for the year
-	def income_estimation
+	def income_estimation(*tags)
+	  #debugger
 	  softotal = 0
     @sourceoffunds.each do |sof|
-      softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+      if (tags.count > 0 && self.findsoftag(sof.name, tags[0])) || (tags.count == 0)       
+        softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+      end
+      
     end
     softotal
   end
