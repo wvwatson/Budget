@@ -31,7 +31,7 @@ end
 
 
 Then /^the balance for the "([^"]*)" SOFs should be \$"([^"]*)"$/ do |arg1, arg2|
-  debugger
+  #debugger
   @organization.balance(arg1).should == arg2.to_i
 end
 
