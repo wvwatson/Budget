@@ -3,7 +3,7 @@ Feature: Indirect
   As a submitter of budgets
   I want indirect expenditures to roll into indirect accounts
 
-  Scenario: Roll indirect expenditures into an accounts
+  Scenario: Roll indirect expenditures into an account
     Given I have an organization's expenditure tagged as "indirect"
 	And the organization's expenditure has $500
 	And an organization's account named "indirect"

@@ -1,7 +1,7 @@
  Feature: Balance
   In order to check the balance
   As a submitter of budgets
-  I want to subtract the total amount of source of funds available from the total proposed proposed budget
+  I want to subtract the total amount of the source of funds available from the total proposed budget
 
   Scenario: Check that the balance is positive
     Given I have an assigned source of funds with $800

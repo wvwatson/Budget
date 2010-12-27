@@ -1,7 +1,7 @@
 Feature: Estimated Income
-  In order to create a estimations of income
+  In order to create an estimation of income
   As an executive
-  I want to create a list of estimated income from source of funds.
+  I want to create a list of estimated income from all source of funds.
 
   Scenario: Get the total estimated income
     Given I have a Source of Funds named "Red Cross" with a likelihood of funding of 70% and an amount of $10000

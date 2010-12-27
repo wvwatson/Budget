@@ -1,7 +1,7 @@
 Feature: Budget
   In order to monitor an organization's budget
   As a reviewer of budgets
-  I want to roll a sub-organization's numbers into its parent
+  I want to roll a sub-organization's numbers into its parent organization
   
   Scenario: Roll up a budget
     Given I have an organization with $1000

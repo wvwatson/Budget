@@ -1,7 +1,7 @@
 Feature: Accounts
   In order to keep track of an account
   As a submitter of budgets
-  I want to add and expenditure to an account
+  I want to add an expenditure to an account
 
   Scenario: Assign expenditure to an account
     Given I have an expenditure with $500
