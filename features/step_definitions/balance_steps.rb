@@ -30,6 +30,8 @@ Then /^the balance should be \$"([^"]*)"$/ do |arg1|
 end
 
 
-Given /^I have an unassigned source of funds with \$(\d+)$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^the balance for the "([^"]*)" SOFs should be \$"([^"]*)"$/ do |arg1, arg2|
+  debugger
+  @organization.balance(arg1).should == arg2.to_i
 end
+

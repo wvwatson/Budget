@@ -314,8 +314,9 @@ class Organization
     @budget += @Account.dollars
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
-	def balance
-	  income_estimation - rollup
+	def balance(*tags)
+	  # debugger
+	  income_estimation(tags) - rollup
 	end
 	
 	#Estimation of all sources of funds and other revenue for the year
@@ -323,10 +324,16 @@ class Organization
 	  #debugger
 	  softotal = 0
     @sourceoffunds.each do |sof|
-      if (tags.count > 0 && self.findsoftag(sof.name, tags[0])) || (tags.count == 0)       
-        softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+      if  (tags.flatten.count == 0)
+          softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+      else
+        tags.flatten.each do |tag|
+          if (tags.count > 0 && self.findsoftag(sof.name, tag))        
+            softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+            break # if the tag is included, count in the sum (once)
+          end
+        end
       end
-      
     end
     softotal
   end
