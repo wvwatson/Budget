@@ -41,6 +41,7 @@
 #    debit unrestricted
 # end
 
+require 'objectives'
 # Assess risk by multiplying probability of occurence by impact
 class Risk
 end
@@ -49,45 +50,45 @@ class EstimatedIncome
 	attr_accessor :probability
 	attr_accessor :SourceOfFunds
 end
-
-class Action
-  attr_accessor :description
-end
-
-class Goal
-  attr_accessor :description
-  attr_accessor :actions
-  def initialize
-    @Actions = []
-  end
-  def addactions(newactiondesc)
-    @Actions = [] unless @Actions
-    @newaction = Action.new
-    @newaction.description = newactiondesc
-    @Actions.push(@newaction)   
-  end
-  
-  def show_actions
-    @Actions
-  end
-end
-
-class WorkPlan
- attr_accessor :goals
-  def initialize
-    @Goals = []
-  end
- def addgoals(newgoaldesc)
-   @Goals = [] unless @Goals
-   @newgoal = Goal.new
-   @newgoal.description = newgoaldesc
-   @Goals.push(@newgoal)
- end
- 
- def show_workplan
-   @Goals
- end
-end
+# 
+# class Action
+#   attr_accessor :description
+# end
+# 
+# class Goal
+#   attr_accessor :description
+#   attr_accessor :actions
+#   def initialize
+#     @Actions = []
+#   end
+#   def addactions(newactiondesc)
+#     @Actions = [] unless @Actions
+#     @newaction = Action.new
+#     @newaction.description = newactiondesc
+#     @Actions.push(@newaction)   
+#   end
+#   
+#   def show_actions
+#     @Actions
+#   end
+# end
+# 
+# class WorkPlan
+#  attr_accessor :goals
+#   def initialize
+#     @Goals = []
+#   end
+#  def addgoals(newgoaldesc)
+#    @Goals = [] unless @Goals
+#    @newgoal = Goal.new
+#    @newgoal.description = newgoaldesc
+#    @Goals.push(@newgoal)
+#  end
+#  
+#  def show_workplan
+#    @Goals
+#  end
+# end
 
 # Performance Measurement.  Somehow make it so the specification of 
 # action plans is a human readable langauge that rides on top of the budgeting piece
