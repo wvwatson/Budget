@@ -21,6 +21,10 @@
 #  Managers could merge their request in to the expense where it really belongs
 # Separate various types of funds, accounts, and behavior into modules so that they can be included into 
 # base source of funds/accounts or combined
+# on command we want to be able to see how much much we have available from the different sources of funds given estimations
+# we want a language for accounting, source of funds, and expenses.  These can be populated with sane defaults
+# there may need to be a set of income, cash, and balance statements for each restricted fund
+# Need the capability to do incremental, zero based, and activity based budgeting
 
 # Assess risk by multiplying probability of occurence by impact
 class Risk
@@ -104,6 +108,16 @@ class SourceOfFunds
 	attr_accessor :percentage
 	attr_accessor :dollars
 	#maybe do a grant mixin
+	attr_accessor :likelyhood
+	attr_accessor :tags
+	
+	def initialize
+    @tags = []
+  end
+  
+	def addtags(newtag)
+    @tags.push(newtag)
+  end
 end
 #alias :SourceOfFunds :Grant
 
@@ -249,6 +263,30 @@ class Organization
   def addaccount(account)
     @accounts.push(account)
   end
+  
+  def addsoftag(sofname, tag)
+    @sourceoffunds.each do |sof|
+      if sof.name==sofname
+         sof.addtags(tag)
+      else 
+         false
+      end 
+    end
+  end
+  
+  def findsoftag(sofname, tag)
+    #debugger
+    @sourceoffunds.each do |sof|
+      if sof.name==sofname
+        sof.tags.each do |softag|
+          return true if softag == tag
+        end
+      else 
+         false
+      end 
+    end
+    false
+  end
   #create hash of each source of funding paired with the amount
   #of money extracted from the fund
   def fundingdistribution
@@ -260,8 +298,8 @@ class Organization
    end
   # rolls up everything to this org using the strategy of this org and the orgs below it.  
 	# returns money
-	def rollup
-	  
+	def rollup(*tags)
+	  @budget = 0
 	  #roll up sub organization's accounts
 	  @sub.each do |sub|
 	    sub.rollup
@@ -273,11 +311,32 @@ class Organization
        @budget += account.dollars
     end
     
-    @budget += @Account.dollars 
+    @budget += @Account.dollars
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
-	def balance
+	def balance(*tags)
+	  # debugger
+	  income_estimation(tags) - rollup
 	end
+	
+	#Estimation of all sources of funds and other revenue for the year
+	def income_estimation(*tags)
+	  #debugger
+	  softotal = 0
+    @sourceoffunds.each do |sof|
+      if  (tags.flatten.count == 0)
+          softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+      else
+        tags.flatten.each do |tag|
+          if (tags.count > 0 && self.findsoftag(sof.name, tag))        
+            softotal += sof.dollars.to_i * (sof.likelyhood.to_f / 100)
+            break # if the tag is included, count in the sum (once)
+          end
+        end
+      end
+    end
+    softotal
+  end
 end
 #A complete list of rules for determining a budget
 #Can be all inclusive, per year, per org

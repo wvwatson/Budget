@@ -1,18 +1,15 @@
 Before do
-  @suborganization1 = Organization.new
-  @account = Account.new
-  @sourceoffunds1 = SourceOfFunds.new
-  @sourceoffunds2 = SourceOfFunds.new
+  @organization = Organization.new
 end
 
 Given /^I have a Source of Funds named "([^"]*)" with a likelihood of funding of (\d+)% and an amount of \$(\d+)$/ do |arg1, arg2, arg3|
-  pending # express the regexp above with the code you wish you had
+  @sourceoffunds = SourceOfFunds.new
+  @sourceoffunds.name = arg1
+  @sourceoffunds.likelyhood = arg2
+  @sourceoffunds.dollars = arg3
+  @organization.addsof(@sourceoffunds)
 end
 
-When /^I select Income Estimation$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^the Income Estimation result should be \$(\d+)$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^the Income Estimation should be \$(\d+)$/ do |arg1|
+  @organization.income_estimation.should == arg1.to_i
 end
