@@ -25,6 +25,21 @@
 # we want a language for accounting, source of funds, and expenses.  These can be populated with sane defaults
 # there may need to be a set of income, cash, and balance statements for each restricted fund
 # Need the capability to do incremental, zero based, and activity based budgeting
+# allow for proposals (preferrably 3)
+#  Derive from those proposals the highest priorities
+#  Apply money to the highest priorities first then display which exepenses would be cut
+#  Show which activies/tasks would be cut
+#  Link activities/tasks to expenses
+#    Have a way to show type A versus type B activities
+#      Maybe type A can be called activity ... sharpening the saw work.  Type As should be assigned to type Bs in some way
+#        type A can have a value assigned to them that would turn into an 'opportunity cost' if the activity fails.
+#      type B can be called task?  things you do to stay afloat
+#  Have a year associated with rules for rolling up income and expenses
+# Send a block to tags for rollup customization? 
+# indirect expense do 
+#    debit indirect unless indirect.empty?
+#    debit unrestricted
+# end
 
 # Assess risk by multiplying probability of occurence by impact
 class Risk
