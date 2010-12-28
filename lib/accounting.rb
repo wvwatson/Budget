@@ -1,4 +1,6 @@
 # Accounting is tracking the ebb and flow of money through a business entity
+# solvency is when cash is greater than bills currently due.
+# profitability is when sales is greater than costs and expenses
 
 require 'income'
 require 'expenses'

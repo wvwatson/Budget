@@ -1,6 +1,12 @@
+# revenue aka sales aka shipments
+# orders dont become revenue/sales until they are shipped
+# profit aka earnings aka income
+# revenue is not income
+# profile is not cash
 # Income is money that comes into the business entity.  Non profits have multiple kinds of revenue streams, 
 # some of which have rules (appropriations) associated with them.  This gives non-profits and government 
 # organizations unique budgeting challenges. 
+
 
 
 #Accounting.  Maybe make Journal(entry) a module and credit and debit extend it?  Or 
@@ -14,6 +20,8 @@ class Asset
 end
 class Equity
 end
+
+
 class Revenue
 end
 
