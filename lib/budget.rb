@@ -40,6 +40,9 @@
 #    debit indirect unless indirect.empty?
 #    debit unrestricted
 # end
+# use of the budget system could be mandatory by directive of a grantor.  The grantee could also be put
+# on mandatory budgeting with this system if they are poor performers.  successful budgeting patterns could be shared in the system
+# between successfull and unsuccessful grantees.
 
 # Assess risk by multiplying probability of occurence by impact
 class Risk
