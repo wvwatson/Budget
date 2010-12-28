@@ -17,7 +17,7 @@ class Debit
 end
 #Accounting.  Maybe make account a module and these extend it.
 
-# something you have
+# something you have.  must be valuable and measureable (quantifiable)
 class Asset
 end
 
