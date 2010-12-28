@@ -2,6 +2,12 @@
 # solvency is when cash is greater than bills currently due.
 # profitability is when sales is greater than costs and expenses
 
+#accrual based accounting is based on when money is promised
+#cash based accounting is when cash actually changes hands
+
+# assets - liabilities = worth
+#worth aka net worth aka equity aka owner's equity aka shareholder's equity
+
 require 'income'
 require 'expenses'
 
@@ -14,6 +20,8 @@ class IncomeStatement
 end
 class CashFlowStatement
 end
+
+# assets = liabilities + worth
 class BalanceStatement
 end
 

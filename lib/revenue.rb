@@ -16,8 +16,12 @@ end
 class Debit
 end
 #Accounting.  Maybe make account a module and these extend it.
+
+# something you have
 class Asset
 end
+
+# what something is worth
 class Equity
 end
 

@@ -7,7 +7,7 @@
 #  should look at a standard format first, then quickbooks, then peoplesoft.
 
 
-
+# something you owe
 class Liability
 end
 
