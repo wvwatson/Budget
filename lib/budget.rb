@@ -42,8 +42,10 @@
 # end
 # abstract tagging code
 # abstract hierarchy code
-# figure out a way to decouple organization from accounting code.  Need some other way to compose these
-# abstract roll up code
+# figure out a way to decouple organization from accounting code so that we can have an intuitive way to 
+#  create an 'org chart' separate from accouting code.  Need some other way to compose these
+# abstract roll up code.  need capability to add intuitively code to every step of the roll up.  no shrink wrap 
+#  application will be able to provide that out of the box.
 
 require 'objectives'
 require 'accounting'

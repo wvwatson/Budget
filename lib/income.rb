@@ -46,6 +46,9 @@ end
 class Matching
 end
 
+# make something 'source of funds' capable.  organizations can be 'given' money from a source of funds.  
+
+#  source of funds
 class SourceOfFunds
 	attr_accessor :startdate
 	attr_accessor :enddate
