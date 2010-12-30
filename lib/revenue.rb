@@ -17,7 +17,7 @@ class Debit
 end
 #Accounting.  Maybe make account a module and these extend it.
 
-# something you have
+<<<<<<< HEAD
 # 'accounts receivable' tag?
 # 'Inventory' tag? raw material, work in process, finished goods
 #   finished goods becomes accounts receivable becomes cash
@@ -29,6 +29,7 @@ end
 # other assets -- like intangible assets -- patents
 # fixed assets -- affected by depreciation
 # net fixed assets is the sum of the purchase price minus the depreciation charges already taken
+# something you have.  must be valuable and measureable (quantifiable)
 class Asset
 end
 

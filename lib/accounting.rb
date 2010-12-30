@@ -8,7 +8,7 @@
 # assets - liabilities = worth
 #worth aka net worth aka equity aka owner's equity aka shareholder's equity
 
-require 'income'
+require 'revenue'
 require 'expenses'
 
 class Journal
