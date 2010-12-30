@@ -1,7 +1,14 @@
+Things start as an idea.  
+As we nurse that idea we give it resources.  
+At some point we want to know just how big that idea can become.
+In the end we must keep that idea from consuming everything.
+
+Your idea -> feasability numbers -> projection -> budget
+
 I would like this to become a language for describing a budget for non-profits.  Hopefully the language and model created here will be intuitive to an accountant or financial personnel that is familiar with budgets ... hopefully
 
-# regular people want to use the word 'bill' as synonym for expense
-# maybe have a file named expenses/income so that it doesn't have to be set.
+Regular people want to use the word 'bill' as synonym for expense
+Maybe have a file named expenses/income so that it doesn't have to be set.
 
 	expenses do
 
