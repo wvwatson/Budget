@@ -40,6 +40,8 @@ end
 #   Accounts receivable -> cash 
 # other assets -- like intangible assets -- patents
 # fixed assets -- affected by depreciation
+# Accumulated depreciation is the sum of all depreciation charges taken since an asset was first acquired
+# depreciation lowers cost but not cash
 # net fixed assets is the sum of the purchase price minus the depreciation charges already taken
 # something you have.  must be valuable and measureable (quantifiable)
 class Asset

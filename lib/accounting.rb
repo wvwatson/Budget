@@ -24,6 +24,9 @@ end
 # assets = liabilities + worth
 # A balance sheet should group assets from most liquid to least liquid
 # another grouping is: very liquid, productive, and then products for sale
+# Liabilities are grouped by to whom the debt is owed
+#  then whether it can be paid in 1 year (a current liability)
+# Shareholder's equity is a liability that is repaid in the normal course of business
 class BalanceSheet
 end
 
