@@ -17,6 +17,7 @@ class Debit
 end
 #Accounting.  Maybe make account a module and these extend it.
 
+<<<<<<< HEAD:lib/revenue.rb
 
 # Cash A
 # Accounts Receivable B
@@ -28,10 +29,21 @@ end
 # Acculmulated Depreciation H
 # Net Fixed Assets G - H is I
 # Total Assets E + F + I is J
-# Assets are something you have.  must be valuable and measureable (quantifiable)
 # Current assets are assets that are expected to be converted into cash in the next 12 months
 # Accounts receiveables is a kind of asset that is the 'right' to collect from a customer
 #  This is business done on credt with 30, 60, 90 day rules customarily
+# 'accounts receivable' tag?
+# 'Inventory' tag? raw material, work in process, finished goods
+#   finished goods becomes accounts receivable becomes cash
+#   prepaid expenses are assets because those bills don't have to be paid in the future
+# current asset cycle
+#   cash -> inventory
+#   Inventory -> accounts receivable
+#   Accounts receivable -> cash 
+# other assets -- like intangible assets -- patents
+# fixed assets -- affected by depreciation
+# net fixed assets is the sum of the purchase price minus the depreciation charges already taken
+# something you have.  must be valuable and measureable (quantifiable)
 class Asset
 # need some way to assign probability to the asset (credit)
 # maybe make asset a module and have sof implement it
