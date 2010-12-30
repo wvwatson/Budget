@@ -18,6 +18,17 @@ end
 #Accounting.  Maybe make account a module and these extend it.
 
 # something you have
+# 'accounts receivable' tag?
+# 'Inventory' tag? raw material, work in process, finished goods
+#   finished goods becomes accounts receivable becomes cash
+#   prepaid expenses are assets because those bills don't have to be paid in the future
+# current asset cycle
+#   cash -> inventory
+#   Inventory -> accounts receivable
+#   Accounts receivable -> cash 
+# other assets -- like intangible assets -- patents
+# fixed assets -- affected by depreciation
+# net fixed assets is the sum of the purchase price minus the depreciation charges already taken
 class Asset
 end
 

@@ -8,6 +8,8 @@
 
 
 # something you owe
+# Accumulated depreciation is the sum of all depreciation charges taken since an asset was first acquired
+# depreciation lowers cost but not cash
 class Liability
 end
 
