@@ -17,7 +17,19 @@ class Debit
 end
 #Accounting.  Maybe make account a module and these extend it.
 
-<<<<<<< HEAD
+# Cash A
+# Accounts Receivable B
+# Inventory C
+# PrePaid Expenses D
+# Current Assets is A + B + C + D which gives you E
+# Other Assets F
+# Fixed Assets At Cost G
+# Acculmulated Depreciation H
+# Net Fixed Assets G - H is I
+# Total Assets E + F + I is J
+# Current assets are assets that are expected to be converted into cash in the next 12 months
+# Accounts receiveables is a kind of asset that is the 'right' to collect from a customer
+#  This is business done on credt with 30, 60, 90 day rules customarily
 # 'accounts receivable' tag?
 # 'Inventory' tag? raw material, work in process, finished goods
 #   finished goods becomes accounts receivable becomes cash
@@ -31,6 +43,8 @@ end
 # net fixed assets is the sum of the purchase price minus the depreciation charges already taken
 # something you have.  must be valuable and measureable (quantifiable)
 class Asset
+# need some way to assign probability to the asset (credit)
+# maybe make asset a module and have sof implement it
 end
 
 # what something is worth

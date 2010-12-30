@@ -22,7 +22,9 @@ class CashFlowStatement
 end
 
 # assets = liabilities + worth
-class BalanceStatement
+# A balance sheet should group assets from most liquid to least liquid
+# another grouping is: very liquid, productive, and then products for sale
+class BalanceSheet
 end
 
 #extend number to allow for year mean budget year.  Allow budgets per year and rolling forward per year 
