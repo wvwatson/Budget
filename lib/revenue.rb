@@ -17,8 +17,6 @@ class Debit
 end
 #Accounting.  Maybe make account a module and these extend it.
 
-<<<<<<< HEAD:lib/revenue.rb
-
 # Cash A
 # Accounts Receivable B
 # Inventory C
