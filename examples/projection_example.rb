@@ -21,7 +21,7 @@ expenses do
   # or
   birthday $250, date => 8/3/2011
   
-  # fudge expenses 
+  # fuzzy expenses 
   car_maintenance do
     cost $500
 	chance 25%
@@ -33,11 +33,11 @@ expenses do
   # specialized calculations
   on 4/15/2011 do
     taxes $5000 do
-		# whatever ruby code you want in here, with access to context
-		if cash_on_hand < 10000
-			file_extension
-			date = date.3.months.from
-		end
+      # whatever ruby code you want in here, with access to context
+      if cash_on_hand < 10000
+        file_extension
+        date = date.3.months.from
+      end
 	end
   end
   

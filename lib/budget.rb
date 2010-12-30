@@ -49,6 +49,8 @@
 #  create an 'org chart' separate from accouting code.  Need some other way to compose these
 # abstract roll up code.  need capability to add intuitively code to every step of the roll up.  no shrink wrap 
 #  application will be able to provide that out of the box.
+# organically build your budget
+# idea -> feasability numbers -> projection -> budget
 
 
 require 'objectives'
