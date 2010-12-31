@@ -47,6 +47,10 @@ class Liability
 end
 
 class Expense
+  attr_accessor :period
+  
+  def initialize (&block)
+  end
 end
 
 class BudgetObject
