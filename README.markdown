@@ -2,7 +2,8 @@ Things start as an idea.
 As we nurse that idea we give it resources.  
 At some point we want to know just how big that idea can become.
 
-In the end we must keep that idea from consuming everything.
+In the end we must keep the idea from consuming everything 
+Or vice versa
 
 Your idea -> feasability numbers -> projection -> budget
 
@@ -49,3 +50,7 @@ Your idea -> feasability numbers -> projection -> budget
 	  end
 	  
 	end
+
+First code imitates spec
+Then spec imitates code
+then spec *becomes* code	
