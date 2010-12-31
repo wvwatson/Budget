@@ -46,11 +46,37 @@
 class Liability
 end
 
-class Expense
-  attr_accessor :period
+class Expenses
+  attr_accessor :expense_list
+  attr_accessor :period 
+  attr_accessor :start_date
   
-  def initialize (&block)
+  def add_expense(name, amount)
+	expense = Expense.new
+	expense.name = name
+	expense.amount = amount
+	expense.period = period
+	@expense_list.push(expense)
   end
+  # dynamically define expenses
+  def self.method_missing(methId, amount)
+    str = methId.id2name
+    add_expense(amount)
+  end
+
+  def bills (&block)
+	#debugger
+    @expense_list = []
+    period = "monthly"
+	start_date = Time.now
+    yield
+  end
+end
+
+class Expense
+  attr_accessor :name
+  attr_accessor :period
+  attr_accessor :amount
 end
 
 class BudgetObject
