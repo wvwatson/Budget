@@ -1,12 +1,9 @@
 my = Expenses.new
 Given /^I have a monthly expense of "([^"]*)" that is \$(\d+)$/ do |arg1, arg2|
-   pending # express the regexp above with the code you wish you had
+   #pending # express the regexp above with the code you wish you had
    # try instance eval
-  my.bills do
-	 #puts self.class
-	 self.define_method arg1 do |arg2|
-	    add_expense(arg1, arg2)
-     end	 
+  my.mybills do
+	    arg1 arg2	 
   end
 end
 

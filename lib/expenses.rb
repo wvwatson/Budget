@@ -59,16 +59,24 @@ class Expenses
 	@expense_list.push(expense)
   end
   # dynamically define expenses
-  def self.method_missing(methId, amount)
+  def method_missing(methId, amount)
+    #debugger
     str = methId.id2name
-    add_expense(amount)
+    add_expense(str, amount)
   end
 
+  def mybills(&block) 
+    #debugger
+    @expense_list = []
+    myexp = Expense.new
+    self.class_eval block
+  end
+  
   def bills (&block)
-	#debugger
+	  #debugger
     @expense_list = []
     period = "monthly"
-	start_date = Time.now
+	  start_date = Time.now
     yield
   end
 end
