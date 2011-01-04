@@ -4,8 +4,8 @@ Given /^I have a monthly expense of "([^"]*)" that is \$(\d+)$/ do |arg1, arg2|
    # try instance eval
   my.mybills do
 	    #arg1.to_sym arg2.to_sym	 
-	    arg1.to_sym(arg2.to_sym)			
-  end
+	    telephone arg2	 
+ end
 end
 
 When /^I ask for my total monthly expenses$/ do
