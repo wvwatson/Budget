@@ -60,14 +60,14 @@ class Expenses
   end
   # dynamically define expenses
   def self.method_missing(methId, *args)
-    debugger
+    #debugger
     str = methId.id2name
     #self.add_expense(str, amount)
     #add define method here
   end
 
   def mybills(&block) 
-    debugger
+    #debugger
     @expense_list = []
     myexp = Expense.new
     Expenses.class_eval &block
