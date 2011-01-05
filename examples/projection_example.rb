@@ -23,6 +23,12 @@ expenses do
   # or it can look like this
   birthday $250, date => 8/3/2011
   
+  #range
+  from 3/1/2011, 11/1/2011 do
+    every :month do
+	  lawn_care $250
+	end
+  end
   # use probabilities (you don't always pay car maintenance every year)
   car_maintenance do
 	cost $500

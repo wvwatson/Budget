@@ -39,7 +39,8 @@
 #  lots of working capital makes it easier to pay your current liabilities
 # Total liabilities is current liabilities and long term debt
 #   Long term debt is a loan that takes longer than 12 months to repay
-
+# We will need to have 'defaults' for the tree if a user doesn't supply one 
+#  for instance org.name='default', account.name='default' if putting in only expenses
 
 
 # something you owe
