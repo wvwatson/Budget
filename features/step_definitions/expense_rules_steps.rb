@@ -5,6 +5,7 @@ Given /^I have a monthly expense of "([^"]*)" that is \$(\d+)$/ do |arg1, arg2|
   my.mybills do
 	    #arg1.to_sym arg2.to_sym	 
 	    telephone arg2	 
+		#arg1 arg2
  end
 end
 
