@@ -56,11 +56,12 @@ class Expenses
 	  expense.name = name
     expense.amount = amount
     #wtf because this next line was here it was not allowing this method to show as a instance_method
-    #expense.period = period
+    expense.period = period
     @expense_list.push(expense)
   end
   
   # dynamically define expenses
+
   def method_missing(methId, *args)
     #debugger
     str = methId.id2name

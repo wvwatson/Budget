@@ -5,7 +5,7 @@ end
 Given /^I have a monthly expense of telephone that is \$(\d+)$/ do |arg1|
    #pending # express the regexp above with the code you wish you had
    # try instance eval
-   
+
   @my.mybills do
 	    telephone arg1	 
   end
