@@ -52,33 +52,36 @@ class Expenses
   attr_accessor :start_date
   
   def add_expense(name, amount)
-	expense = Expense.new
-	expense.name = name
-	expense.amount = amount
-	expense.period = period
-	@expense_list.push(expense)
+	  expense = Expense.new
+	  expense.name = name
+    expense.amount = amount
+    #wtf because this next line was here it was not allowing this method to show as a instance_method
+    #expense.period = period
+    @expense_list.push(expense)
   end
+  
   # dynamically define expenses
-  def self.method_missing(methId, *amount)
-    debugger
+  def method_missing(methId, *args)
+    #debugger
     str = methId.id2name
-    #self.add_expense(str, amount)
+    #need to ensure 1 variable
+    add_expense(str, args[0])
     #add define method here
   end
 
   def mybills(&block) 
     #debugger
-    @expense_list = []
-    myexp = Expense.new
-    Expenses.class_eval &block
+    #@expense_list = []
+    #myexp = Expense.new
+    #Expenses.class_eval &block
+    self.instance_eval &block
   end
   
-  def bills (&block)
+  def initialize
 	  #debugger
     @expense_list = []
     period = "monthly"
 	  start_date = Time.now
-    yield
   end
 end
 
