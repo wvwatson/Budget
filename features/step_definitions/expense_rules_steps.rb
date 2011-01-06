@@ -1,5 +1,5 @@
 Before do
-  @my = Expenses.new
+  @my = ExpenseBuilder.new
 end
 
 Given /^I have a monthly expense of telephone that is \$(\d+)$/ do |arg1|
@@ -30,9 +30,9 @@ end
 
 
 When /^I ask for my total monthly expenses$/ do
-  pending # express the regexp above with the code you wish you had
+  @my.total
 end
 
 Then /^total of the monthly expenses should be \$(\d+)$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  @my.total.should == arg1.to_i
 end

@@ -1,6 +1,9 @@
 # An expense is money that goes out of the business entity. 
 # a cost is not an expense
 # an expense is not an expenditure 
+#  a cost is money spent making a product or service
+#  an expense is money spent to develop, sell, account, and manage the whole making and selling process
+#  an expenditure is a cost or expense when it is actually sent to a vendor to pay for it
 # need some way to import expenses into expense and budget object collections
 #  have a standard budget file format for import.
 #  perhaps use activewarehouse etl to import from various systems and formats into the standard budget format
@@ -47,7 +50,7 @@
 class Liability
 end
 
-class Expenses
+class ExpenseBuilder
   attr_accessor :expense_list
   attr_accessor :period 
   attr_accessor :start_date
@@ -59,6 +62,10 @@ class Expenses
     #wtf because this next line was here it was not allowing this method to show as a instance_method
     expense.period = period
     @expense_list.push(expense)
+  end
+  
+  def total
+      @expense_list.inject(0) {|result, expense| result + expense.amount.to_i }
   end
   
   # dynamically define expenses
