@@ -18,7 +18,7 @@ expenses do
 
   # pay one time bill
   on 8/3/2011 do
-	birthday $250
+	  birthday $250
   end
   # or it can look like this
   birthday $250, date => 8/3/2011
@@ -31,8 +31,8 @@ expenses do
   end
   # use probabilities (you don't always pay car maintenance every year)
   car_maintenance do
-	cost $500
-	chance 25%
+	  cost $500
+    chance 25%
   end
   # or it can look like this
   car_maintenance $500, chance => 25%

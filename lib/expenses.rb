@@ -54,18 +54,29 @@ class ExpenseBuilder
   attr_accessor :expense_list
   attr_accessor :period 
   attr_accessor :start_date
+  attr_accessor :one_time_date
   
   def add_expense(name, amount)
 	  expense = Expense.new
 	  expense.name = name
     expense.amount = amount
     #wtf because this next line was here it was not allowing this method to show as a instance_method
-    expense.period = period
+    expense.period = @period
+    if @period=:one_time
+      expense.date=@one_time_date
+    end
     @expense_list.push(expense)
   end
   
   def total
       @expense_list.inject(0) {|result, expense| result + expense.amount.to_i }
+  end
+  
+  def on (date, &block)
+    #debugger
+    period=:one_time
+    one_time=date
+    self.instance_eval &block
   end
   
   # dynamically define expenses
@@ -88,14 +99,15 @@ class ExpenseBuilder
   def initialize
 	  #debugger
     @expense_list = []
-    period = "monthly"
-	  start_date = Time.now
+    @period = :monthly
+	  @start_date = Time.now
   end
 end
 
 class Expense
   attr_accessor :name
   attr_accessor :period
+  attr_accessor :date
   attr_accessor :amount
 end
 
