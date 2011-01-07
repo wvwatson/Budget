@@ -62,7 +62,7 @@ class ExpenseBuilder
     expense.amount = amount
     #wtf because this next line was here it was not allowing this method to show as a instance_method
     expense.period = @period
-    if @period=:one_time
+    if @period==:one_time
       expense.date=@one_time_date
     end
     @expense_list.push(expense)
