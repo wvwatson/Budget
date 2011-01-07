@@ -13,7 +13,7 @@ expenses do
   # do something every 6 months
 
   every 6.months do
-	car_insurance $600
+	  car_insurance $600
   end
 
   # pay one time bill
@@ -40,13 +40,13 @@ expenses do
   
   # specialized calculations
   on 4/15/2011 do
-	taxes $5000 do
-	  # whatever code you want in here
-	  if cash_on_hand < 10000
-		file_extension
-		date = date.3.months.from_now
-	  end
-	end
+  	taxes $5000 do
+  	  # whatever code you want in here
+  	  if cash_on_hand < 10000
+  	  	file_extension
+    		date = date.3.months.from_now
+  	  end
+  	end
   end
   
 end
