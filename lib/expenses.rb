@@ -70,7 +70,7 @@ class ExpenseBuilder
     case @period
     when :one_time
       expense.date=@one_time_date
-    when :one_time 
+    when :incremental
       expense.date=@increment
     end
     @expense_list.push(expense)
