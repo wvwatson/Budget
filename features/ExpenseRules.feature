@@ -15,3 +15,6 @@ Feature: Expense rules
 	Given I have a one time birthday expense of $"250" on "8/3/2011"
 	Then the total of the one time expenses should be $250
 
+  Scenario: Add an incremental expense
+	Given I have an incremental car_insurance expense of $"600" every 6 months
+	Then the total of the incremental expenses should be $600

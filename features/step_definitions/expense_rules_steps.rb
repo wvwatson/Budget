@@ -48,3 +48,14 @@ Then /^the total of the one time expenses should be \$(\d+)$/ do |arg1|
     @my.total.should == arg1.to_i
 end
 
+Given /^I have an incremental car_insurance expense of \$"([^"]*)" every (\d+) months$/ do |arg1, arg2|
+  @my.every arg2.to_i.months do
+ 	  car_insurance arg1
+   end
+end
+
+Then /^the total of the incremental expenses should be \$(\d+)$/ do |arg1|
+    @my.total.should == arg1.to_i
+end
+
+

@@ -20,6 +20,7 @@ expenses do
   on 8/3/2011 do
 	  birthday $250
   end
+  
   # or it can look like this
   birthday $250, date => 8/3/2011
   
