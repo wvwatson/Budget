@@ -62,8 +62,22 @@ class ExpenseBuilder
   attr_accessor :increment
   #length of the projection. Could be a budget cycle, a calendar year, or a couple months
   attr_accessor :duration
+  attr_accessor :cost
+  attr_accessor :chance
   
-  def add_expense(name, amount)
+  def cost(cost)
+    #debugger
+    expense_list.last.amount=cost
+    #should raise an error if no expense exists
+  end
+  
+  def chance(chance)
+    #debugger
+    expense_list.last.chance=chance
+    #should raise an error if no expense exists
+  end
+  
+  def add_expense(name, amount=0)
 	  expense = Expense.new
 	  expense.name = name
     expense.amount = amount
@@ -82,12 +96,19 @@ class ExpenseBuilder
   end
   
   def total
-    @expense_list.inject(0) {|result, expense| result + expense.amount.to_i }
+    @expense_list.inject(0) do |result, expense| 
+      if expense.chance
+        #debugger
+        result + expense.amount.to_i * (expense.chance.to_f/100)
+      else
+        result + expense.amount.to_i
+      end  
+    end
   end
   
   def every (date, &block)
     #debugger
-    if date = :monthly
+    if date == :monthly
       period = :monthly
     else
       period=:incremental
@@ -112,11 +133,18 @@ class ExpenseBuilder
   end
   
   # dynamically define expenses
-  def method_missing(methId, *args)
+  def method_missing(methId, *args, &block)
     #debugger
     str = methId.id2name
+    #debugger
     #need to ensure 1 variable
-    add_expense(str, args[0])
+    if args.count == 0 
+      #debugger
+      add_expense(str)
+      self.instance_eval &block
+    elsif args.count == 1 
+      add_expense(str, args[0])
+    end
     #add define method here
   end
 
@@ -142,6 +170,7 @@ class Expense
   attr_accessor :period
   attr_accessor :date
   attr_accessor :amount
+  attr_accessor :chance
 end
 
 class BudgetObject

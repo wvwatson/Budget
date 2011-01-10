@@ -70,4 +70,18 @@ Then /^the total of the ranged expenses should be \$(\d+)$/ do |arg1|
   @my.total.should == arg1.to_i
 end
 
+Given /^I have a car maintenance expense of \$"([^"]*)" with a chance of (\d+)%$/ do |arg1, arg2|
+  @my.mybills do
+    car_maintenance do
+      cost arg1
+      chance arg2
+    end
+  end
+end
+
+Then /^the total of the car maintenance should be \$(\d+)$/ do |arg1|
+  @my.total.should == arg1.to_i
+end
+
+
 

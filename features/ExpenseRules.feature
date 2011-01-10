@@ -22,3 +22,7 @@ Feature: Expense rules
   Scenario: Add a ranged expense
 	Given I have a monthly ranged lawn care expense of $"250" from "3/1/2011" to "11/1/2011"
 	Then the total of the ranged expenses should be $250
+	
+  Scenario: Add an expense with a probability
+	Given I have a car maintenance expense of $"500" with a chance of 25%
+	Then the total of the car maintenance should be $125
