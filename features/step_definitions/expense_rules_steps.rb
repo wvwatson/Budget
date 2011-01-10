@@ -58,4 +58,16 @@ Then /^the total of the incremental expenses should be \$(\d+)$/ do |arg1|
     @my.total.should == arg1.to_i
 end
 
+Given /^I have a monthly ranged lawn care expense of \$"([^"]*)" from "([^"]*)" to "([^"]*)"$/ do |arg1, arg2, arg3|
+  @my.from arg2, arg3 do
+    every :month do
+      lawn_care arg1
+    end
+  end
+end
+
+Then /^the total of the ranged expenses should be \$(\d+)$/ do |arg1|
+  @my.total.should == arg1.to_i
+end
+
 

@@ -18,3 +18,7 @@ Feature: Expense rules
   Scenario: Add an incremental expense
 	Given I have an incremental car_insurance expense of $"600" every 6 months
 	Then the total of the incremental expenses should be $600
+	
+  Scenario: Add a ranged expense
+	Given I have a monthly ranged lawn care expense of $"250" from "3/1/2011" to "11/1/2011"
+	Then the total of the ranged expenses should be $250

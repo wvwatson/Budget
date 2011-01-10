@@ -27,9 +27,10 @@ expenses do
   #range
   from 3/1/2011, 11/1/2011 do
     every :month do
-	  lawn_care $250
-	end
+  	  lawn_care $250
+  	end
   end
+  
   # use probabilities (you don't always pay car maintenance every year)
   car_maintenance do
 	  cost $500

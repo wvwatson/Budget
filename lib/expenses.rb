@@ -50,40 +50,57 @@
 class Liability
 end
 
+# need to have the capability to calculate for a year and for one month
+# Build expenses from a expense language
 class ExpenseBuilder
   attr_accessor :expense_list
   attr_accessor :period 
   attr_accessor :start_date
+  attr_accessor :range_start_date
+  attr_accessor :range_end_date
   attr_accessor :one_time_date
   attr_accessor :increment
+  #length of the projection. Could be a budget cycle, a calendar year, or a couple months
+  attr_accessor :duration
   
   def add_expense(name, amount)
 	  expense = Expense.new
 	  expense.name = name
     expense.amount = amount
-    #wtf because this next line was here it was not allowing this method to show as a instance_method
     expense.period = @period
-    # if @period=:one_time
-    #     expense.date=@one_time_date
-    #   end
 
     case @period
     when :one_time
       expense.date=@one_time_date
     when :incremental
       expense.date=@increment
+    when :ranged
+      # fix this to create expenses per period type for the range
+      expense.date=@ranged_state_date
     end
     @expense_list.push(expense)
   end
   
   def total
-      @expense_list.inject(0) {|result, expense| result + expense.amount.to_i }
+    @expense_list.inject(0) {|result, expense| result + expense.amount.to_i }
   end
   
   def every (date, &block)
     #debugger
-    period=:incremental
-    increment=date
+    if date = :monthly
+      period = :monthly
+    else
+      period=:incremental
+      increment=date
+    end
+    self.instance_eval &block
+  end
+  
+  def from (start_date, end_date, &block)
+    #debugger
+    period=:ranged
+    range_start_date=start_date
+    range_end_date=end_date
     self.instance_eval &block
   end
   
@@ -116,6 +133,7 @@ class ExpenseBuilder
     @expense_list = []
     @period = :monthly
 	  @start_date = Time.now
+	  @duration = 1.year 
   end
 end
 
