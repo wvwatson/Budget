@@ -7,7 +7,89 @@
 # some of which have rules (appropriations) associated with them.  This gives non-profits and government 
 # organizations unique budgeting challenges. 
 
+#abstract builders (expense and revenue) out
 
+class RevenueBuilder
+  
+  attr_accessor :revenue_list
+  #maybe shadow all expense fields to make them available to blocks
+
+  attr_accessor :period 
+  attr_accessor :start_date
+  attr_accessor :range_start_date
+  attr_accessor :range_end_date
+  attr_accessor :one_time_date
+  attr_accessor :increment
+  
+  #length of the projection. Could be a budget cycle, a calendar year, or a couple months
+  attr_accessor :duration
+  attr_accessor :cost
+  attr_accessor :chance
+
+  def add_revenue(name, amount=0)
+	  revenue = Revenue.new
+	  revenue.name = name
+    revenue.amount = amount
+    revenue.period = @period
+
+    case @period
+    when :one_time
+      revenue.date=@one_time_date
+    when :incremental
+      revenue.date=@increment
+    when :ranged
+      # fix this to create expenses per period type for the range
+      revenue.date=@ranged_state_date
+    end
+    @revenue_list.push(revenue)
+    yield if block_given?
+  end
+
+  
+  # dynamically define expenses
+  def method_missing(methId, *args, &block)
+    #debugger
+    str = methId.id2name
+    #debugger
+    #need to ensure 1 variable
+    if args.count == 0 
+      #debugger
+      add_revenue(str)
+      self.instance_eval &block
+    elsif args.count == 1 
+      add_revenue(str, args[0])
+    end
+    #add define method here
+  end
+  
+  def mybills(&block) 
+    #debugger
+    #@expense_list = []
+    #myexp = Expense.new
+    #Expenses.class_eval &block
+    self.instance_eval &block
+  end
+     
+  def initialize
+	  #debugger
+    @revenue_list = []
+    @period = :monthly
+	  @start_date = Time.now
+	  @duration = 1.year 
+  end
+  
+  def total
+    @revenue_list.inject(0) do |result, expense| 
+      if revenue.chance
+        #debugger
+        result + revenue.amount.to_i * (revenue.chance.to_f/100)
+      else
+        result + revenue.amount.to_i
+      end  
+    end
+  end
+  
+end
 
 #Accounting.  Maybe make Journal(entry) a module and credit and debit extend it?  Or 
 # use inheritance?
@@ -55,6 +137,11 @@ end
 
 
 class Revenue
+  attr_accessor :name
+  attr_accessor :period
+  attr_accessor :date
+  attr_accessor :amount
+  attr_accessor :chance
 end
 
 class EstimatedIncome

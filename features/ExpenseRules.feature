@@ -26,3 +26,9 @@ Feature: Expense rules
   Scenario: Add an expense with a probability
 	Given I have a car maintenance expense of $"500" with a chance of 25%
 	Then the total of the car maintenance should be $125
+	
+  Scenario: Add an expense with custom logic
+	Given I have "7000"
+	And I have "7000" of other expenses
+	And I have a tax expense of $"5000" on "4/15/2011" I want to file an extension if my total cash is less than "10000"
+	Then the total expenses at "4/15/2011" should be $7000

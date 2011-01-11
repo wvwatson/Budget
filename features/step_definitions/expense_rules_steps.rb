@@ -1,5 +1,6 @@
 Before do
   @my = ExpenseBuilder.new
+  @my_revenue = RevenueBuilder.new
 end
 
 Given /^I have a monthly expense of telephone that is \$(\d+)$/ do |arg1|
@@ -81,6 +82,35 @@ end
 
 Then /^the total of the car maintenance should be \$(\d+)$/ do |arg1|
   @my.total.should == arg1.to_i
+end
+
+Given /^I have "([^"]*)"$/ do |arg1|
+  @my_revenue.mybills do
+	    income arg1	 
+  end
+end
+
+Given /^I have "([^"]*)" of other expenses$/ do |arg1|
+  @my.mybills do
+	    total_expenses arg1	 
+  end
+end
+
+Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an extension if my total cash is less than "([^"]*)"$/ do |arg1, arg2, arg3|
+  @my.on 4/15/2011 do
+  	taxes $5000 do
+  	  # whatever code you want in here
+  	  # needs to make sense within context of builder
+      # if @my_revenue.total < 10000
+      #         file_extension
+      #         date = date.3.months.from_now
+      #       end
+  	end
+  end
+end
+
+Then /^the total expenses at "([^"]*)" should be \$(\d+)$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
 end
 
 

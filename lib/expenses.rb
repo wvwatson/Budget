@@ -53,6 +53,7 @@ end
 # need to have the capability to calculate for a year and for one month
 # Build expenses from a expense language
 class ExpenseBuilder
+  #maybe shadow all expense fields to make them available to blocks
   attr_accessor :expense_list
   attr_accessor :period 
   attr_accessor :start_date
@@ -93,6 +94,7 @@ class ExpenseBuilder
       expense.date=@ranged_state_date
     end
     @expense_list.push(expense)
+    yield if block_given?
   end
   
   def total

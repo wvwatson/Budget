@@ -44,6 +44,7 @@ expenses do
   on 4/15/2011 do
   	taxes $5000 do
   	  # whatever code you want in here
+  	  # needs to make sense within context of builder
   	  if cash_on_hand < 10000
   	  	file_extension
     		date = date.3.months.from_now
