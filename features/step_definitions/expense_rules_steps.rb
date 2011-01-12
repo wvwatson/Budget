@@ -105,7 +105,7 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
   	  # how do  I make the expense aware of the income?
       if @my_revenue.total < 10000
         file_extension
-        date = date.3.months.from_now
+        #date = date.3.months.from_now
       end
   	end
   end
