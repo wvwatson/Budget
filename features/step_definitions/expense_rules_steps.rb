@@ -1,6 +1,7 @@
 Before do
   @my = ExpenseBuilder.new
   @my_revenue = RevenueBuilder.new
+  @my_budget = BudgetBuilder.new
 end
 
 Given /^I have a monthly expense of telephone that is \$(\d+)$/ do |arg1|
@@ -101,10 +102,11 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
   	taxes $5000 do
   	  # whatever code you want in here
   	  # needs to make sense within context of builder
-      # if @my_revenue.total < 10000
-      #         file_extension
-      #         date = date.3.months.from_now
-      #       end
+  	  # how do  I make the expense aware of the income?
+      if @my_revenue.total < 10000
+        file_extension
+        date = date.3.months.from_now
+      end
   	end
   end
 end
