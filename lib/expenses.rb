@@ -53,6 +53,10 @@ end
 # need to have the capability to calculate for a year and for one month
 # Build expenses from a expense language
 class ExpenseBuilder
+  # need some way to reference income
+  # maybe use visitor pattern
+  # maybe execute block inside the context of an income statement  (which includes expenses and income)
+  attr_accessor :budget_builder #ref to parent, be careful here
   #maybe shadow all expense fields to make them available to blocks
   attr_accessor :expense_list
   attr_accessor :period 
@@ -137,15 +141,18 @@ class ExpenseBuilder
   # dynamically define expenses
   def method_missing(methId, *args, &block)
     #debugger
+    # maybe make more secure/easier to debug by requiring method to have 
+    # prefix of exp_ or rev_
     str = methId.id2name
     #debugger
+    #debugger if str == 'taxes'
     #need to ensure 1 variable
     if args.count == 0 
       #debugger
       add_expense(str)
       self.instance_eval &block
     elsif args.count == 1 
-      add_expense(str, args[0])
+      add_expense(str, args[0], &block)
     end
     #add define method here
   end
