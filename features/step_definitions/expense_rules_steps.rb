@@ -123,7 +123,7 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
 end
 
 Then /^the total expenses at "([^"]*)" should be \$(\d+)$/ do |arg1, arg2|
-    @my.total.should == arg2.to_i
+    @my_budget.total_expenses.should == arg2.to_i
 end
 
 
