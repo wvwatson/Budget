@@ -40,11 +40,24 @@ expenses do
   car_maintenance $500, chance => 25%
   
   
-  # specialized calculations
+  # specialized expense calculations
+  on 4/15/2011 do
+    total_expenses 10000
+  	taxes $5000 do
+  	  # whatever code you want in here
+  	  # needs to make sense within context of an expense
+  	  if total_expenses > 7000
+  	  	file_extension
+  	  end
+  	end
+  end
+  
+  # specialized calculations that span income and expenses
   on 4/15/2011 do
   	taxes $5000 do
   	  # whatever code you want in here
-  	  # needs to make sense within context of builder
+  	  # needs to make sense within context of a 
+  	  #  financial statement (expense and income)
   	  if cash_on_hand < 10000
   	  	file_extension
     		date = date.3.months.from_now
