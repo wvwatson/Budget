@@ -10,9 +10,7 @@
 #abstract builders (expense and revenue) out
 
 class RevenueBuilder
-  # need some way to reference income
-  # maybe use visitor pattern
-  attr_accessor :budget_builder #ref to parent, be careful here
+
   attr_accessor :revenue_list
   #maybe shadow all expense fields to make them available to blocks
 
