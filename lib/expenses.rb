@@ -70,9 +70,10 @@ class ExpenseBuilder
   attr_accessor :cost
   attr_accessor :chance
   
-  def cost(cost)
+  
+  def cost(tempcost)
     #debugger
-    expense_list.last.amount=cost
+    expense_list.last.amount=tempcost
     #should raise an error if no expense exists
   end
   
