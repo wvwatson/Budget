@@ -76,6 +76,11 @@ class ExpenseBuilder
     expense_list.last.amount=tempcost
     #should raise an error if no expense exists
   end
+
+  # at some point make = work
+  # def cost=(tempcost)
+  #   cost(tempcost)
+  # end
   
   def chance(chance)
     #debugger
