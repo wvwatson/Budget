@@ -180,33 +180,34 @@ class ExpenseBuilder
 	  @duration = 1.year 
   end
   
-  # def export_excel
-  #    #filepath = File.dirname(__FILE__)+"/test_input.xls" 
-  #    #File.open(filepath, "w"){|f| Net::HTTP.start("kangarooit.com") { |http| resp = http.get("/test/test_input.xls"); f.write(resp.body)} }
-  # 
-  #    #spreadsheet = Spreadsheet.open(filepath)
-  #    sheet = spreadsheet.worksheets.first
-  #    output_path = File.dirname(__FILE__) + "/test_output.xls"
-  # 
-  #    book = Spreadsheet::Workbook.new
-  #    sheet2 = book.create_worksheet
-  #    sheet2.row(0)[0] = 1
-  #    sheet2.row(0)[1] = 2
-  #    sheet2.row(1)[0] = 3
-  #    sheet2.row(1)[1] = 4
-  #    puts sheet2.row(1)[0].data.inspect
-  #    puts sheet2.row(1)[1].data.inspect
-  #    # note that the formula in sheet2.row(1)[1].data is significantly larger than the one in sheet2.row(1)[0].data
-  #    book.write output_path
-  # 
-  #    # Not sure how to programatically test the fact that cell A2 doesn't render in excel ( on linux openoffice) - it should show 365
-  # 
-  #    # The following expectation passes which means that under the covers, the formula is essentially correct:
-  #    # Spreadsheet.open(output_path).worksheets.first.row(1)[0].value.should eql(365.0)
-  #    puts Spreadsheet.open(output_path).worksheets.first.row(1)[0].data.inspect
-  # 
-  #  end
-  #  
+  def export_excel
+     debugger
+     #filepath = File.dirname(__FILE__)+"/test_input.xls" 
+     #File.open(filepath, "w"){|f| Net::HTTP.start("kangarooit.com") { |http| resp = http.get("/test/test_input.xls"); f.write(resp.body)} }
+
+     #spreadsheet = Spreadsheet.open(filepath)
+     #sheet = spreadsheet.worksheets.first
+     output_path = File.dirname(__FILE__) + "/test_output.xls"
+
+     book = Spreadsheet::Workbook.new
+     sheet2 = book.create_worksheet
+     sheet2.row(0)[0] = 1
+     sheet2.row(0)[1] = 2
+     sheet2.row(1)[0] = 3
+     sheet2.row(1)[1] = 4
+     #puts sheet2.row(1)[0].data.inspect
+     #puts sheet2.row(1)[1].data.inspect
+     # note that the formula in sheet2.row(1)[1].data is significantly larger than the one in sheet2.row(1)[0].data
+     book.write output_path
+
+     # Not sure how to programatically test the fact that cell A2 doesn't render in excel ( on linux openoffice) - it should show 365
+
+     # The following expectation passes which means that under the covers, the formula is essentially correct:
+     # Spreadsheet.open(output_path).worksheets.first.row(1)[0].value.should eql(365.0)
+     #puts Spreadsheet.open(output_path).worksheets.first.row(1)[0].data.inspect
+
+   end
+   
 end
 
 class Expense

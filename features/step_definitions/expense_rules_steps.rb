@@ -111,7 +111,7 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
   	  # how do I make the expense aware of the income?
   	  # separate expense specific code from income_statement specific code (which
   	  #  includes expenses and income ... and has references to both)
-  	  debugger
+  	  #debugger
       if total.to_f > arg3.to_f
         #file_extension
         #why doesn't an = work here?
