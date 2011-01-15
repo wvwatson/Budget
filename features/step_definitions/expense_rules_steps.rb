@@ -103,15 +103,15 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
   # make this an income statement (which includes expenses and income) test and replace it with an
   # expense - only test. maybe make it so that income/cashflow statement rules get applied after individual
   # revenue or expense rules
-  @my.on arg3 do
-    #debugger
-  	taxes arg1 do
+    @my.on arg3 do
+      #debugger
+  	  taxes arg1 do
   	  # whatever code you want in here
   	  # needs to make sense within context of builder
   	  # how do I make the expense aware of the income?
   	  # separate expense specific code from income_statement specific code (which
   	  #  includes expenses and income ... and has references to both)
-  	  #debugger
+  	  debugger
       if total.to_f > arg3.to_f
         #file_extension
         #why doesn't an = work here?
@@ -123,7 +123,7 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
 end
 
 Then /^the total expenses at "([^"]*)" should be \$(\d+)$/ do |arg1, arg2|
-    @my_budget.total_expenses.should == arg2.to_i
+    @my.total.should == arg2.to_i
 end
 
 
