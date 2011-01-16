@@ -181,13 +181,13 @@ class ExpenseBuilder
   end
   
   def export_excel
-     debugger
+     #debugger
      #filepath = File.dirname(__FILE__)+"/test_input.xls" 
      #File.open(filepath, "w"){|f| Net::HTTP.start("kangarooit.com") { |http| resp = http.get("/test/test_input.xls"); f.write(resp.body)} }
 
      #spreadsheet = Spreadsheet.open(filepath)
      #sheet = spreadsheet.worksheets.first
-     output_path = File.dirname(__FILE__) + "/test_output.xls"
+     output_path = File.dirname(__FILE__) + "/expenses.xls"
 
      book = Spreadsheet::Workbook.new
      sheet2 = book.create_worksheet
