@@ -89,7 +89,7 @@ class ExpenseBuilder
     #should raise an error if no expense exists
   end
   
-  def add_expense(name, amount=0)
+  def add_expense(name, amount=0, &block)
 	  expense = Expense.new
 	  expense.name = name
     expense.amount = amount
@@ -106,6 +106,7 @@ class ExpenseBuilder
     end
     @expense_list.push(expense)
     yield if block_given?
+    expense_list.last.custom_code=block
   end
   
   def total
@@ -180,6 +181,17 @@ class ExpenseBuilder
 	  @duration = 1.year 
   end
   
+  def build_projection
+    # create a loop based on month starting at the start date and ending at duration
+    # create a month expense list based on the what expenses are monthly
+    # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
+    # create iterators and check against iterators to see if an expense should be added for the current month
+    # apply the custom code after the expense has been created
+    # may need some concept of current expense list and projection expense list
+    #  maybe a hash of months in a hash of years
+  end
+  
+  
   def export_excel
      #debugger
      #filepath = File.dirname(__FILE__)+"/test_input.xls" 
@@ -191,10 +203,18 @@ class ExpenseBuilder
 
      book = Spreadsheet::Workbook.new
      sheet2 = book.create_worksheet
-     sheet2.row(0)[0] = 1
-     sheet2.row(0)[1] = 2
-     sheet2.row(1)[0] = 3
-     sheet2.row(1)[1] = 4
+     # sheet2.row(0)[0] = 1
+     # sheet2.row(0)[1] = 2
+     # sheet2.row(1)[0] = 3
+     # sheet2.row(1)[1] = 4
+     
+     # start on the second row
+  
+     #debugger
+     expense_list.each_with_index do |expense, i|
+        sheet2.row(i)[0] =  expense.name
+        sheet2.row(i)[1] =  expense.amount
+     end 
      #puts sheet2.row(1)[0].data.inspect
      #puts sheet2.row(1)[1].data.inspect
      # note that the formula in sheet2.row(1)[1].data is significantly larger than the one in sheet2.row(1)[0].data
@@ -216,6 +236,7 @@ class Expense
   attr_accessor :date
   attr_accessor :amount
   attr_accessor :chance
+  attr_accessor :custom_code
 end
 
 class BudgetObject

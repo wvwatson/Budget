@@ -3,12 +3,8 @@ Feature: Export Financial Statement
   As a reviewer of budgets
   I want to export a financial statement to excel 
 
-  Scenario: Export an income statement to excel
-    Given I have income and expenses calculated for 1 year
-    When I export the income statement to excel
-    Then an excel spreadsheet should be created
-
   Scenario: Export some expenses to excel
     Given I have some expenses
     When I export the expenses to excel
     Then an excel spreadsheet should be created
+
