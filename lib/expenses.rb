@@ -236,7 +236,7 @@ class ExpenseProjection
 
 
     # create a month expense list based on the what expenses are monthly
-    # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
+    # have a 'current date' and check to see if the "expense rule" has a one time date that falls in the current dates's month
     # create iterators and check against iterators to see if an expense should be added for the current month
     # apply the custom code after the expense has been created
     # may need some concept of current expense list and projection expense list
@@ -249,6 +249,26 @@ class ExpenseProjection
     @expense_projection = {}
   end
   
+  def build_projection
+    @expense_projection = build_projection_hash(@expense_builder.start_date, @expense_builder.end_date)
+    @expense_projection.each do |year, month|
+      month.each do |expense_month, expense|
+        # should we make the object an expense or an expense builder .. maybe expense builder
+        #  because need ability to apply custom code with context?
+        # Need some way to apply the logic for the date we are on
+        # loop through each expense rule to check if we should move it over
+        expense.expense_list.each do |expense_rule|
+          # if within start and end dates...
+          case expense_rule.expense.period
+          when :monthly
+            #expense.amount = expense_rule.expense.amount 
+          end
+          
+          # need to apply custom code
+        end
+      end
+    end
+  end
   # build the months and years
   def build_projection_hash(date,laterdate)
     
