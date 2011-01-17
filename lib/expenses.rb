@@ -180,17 +180,7 @@ class ExpenseBuilder
 	  @start_date = Time.now
 	  @duration = 1.year 
   end
-  
-  def build_projection
-    # create a loop based on month starting at the start date and ending at duration
-    # create a month expense list based on the what expenses are monthly
-    # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
-    # create iterators and check against iterators to see if an expense should be added for the current month
-    # apply the custom code after the expense has been created
-    # may need some concept of current expense list and projection expense list
-    #  maybe a hash of months in a hash of years
-  end
-  
+ 
   
   def export_excel
      #debugger
@@ -228,6 +218,60 @@ class ExpenseBuilder
 
    end
    
+end
+
+class ExpenseProjection
+  
+  attr_accessor :expense_builder
+  attr_accessor :expense_projection
+  # create a loop based on month starting at the start date and ending at duration
+  # create a month expense list based on the what expenses are monthly
+  # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
+  # create iterators and check against iterators to see if an expense should be added for the current month
+  # apply the custom code after the expense has been created
+  # may need some concept of current expense list and projection expense list
+  #  maybe a hash of months in a hash of years
+  def build_projection
+
+
+
+    # create a month expense list based on the what expenses are monthly
+    # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
+    # create iterators and check against iterators to see if an expense should be added for the current month
+    # apply the custom code after the expense has been created
+    # may need some concept of current expense list and projection expense list
+    #  maybe a hash of months in a hash of years
+    
+ 
+  end
+ 
+  def initialize
+    @expense_projection = {}
+  end
+  
+  # build the months and years
+  def build_projection_hash(date,laterdate)
+    
+    # instantiate a hash of hashes
+    year_hash = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+    
+    (date.year..laterdate.year).each do |y|
+      
+      # if the current year is not part of the start date, we must be on the
+      # the first month of the next year
+      mo_start = (date.year == y) ? date.month : 1
+      # if the current year is not part of the end date, we must be on 
+      # the last month of the year
+      mo_end = (laterdate.year == y) ? laterdate.month : 12
+
+      (mo_start..mo_end).each do |m|  
+          #puts Date::MONTHNAMES[m]
+          year_hash[y][m]=ExpenseBuilder.new
+      end
+    end
+    year_hash
+  end
+  
 end
 
 class Expense

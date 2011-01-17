@@ -1,3 +1,7 @@
+Before do
+  @expense_projection = ExpenseProjection.new
+end
+
 Given /I have expense rules set up/ do
   steps %Q{
     Given I have a monthly expense of telephone that is $50
