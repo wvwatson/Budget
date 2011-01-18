@@ -1,17 +1,7 @@
 Before do
-  #@my_expenses = ExpenseBuilder.new
+
   @expense_projection = ExpenseProjection.new
 end
-
-# Given /^I have some expenses$/ do
-#   # try a step set up from the expense rules
-#   @my_expenses.mybills do
-#       telephone 200  
-#       cell_phone 75
-#       rent 750
-#       car_note 350
-#   end
-# end
 
 When /^I export the expenses to excel$/ do
   @expense_projection.expense_builder=@my
