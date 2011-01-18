@@ -4,7 +4,7 @@ Feature: Export Financial Statement
   I want to export a financial statement to excel 
 
   Scenario: Export some expenses to excel
-    Given I have some expenses
+    Given I have expense rules set up
     When I export the expenses to excel
     Then an excel spreadsheet should be created
 
