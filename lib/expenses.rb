@@ -299,25 +299,58 @@ class ExpenseProjection
      #debugger
      # need to loop through the whole list and get all of the expense names for each month
      #  and include that list for the first column
-     last_month_column = -1
+     last_month_column = 0
      expense_projections.each_with_index do |(year, month_hash), year_index|
        # excelname.row(rownumber)[columnnumber]
 	   # year needs to print conditionally if a new year
-	   sheet2.row(0)[last_month_column + 1] = year 
-	   
+	   #sheet2.row(0)[last_month_column + 1] = year 
+	     #debugger
        month_hash.each_with_index do |(month, expense_list), month_index|
-	   
-		  # always shows on the second row (for now)
-          sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
-         
+	        #debugger
+		      # always shows on the second row (for now)
+          #sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
+          #debugger
           expense_list.each_with_index do |expense, expense_index|
 			  # 2 levels below year
+			        #debugger
               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.name
               #sheet2.row(i)[1] =  expense.amount
           end 
-          last_month_column += month_index
+          #debugger
+          last_month_column += 1
+          #exit after one listing of expense names
+          break
        end 
+       #debugger
      end
+     
+     
+     #debugger
+      # need to loop through the whole list and get all of the expense names for each month
+      #  and include that list for the first column
+      #last_month_column = 0
+      expense_projections.each_with_index do |(year, month_hash), year_index|
+        # excelname.row(rownumber)[columnnumber]
+ 	   # year needs to print conditionally if a new year
+ 	   sheet2.row(0)[last_month_column + 1] = year 
+ 	     #debugger
+        month_hash.each_with_index do |(month, expense_list), month_index|
+ 	        #debugger
+ 		      # always shows on the second row (for now)
+           sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
+           #debugger
+           expense_list.each_with_index do |expense, expense_index|
+ 			  # 2 levels below year
+ 			        #debugger
+               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.amount
+               #sheet2.row(i)[1] =  expense.amount
+           end 
+           #debugger
+           last_month_column += 1
+        end 
+        #debugger
+      end
+      
      # 
      # #numbers for each month
      # expense_projections.each_with_index do |(year, month_hash), index|
