@@ -33,4 +33,16 @@ Then /^I should get a total of \$(\d+) of monthly expenses for the year$/ do |ar
   pending # express the regexp above with the code you wish you had
 end
 
+Then /^I should get a total of \$(\d+) of one time expenses for the year$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should get a total of \$(\d+) ranged expenses for the year$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should get a total of \$(\d+) expenses for the year$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
 
