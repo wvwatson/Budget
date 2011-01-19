@@ -337,12 +337,14 @@ class ExpenseProjection
         month_hash.each_with_index do |(month, expense_list), month_index|
  	        #debugger
  		      # always shows on the second row (for now)
-           sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
+           sheet2.row(3)[last_month_column + 1] = Date::MONTHNAMES[month]
+		              sheet2.row(3)[last_month_column + 1] = Date::MONTHNAMES[month]
+
            #debugger
            expense_list.each_with_index do |expense, expense_index|
  			  # 2 levels below year
  			        #debugger
-               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.amount
+               sheet2.row(expense_index + 3)[last_month_column + 1] =  expense.amount
                #sheet2.row(i)[1] =  expense.amount
            end 
            #debugger
