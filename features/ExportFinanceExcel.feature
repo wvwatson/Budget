@@ -1,3 +1,4 @@
+@expense
 Feature: Export Financial Statement 
   In order to review a financial statement
   As a reviewer of budgets
