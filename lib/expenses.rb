@@ -338,7 +338,6 @@ class ExpenseProjection
  	        #debugger
  		      # always shows on the second row (for now)
            sheet2.row(1)[last_month_column + 1] = Date::MONTHNAMES[month].dup
-           puts last_month_column + 1
            expense_list.each_with_index do |expense, expense_index|
  			  # 2 levels below year
  			        #debugger
