@@ -8,3 +8,8 @@ Feature: Create an expense projection
     Given I have expense rules set up
     When I generate the projected expenses
     Then I should get 12 expenses with labels for each month
+
+  Scenario: Total for one month
+    Given I have expense rules set up
+    When I generate the projected expenses
+    Then I should get a total of $16200 of monthly expenses for the year
