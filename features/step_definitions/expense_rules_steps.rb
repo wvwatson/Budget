@@ -63,6 +63,8 @@ Then /^the total of the incremental expenses should be \$(\d+)$/ do |arg1|
 end
 
 Given /^I have a monthly ranged lawn care expense of \$"([^"]*)" from "([^"]*)" to "([^"]*)"$/ do |arg1, arg2, arg3|
+  # ranged can be incremental too ... need a way to do both
+  # ranged is incremental (usually 1 month increments).  Probably need to default to 1 month
   @my.from arg2, arg3 do
     every :month do
       lawn_care arg1
