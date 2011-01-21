@@ -22,9 +22,9 @@ Feature: Create an expense projection
   Scenario: Total ranged expenses for the year
     Given I have expense rules set up
     When I generate the projected expenses
-    Then I should get a total of $16200 ranged expenses for the year
+    Then I should get a total of $2250 ranged expenses for the year
 
   Scenario: Total expenses for the year
     Given I have expense rules set up
     When I generate the projected expenses
-    Then I should get a total of $16200 expenses for the year
+    Then I should get a total of $28200 expenses for the year
