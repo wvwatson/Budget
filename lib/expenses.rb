@@ -72,6 +72,7 @@ class ExpenseBuilder
   attr_accessor :duration
   attr_accessor :cost
   attr_accessor :chance
+  attr_accessor :date_type
   
   
   def cost(tempcost)
@@ -99,6 +100,7 @@ class ExpenseBuilder
 
     case @period
     when :one_time
+      #debugger
       expense.date=@one_time_date
     when :incremental
       expense.date=@increment
@@ -106,7 +108,7 @@ class ExpenseBuilder
     #      # fix this to create expenses per period type for the range
     #      expense.date=@ranged_state_date
     end
-    expense.range_start_date=@range_state_date  
+    expense.range_start_date=@range_state_date
     expense.range_end_date=@range_end_date
     expense.ranged=@ranged
          
@@ -144,8 +146,8 @@ class ExpenseBuilder
   def from (start_date, end_date, &block)
     #debugger
     @period=:ranged
-    @range_start_date=start_date
-    @range_end_date=end_date
+    @range_start_date=Date.strptime(start_date, @date_type)
+    @range_end_date=Date.strptime(end_date, @date_type)
     instance_eval &block
   end
   
@@ -154,7 +156,7 @@ class ExpenseBuilder
     # something totally hosed here... need to make sure a new expense builder not created
     #  period is getting lost when the block is executed.
     @period=:one_time
-    @one_time_date=date
+    @one_time_date=Date.strptime(date, @date_type)
     instance_eval &block
   end
   
@@ -195,6 +197,7 @@ class ExpenseBuilder
 	  @start_date = Time.now
 	  @duration = 1.year # not used yet
 	  @end_date = @start_date + 11.months # 1 year default
+	  @date_type = "%D"
   end
    
 end
@@ -243,7 +246,12 @@ class ExpenseProjection
           when :monthly
             # take the closure (custom code) out of this push later
             expense_list.push(expense_rule) 
-            
+          when :one_time 
+            if expense_rule.date.month==expense_month
+            #if month(expense_rule.date)==month_number
+              # expense_result + expense.amount.to_i
+              expense_list.push(expense_rule)
+            end
           end
           
           # need to apply custom code.  will it be executed in the context of expense or expense builder?
@@ -283,15 +291,28 @@ class ExpenseProjection
   def projection_total(expense_type=:all)
     @expense_projections.inject(0) do |year_result, (year_name, month_hash)|
       #puts year_name
-      year_result + month_hash.inject(0) do |month_result, (month_name, expense_list)|
+      year_result + month_hash.inject(0) do |month_result, (month_number, expense_list)|
         #puts month_name 
         #puts month_result.to_s
         #debugger
         month_result + expense_list.inject(0) do |expense_result, expense|
-          #puts expense.name + ' ' +expense.period.to_s + ' ' + expense.amount.to_s
+          #puts expense.name + ' ' +expense.period.to_s + ' ' + expense.amount.to_s 
+          #puts ' count: ' + expense_list.count.to_s
+          #debugger if expense_type = :one_time
           if (expense.period == expense_type) or (expense_type == :all)
-            #puts "made it in: " + expense.amount.to_s
-            expense_result + expense.amount.to_i
+            #puts "made it in: " + expense.name + ' ' +expense.period.to_s + ' ' + expense.amount.to_s 
+            # debugger #if expense_type == :one_time
+            # case expense.period
+            # when :monthly
+            #   expense_result + expense.amount.to_i
+            # when :one_time 
+            #   if month(expense.date)==month_number
+                #debugger if expense.amount.nil?
+                expense_result + expense.amount.to_i
+             # end
+            # end
+          else
+            expense_result + 0
           end
         end
       end
@@ -446,6 +467,13 @@ class Expense
   attr_accessor :amount
   attr_accessor :chance
   attr_accessor :custom_code
+  
+  def initialize
+    @period = :monthly
+	  @date = Date.new
+	  #@end_date = @start_date + 11.months # 1 year default
+  end
+  
 end
 
 class BudgetObject

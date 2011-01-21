@@ -25,7 +25,8 @@ class RevenueBuilder
   attr_accessor :duration
   attr_accessor :cost
   attr_accessor :chance
-
+  attr_accessor :date_type
+  
   def add_revenue(name, amount=0)
 	  revenue = Revenue.new
 	  revenue.name = name
@@ -34,12 +35,12 @@ class RevenueBuilder
 
     case @period
     when :one_time
-      revenue.date=@one_time_date
+      revenue.date=Date.strptime(@one_time_date, @date_type)
     when :incremental
       revenue.date=@increment
     when :ranged
       # fix this to create expenses per period type for the range
-      revenue.date=@ranged_state_date
+      revenue.date=Date.strptime(@ranged_state_date, @date_type)
     end
     @revenue_list.push(revenue)
     yield if block_given?
@@ -75,7 +76,8 @@ class RevenueBuilder
     @revenue_list = []
     @period = :monthly
 	  @start_date = Time.now
-	  @duration = 1.year 
+	  @duration = 1.year
+	  @date_type = '%D'
   end
   
   def total

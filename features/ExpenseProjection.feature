@@ -17,7 +17,7 @@ Feature: Create an expense projection
   Scenario: Total one time expenses for the year
     Given I have expense rules set up
     When I generate the projected expenses
-    Then I should get a total of $16200 of one time expenses for the year
+    Then I should get a total of $5250 of one time expenses for the year
 
   Scenario: Total ranged expenses for the year
     Given I have expense rules set up

@@ -31,11 +31,11 @@ end
 
 Then /^I should get a total of \$(\d+) of monthly expenses for the year$/ do |arg1|
   #pending # express the regexp above with the code you wish you had
-  @expense_projection.projection_total.should == arg1.to_i
+  @expense_projection.projection_total(:monthly).should == arg1.to_i
 end
 
 Then /^I should get a total of \$(\d+) of one time expenses for the year$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  @expense_projection.projection_total(:one_time).should == arg1.to_i
 end
 
 Then /^I should get a total of \$(\d+) ranged expenses for the year$/ do |arg1|

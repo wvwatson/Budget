@@ -105,7 +105,7 @@ Given /^I have a tax expense of \$"([^"]*)" on "([^"]*)" I want to file an exten
   # make this an income statement (which includes expenses and income) test and replace it with an
   # expense - only test. maybe make it so that income/cashflow statement rules get applied after individual
   # revenue or expense rules
-    @my.on arg3 do
+    @my.on arg2 do
       #debugger
   	  taxes arg1 do
   	  # whatever code you want in here
