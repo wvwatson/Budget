@@ -40,7 +40,7 @@ class RevenueBuilder
       revenue.date=@increment
     when :ranged
       # fix this to create expenses per period type for the range
-      revenue.date=Date.strptime(@ranged_state_date, @date_type)
+      revenue.date=Date.strptime(@ranged_start_date, @date_type)
     end
     @revenue_list.push(revenue)
     yield if block_given?

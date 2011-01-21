@@ -106,9 +106,9 @@ class ExpenseBuilder
       expense.date=@increment
     # when :ranged
     #      # fix this to create expenses per period type for the range
-    #      expense.date=@ranged_state_date
+    #      expense.date=@ranged_start_date
     end
-    expense.range_start_date=@range_state_date
+    expense.range_start_date=@range_start_date
     expense.range_end_date=@range_end_date
     expense.ranged=@ranged
          
@@ -146,6 +146,7 @@ class ExpenseBuilder
   def from (start_date, end_date, &block)
     #debugger
     @period=:ranged
+    @ranged=true
     @range_start_date=Date.strptime(start_date, @date_type)
     @range_end_date=Date.strptime(end_date, @date_type)
     instance_eval &block
@@ -187,6 +188,7 @@ class ExpenseBuilder
     #Expenses.class_eval &block
     # need to set period to default every time a new rule is made
     @period = :monthly
+    @ranged = nil
     self.instance_eval &block
   end
   
@@ -197,7 +199,7 @@ class ExpenseBuilder
 	  @start_date = Time.now
 	  @duration = 1.year # not used yet
 	  @end_date = @start_date + 11.months # 1 year default
-	  @date_type = "%D"
+	  @date_type = '%m/%d/%Y'
   end
    
 end
@@ -245,11 +247,36 @@ class ExpenseProjection
           case expense_rule.period
           when :monthly
             # take the closure (custom code) out of this push later
-            expense_list.push(expense_rule) 
+            if (expense_rule.ranged==true) 
+              #debugger
+              if (expense_month >= expense_rule.range_start_date.month) && 
+                (expense_month <= expense_rule.range_end_date.month)
+                expense_list.push(expense_rule) 
+              end
+            else
+              expense_list.push(expense_rule)
+            end 
+          when :incremental
+            if (expense_rule.ranged==true) 
+               #debugger
+               if (expense_month >= expense_rule.range_start_date.month) && 
+                 (expense_month <= expense_rule.range_end_date.month)
+                 expense_list.push(expense_rule) 
+               end
+             end
+            #elsif expense_rule.duration
           when :one_time 
             if expense_rule.date.month==expense_month
             #if month(expense_rule.date)==month_number
               # expense_result + expense.amount.to_i
+              expense_list.push(expense_rule)
+            end
+          when :ranged 
+            #debugger
+            if (expense_month >= expense_rule.range_start_date.month) and (expense_month <= expense_rule.range_end_date.month)
+            #if month(expense_rule.date)==month_number
+              # expense_result + expense.amount.to_i
+              #debugger
               expense_list.push(expense_rule)
             end
           end
@@ -311,6 +338,8 @@ class ExpenseProjection
                 expense_result + expense.amount.to_i
              # end
             # end
+          elsif (expense_type==:ranged) and (expense.ranged==true)
+            expense_result + expense.amount.to_i
           else
             expense_result + 0
           end
