@@ -241,6 +241,7 @@ class ExpenseProjection
         #  because need ability to apply custom code with context?
         # Need some way to apply the logic for the date we are on
         # loop through each expense rule to check if we should move it over
+        #debugger # if expense_month == 8
         @expense_builder.expense_list.each do |expense_rule|
           # if within start and end dates...
           #debugger
@@ -251,25 +252,36 @@ class ExpenseProjection
               #debugger
               if (expense_month >= expense_rule.range_start_date.month) && 
                 (expense_month <= expense_rule.range_end_date.month)
-                expense_list.push(expense_rule) 
+                expense_list.push(expense_rule.dup)
+              else # if not in range, we want a named expense of 0 to be added
+                expense_list.push(expense_rule.dup)
+                expense_list.last.amount=0
               end
             else
-              expense_list.push(expense_rule)
+              expense_list.push(expense_rule.dup)
             end 
           when :incremental
             if (expense_rule.ranged==true) 
                #debugger
                if (expense_month >= expense_rule.range_start_date.month) && 
                  (expense_month <= expense_rule.range_end_date.month)
-                 expense_list.push(expense_rule) 
+                 expense_list.push(expense_rule.dup) 
+               else # if not in range, we want a named expense of 0 to be added
+                 expense_list.push(expense_rule.dup)
+                 expense_list.last.amount=0
                end
              end
             #elsif expense_rule.duration
           when :one_time 
+            #debugger if expense_month == 8
             if expense_rule.date.month==expense_month
             #if month(expense_rule.date)==month_number
               # expense_result + expense.amount.to_i
-              expense_list.push(expense_rule)
+              expense_list.push(expense_rule.dup)
+            else # if the specific month, we want a named expense of 0 to be added
+              #debugger if expense_month == 8
+              expense_list.push(expense_rule.dup)
+              expense_list.last.amount=0
             end
           when :ranged 
             #debugger
@@ -277,7 +289,10 @@ class ExpenseProjection
             #if month(expense_rule.date)==month_number
               # expense_result + expense.amount.to_i
               #debugger
-              expense_list.push(expense_rule)
+              expense_list.push(expense_rule.dup)
+            else # if not in range, we want a named expense of 0 to be added
+              expense_list.push(expense_rule.dup)
+              expense_list.last.amount=0
             end
           end
           
