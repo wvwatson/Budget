@@ -46,6 +46,7 @@
 #  for instance org.name='default', account.name='default' if putting in only expenses
 
 require 'spreadsheet'
+require 'ProjectionRule'
   
 # something you owe
 class Liability
@@ -54,6 +55,8 @@ end
 # need to have the capability to calculate for a year and for one month
 # Build expenses from a expense language
 class ExpenseBuilder
+  #include ProjectionRuleBuilder
+  
   # need some way to reference income
   # maybe use visitor pattern
   # maybe execute block inside the context of an income statement  (which includes expenses and income)
@@ -206,8 +209,10 @@ end
 
 class ExpenseProjection
   
-  attr_accessor :expense_builder
-  attr_accessor :expense_projections
+  #include Projection
+  #attr_accessor :expense_builder
+  #attr_accessor :expense_projections
+  
   # create a loop based on month starting at the start date and ending at duration
   # create a month expense list based on the what expenses are monthly
   # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
@@ -502,21 +507,23 @@ class ExpenseProjection
 end
 
 class Expense
-  attr_accessor :name
-  attr_accessor :period
-  attr_accessor :date
-  attr_accessor :ranged
-  attr_accessor :range_start_date
-  attr_accessor :range_end_date
+  
+  include ProjectionRule
+  # attr_accessor :name
+  # attr_accessor :period
+  # attr_accessor :date
+  # attr_accessor :ranged
+  # attr_accessor :range_start_date
+  # attr_accessor :range_end_date
   attr_accessor :amount
   attr_accessor :chance
-  attr_accessor :custom_code
+  # attr_accessor :custom_code
   
-  def initialize
-    @period = :monthly
-	  @date = Date.new
-	  #@end_date = @start_date + 11.months # 1 year default
-  end
+  # def initialize
+  #    @period = :monthly
+  #     @date = Date.new
+  #     #@end_date = @start_date + 11.months # 1 year default
+  #  end
   
 end
 
