@@ -83,7 +83,7 @@ class ExpenseBuilder
   attr_accessor :chance
   attr_accessor :date_type
   
-  alias mybills add
+  #alias mybills add # after removing from steps remove this
   
   def cost(tempcost)
     #debugger
@@ -411,111 +411,111 @@ class ExpenseProjection
   #     end
   #  end
   #  
-  def export_excel
-     #debugger
-     #filepath = File.dirname(__FILE__)+"/test_input.xls" 
-     #File.open(filepath, "w"){|f| Net::HTTP.start("kangarooit.com") { |http| resp = http.get("/test/test_input.xls"); f.write(resp.body)} }
-
-     #spreadsheet = Spreadsheet.open(filepath)
-     #sheet = spreadsheet.worksheets.first
-     output_path = File.dirname(__FILE__) + "/expenses.xls"
-
-     book = Spreadsheet::Workbook.new
-     sheet2 = book.create_worksheet
-     # sheet2.row(0)[0] = 1
-     # sheet2.row(0)[1] = 2
-     # sheet2.row(1)[0] = 3
-     # sheet2.row(1)[1] = 4
-     
-     # start on the second row
-  
-  
-	 # maybe create a header and groups that are
-     # we want something like this:
-     
-     # 2011
-     #                January     February
-     # car_insurance  500         0
-     # rent           1000        1000
-     # electricity    200         225
-     # taxes          100         100
-     
-     #debugger
-     # need to loop through the whole list and get all of the expense names for each month
-     #  and include that list for the first column
-     last_month_column = -1
-     expense_projections.each_with_index do |(year, month_hash), year_index|
-       # excelname.row(rownumber)[columnnumber]
-	   # year needs to print conditionally if a new year
-	   #sheet2.row(0)[last_month_column + 1] = year 
-	     #debugger
-       month_hash.each_with_index do |(month, expense_list), month_index|
-	        #debugger
-		      # always shows on the second row (for now)
-          #sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
-          #debugger
-          expense_list.each_with_index do |expense, expense_index|
-			  # 2 levels below year
-			        #debugger
-              sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.name
-              #sheet2.row(i)[1] =  expense.amount
-          end 
-          #debugger
-          last_month_column += 1
-          #exit after one listing of expense names
-          break
-       end 
-       #debugger
-     end
-     
-     
-     #debugger
-      # need to loop through the whole list and get all of the expense names for each month
-      #  and include that list for the first column
-      #last_month_column = 0
-      expense_projections.each_with_index do |(year, month_hash), year_index|
-        # excelname.row(rownumber)[columnnumber]
- 	   # year needs to print conditionally if a new year
- 	   sheet2.row(0)[last_month_column + 1] = year 
- 	     #debugger
-        month_hash.each_with_index do |(month, expense_list), month_index|
- 	        #debugger
- 		      # always shows on the second row (for now)
-           sheet2.row(1)[last_month_column + 1] = Date::MONTHNAMES[month].dup
-           expense_list.each_with_index do |expense, expense_index|
- 			  # 2 levels below year
- 			      # check month against ranged start and end dates
- 			      # if incremental check duration and expense *rule* start date
- 			        #debugger
-               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.amount
-           end 
-           #debugger
-           last_month_column += 1
-        end 
-        #debugger
-      end
-      
-     # 
-     # #numbers for each month
-     # expense_projections.each_with_index do |(year, month_hash), index|
-     #   sheet2.row(i)[0] = year
-     #   expense_list.each_with_index do |expense, i|
-     #      sheet2.row(i)[0] =  expense.name
-     #      sheet2.row(i)[1] =  expense.amount
-     #   end 
-     # end
-     #puts sheet2.row(1)[0].data.inspect
-     #puts sheet2.row(1)[1].data.inspect
-     # note that the formula in sheet2.row(1)[1].data is significantly larger than the one in sheet2.row(1)[0].data
-     book.write output_path
-
-     # Not sure how to programatically test the fact that cell A2 doesn't render in excel ( on linux openoffice) - it should show 365
-
-     # The following expectation passes which means that under the covers, the formula is essentially correct:
-     # Spreadsheet.open(output_path).worksheets.first.row(1)[0].value.should eql(365.0)
-     #puts Spreadsheet.open(output_path).worksheets.first.row(1)[0].data.inspect
-
-   end
+  # def export_excel
+  #      #debugger
+  #      #filepath = File.dirname(__FILE__)+"/test_input.xls" 
+  #      #File.open(filepath, "w"){|f| Net::HTTP.start("kangarooit.com") { |http| resp = http.get("/test/test_input.xls"); f.write(resp.body)} }
+  # 
+  #      #spreadsheet = Spreadsheet.open(filepath)
+  #      #sheet = spreadsheet.worksheets.first
+  #      output_path = File.dirname(__FILE__) + "/expenses.xls"
+  # 
+  #      book = Spreadsheet::Workbook.new
+  #      sheet2 = book.create_worksheet
+  #      # sheet2.row(0)[0] = 1
+  #      # sheet2.row(0)[1] = 2
+  #      # sheet2.row(1)[0] = 3
+  #      # sheet2.row(1)[1] = 4
+  #      
+  #      # start on the second row
+  #   
+  #   
+  #    # maybe create a header and groups that are
+  #      # we want something like this:
+  #      
+  #      # 2011
+  #      #                January     February
+  #      # car_insurance  500         0
+  #      # rent           1000        1000
+  #      # electricity    200         225
+  #      # taxes          100         100
+  #      
+  #      #debugger
+  #      # need to loop through the whole list and get all of the expense names for each month
+  #      #  and include that list for the first column
+  #      last_month_column = -1
+  #      expense_projections.each_with_index do |(year, month_hash), year_index|
+  #        # excelname.row(rownumber)[columnnumber]
+  #      # year needs to print conditionally if a new year
+  #      #sheet2.row(0)[last_month_column + 1] = year 
+  #        #debugger
+  #        month_hash.each_with_index do |(month, expense_list), month_index|
+  #           #debugger
+  #           # always shows on the second row (for now)
+  #           #sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
+  #           #debugger
+  #           expense_list.each_with_index do |expense, expense_index|
+  #         # 2 levels below year
+  #               #debugger
+  #               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.name
+  #               #sheet2.row(i)[1] =  expense.amount
+  #           end 
+  #           #debugger
+  #           last_month_column += 1
+  #           #exit after one listing of expense names
+  #           break
+  #        end 
+  #        #debugger
+  #      end
+  #      
+  #      
+  #      #debugger
+  #       # need to loop through the whole list and get all of the expense names for each month
+  #       #  and include that list for the first column
+  #       #last_month_column = 0
+  #       expense_projections.each_with_index do |(year, month_hash), year_index|
+  #         # excelname.row(rownumber)[columnnumber]
+  #      # year needs to print conditionally if a new year
+  #      sheet2.row(0)[last_month_column + 1] = year 
+  #        #debugger
+  #         month_hash.each_with_index do |(month, expense_list), month_index|
+  #           #debugger
+  #           # always shows on the second row (for now)
+  #            sheet2.row(1)[last_month_column + 1] = Date::MONTHNAMES[month].dup
+  #            expense_list.each_with_index do |expense, expense_index|
+  #         # 2 levels below year
+  #             # check month against ranged start and end dates
+  #             # if incremental check duration and expense *rule* start date
+  #               #debugger
+  #                sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.amount
+  #            end 
+  #            #debugger
+  #            last_month_column += 1
+  #         end 
+  #         #debugger
+  #       end
+  #       
+  #      # 
+  #      # #numbers for each month
+  #      # expense_projections.each_with_index do |(year, month_hash), index|
+  #      #   sheet2.row(i)[0] = year
+  #      #   expense_list.each_with_index do |expense, i|
+  #      #      sheet2.row(i)[0] =  expense.name
+  #      #      sheet2.row(i)[1] =  expense.amount
+  #      #   end 
+  #      # end
+  #      #puts sheet2.row(1)[0].data.inspect
+  #      #puts sheet2.row(1)[1].data.inspect
+  #      # note that the formula in sheet2.row(1)[1].data is significantly larger than the one in sheet2.row(1)[0].data
+  #      book.write output_path
+  # 
+  #      # Not sure how to programatically test the fact that cell A2 doesn't render in excel ( on linux openoffice) - it should show 365
+  # 
+  #      # The following expectation passes which means that under the covers, the formula is essentially correct:
+  #      # Spreadsheet.open(output_path).worksheets.first.row(1)[0].value.should eql(365.0)
+  #      #puts Spreadsheet.open(output_path).worksheets.first.row(1)[0].data.inspect
+  # 
+  #    end
   
 end
 

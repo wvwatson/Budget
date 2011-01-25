@@ -231,15 +231,15 @@ module Projection
 	   # year needs to print conditionally if a new year
 	   #sheet2.row(0)[last_month_column + 1] = year 
 	     #debugger
-       month_hash.each_with_index do |(month, expense_list), month_index|
+       month_hash.each_with_index do |(month, rule_list), month_index|
 	        #debugger
 		      # always shows on the second row (for now)
           #sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
           #debugger
-          expense_list.each_with_index do |expense, expense_index|
+          rule_list.each_with_index do |rule, rule_index|
 			  # 2 levels below year
 			        #debugger
-              sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.name
+              sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.name
               #sheet2.row(i)[1] =  expense.amount
           end 
           #debugger
@@ -260,16 +260,16 @@ module Projection
  	   # year needs to print conditionally if a new year
  	   sheet2.row(0)[last_month_column + 1] = year 
  	     #debugger
-        month_hash.each_with_index do |(month, expense_list), month_index|
+        month_hash.each_with_index do |(month, rule_list), month_index|
  	        #debugger
  		      # always shows on the second row (for now)
            sheet2.row(1)[last_month_column + 1] = Date::MONTHNAMES[month].dup
-           expense_list.each_with_index do |expense, expense_index|
+           rule_list.each_with_index do |rule, rule_index|
  			  # 2 levels below year
  			      # check month against ranged start and end dates
  			      # if incremental check duration and expense *rule* start date
  			        #debugger
-               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.amount
+               sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.amount
            end 
            #debugger
            last_month_column += 1

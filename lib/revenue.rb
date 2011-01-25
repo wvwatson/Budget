@@ -63,7 +63,7 @@ class RevenueBuilder
     #add define method here
   end
   
-  def mybills(&block) 
+  def add(&block) 
     #debugger
     #@expense_list = []
     #myexp = Expense.new

@@ -9,25 +9,25 @@ end
 Given /^I have a monthly expense of telephone that is \$(\d+)$/ do |arg1|
    #pending # express the regexp above with the code you wish you had
    # try instance eval
-  @my.mybills do
+  @my.add do
 	    telephone arg1	 
   end
 end
 
 Given /^I have a monthly expense of cell_phone that is \$(\d+)$/ do |arg1|
-  @my.mybills do
+  @my.add do
 	    cell_phone arg1	 
   end
 end
 
 Given /^I have a monthly expense of rent that is \$(\d+)$/ do |arg1|
-  @my.mybills do
+  @my.add do
 	    rent arg1	 
   end
 end
 
 Given /^I have a monthly expense of car_note that is \$(\d+)$/ do |arg1|
-  @my.mybills do
+  @my.add do
 	    car_note arg1	 
   end
 end
@@ -77,7 +77,7 @@ Then /^the total of the ranged expenses should be \$(\d+)$/ do |arg1|
 end
 
 Given /^I have a car maintenance expense of \$"([^"]*)" with a chance of (\d+)%$/ do |arg1, arg2|
-  @my.mybills do
+  @my.add do
     car_maintenance do
       cost arg1
       chance arg2
@@ -90,13 +90,13 @@ Then /^the total of the car maintenance should be \$(\d+)$/ do |arg1|
 end
 
 # Given /^I have "([^"]*)"$/ do |arg1|
-#   @my_revenue.mybills do
+#   @my_revenue.add do
 #       income arg1  
 #   end
 # end
 
 Given /^I have "([^"]*)" of other expenses$/ do |arg1|
-  @my.mybills do
+  @my.add do
 	    total_expenses arg1	 
   end
 end
