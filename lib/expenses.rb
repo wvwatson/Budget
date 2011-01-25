@@ -59,24 +59,17 @@ end
 class ExpenseBuilder
   include ProjectionRuleBuilder
   
+  attr_accessor :expense_list
+  # remove this somehow
+  alias rule_list= expense_list= 
+  alias rule_list expense_list
   # need some way to reference income
   # maybe use visitor pattern
   # maybe execute block inside the context of an income statement  (which includes expenses and income)
   attr_accessor :budget_builder #ref to parent, be careful here
   #maybe shadow all expense fields to make them available to blocks
-  attr_accessor :expense_list
-  
-  alias rule_list= expense_list= 
-  alias rule_list expense_list 
-  
-  #attr_accessor :period 
-  # attr_accessor :start_date
-  #  attr_accessor :end_date
-  #  attr_accessor :ranged
-  #  attr_accessor :range_start_date
-  #  attr_accessor :range_end_date
-  #  attr_accessor :one_time_date
-  #  attr_accessor :increment
+
+ 
   #length of the projection. Could be a budget cycle, a calendar year, or a couple months
   attr_accessor :duration
   attr_accessor :cost
@@ -139,38 +132,6 @@ class ExpenseBuilder
     end
   end
   
-  # def every (date, &block)
-  #     #debugger
-  #     @period=:incremental
-  #     if (date == :monthly) or (date == :month)
-  #       # need a way to reconcile incremental/monthly/duration
-  #       #@period = :monthly
-  #       @increment=1.month
-  #     else
-  #       #@period=:incremental
-  #       @increment=date
-  #     end
-  #     instance_eval &block
-  #   end
-  
-  # def from (start_date, end_date, &block)
-  #    #debugger
-  #    @period=:ranged
-  #    @ranged=true
-  #    @range_start_date=Date.strptime(start_date, @date_type)
-  #    @range_end_date=Date.strptime(end_date, @date_type)
-  #    instance_eval &block
-  #  end
-  #  
-  #  def on (date, &block)
-  #    #debugger
-  #    # something totally hosed here... need to make sure a new expense builder not created
-  #    #  period is getting lost when the block is executed.
-  #    @period=:one_time
-  #    @one_time_date=Date.strptime(date, @date_type)
-  #    instance_eval &block
-  #  end
-  
   # dynamically define expenses
   def method_missing(methId, *args, &block)
     #debugger
@@ -191,17 +152,6 @@ class ExpenseBuilder
     #add define method here
   end
 
-  # def mybills(&block) 
-  #    #debugger
-  #    #@expense_list = []
-  #    #myexp = Expense.new
-  #    #Expenses.class_eval &block
-  #    # need to set period to default every time a new rule is made
-  #    @period = :monthly
-  #    @ranged = nil
-  #    self.instance_eval &block
-  #  end
-  
   def initialize
 	  #debugger
     @expense_list = []
@@ -214,6 +164,7 @@ class ExpenseBuilder
    
 end
 
+#Is this really needed anymore?
 class ExpenseProjection
   
   include Projection
@@ -222,323 +173,18 @@ class ExpenseProjection
   
   alias expense_projections= projection=
   alias expense_projections projection
-  
-  #attr_accessor :expense_builder
-  #attr_accessor :expense_projections
-  
-  # create a loop based on month starting at the start date and ending at duration
-  # create a month expense list based on the what expenses are monthly
-  # have a 'current date' and check to see if the expense has a one time date that falls in the current dates's month
-  # create iterators and check against iterators to see if an expense should be added for the current month
-  # apply the custom code after the expense has been created
-  # may need some concept of current expense list and projection expense list
-  #  maybe a hash of months in a hash of years
-  # def build_projection
-  # 
-  # 
-  # 
-  #  
-  # end
  
   def initialize
       @expense_projections = {}
   end
-  
-  # # create a month expense list based on the what expenses are monthly
-  #   # have a 'current date' and check to see if the "expense rule" has a one time date that falls in the current dates's month
-  #   # create iterators and check against iterators to see if an expense should be added for the current month
-  #   # apply the custom code after the expense has been created
-  #   # may need some concept of current expense list and projection expense list
-  #   #  maybe a hash of months in a hash of years
-  #   def build_projection
-  #     @expense_projections = build_projection_hash(@expense_builder.start_date, @expense_builder.end_date)
-  #     @expense_projections.each do |year, month|
-  #       #loop through each month and create an expense list for that month
-  #       month.each do |expense_month, expense_list|
-  #         # should we make the object an expense or an expense builder .. maybe expense builder
-  #         #  because need ability to apply custom code with context?
-  #         # Need some way to apply the logic for the date we are on
-  #         # loop through each expense rule to check if we should move it over
-  #         #debugger # if expense_month == 8
-  #         @expense_builder.expense_list.each do |expense_rule|
-  #           # if within start and end dates...
-  #           #debugger
-  #           case expense_rule.period
-  #           when :monthly
-  #             # take the closure (custom code) out of this push later
-  #             if (expense_rule.ranged==true) 
-  #               #debugger
-  #               if (expense_month >= expense_rule.range_start_date.month) && 
-  #                 (expense_month <= expense_rule.range_end_date.month)
-  #                 expense_list.push(expense_rule.dup)
-  #               else # if not in range, we want a named expense of 0 to be added
-  #                 expense_list.push(expense_rule.dup)
-  #                 expense_list.last.amount=0
-  #               end
-  #             else
-  #               expense_list.push(expense_rule.dup)
-  #             end 
-  #           when :incremental
-  #             if (expense_rule.ranged==true) 
-  #                #debugger
-  #                if (expense_month >= expense_rule.range_start_date.month) && 
-  #                  (expense_month <= expense_rule.range_end_date.month)
-  #                  expense_list.push(expense_rule.dup) 
-  #                else # if not in range, we want a named expense of 0 to be added
-  #                  expense_list.push(expense_rule.dup)
-  #                  expense_list.last.amount=0
-  #                end
-  #              end
-  #             #elsif expense_rule.duration
-  #           when :one_time 
-  #             #debugger if expense_month == 8
-  #             if expense_rule.date.month==expense_month
-  #             #if month(expense_rule.date)==month_number
-  #               # expense_result + expense.amount.to_i
-  #               expense_list.push(expense_rule.dup)
-  #             else # if the specific month, we want a named expense of 0 to be added
-  #               #debugger if expense_month == 8
-  #               expense_list.push(expense_rule.dup)
-  #               expense_list.last.amount=0
-  #             end
-  #           when :ranged 
-  #             #debugger
-  #             if (expense_month >= expense_rule.range_start_date.month) and (expense_month <= expense_rule.range_end_date.month)
-  #             #if month(expense_rule.date)==month_number
-  #               # expense_result + expense.amount.to_i
-  #               #debugger
-  #               expense_list.push(expense_rule.dup)
-  #             else # if not in range, we want a named expense of 0 to be added
-  #               expense_list.push(expense_rule.dup)
-  #               expense_list.last.amount=0
-  #             end
-  #           end
-  #           
-  #           # need to apply custom code.  will it be executed in the context of expense or expense builder?
-  #           # perhaps three levels of context for the custom code:
-  #           #  1) context of 1 expense (allows for calcuation based on the rule itself e.g. the rule cost)
-  #           #  2) context of all expenses and expense rules for a month (mutiple rules get applied fifo)
-  #           #  3) context of 
-  #         end
-  #       end
-  #     end
-  #     #debugger
-  #     @expense_projections
-  #   end
-  # # build the months and years
-  #  def build_projection_hash(date,laterdate)
-  #    
-  #    # instantiate a hash of hashes
-  #    year_hash = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
-  #    
-  #    (date.year..laterdate.year).each do |y|
-  #      
-  #      # if the current year is not part of the start date, we must be on the
-  #      # the first month of the next year
-  #      mo_start = (date.year == y) ? date.month : 1
-  #      # if the current year is not part of the end date, we must be on 
-  #      # the last month of the year
-  #      mo_end = (laterdate.year == y) ? laterdate.month : 12
-  # 
-  #      (mo_start..mo_end).each do |m|  
-  #          #puts Date::MONTHNAMES[m]
-  #          year_hash[y][m]=[]
-  #      end
-  #    end
-  #    year_hash
-  #  end
-  
-  # def projection_total(expense_type=:all)
-  #     @expense_projections.inject(0) do |year_result, (year_name, month_hash)|
-  #       #puts year_name
-  #       year_result + month_hash.inject(0) do |month_result, (month_number, expense_list)|
-  #         #puts month_name 
-  #         #puts month_result.to_s
-  #         #debugger
-  #         month_result + expense_list.inject(0) do |expense_result, expense|
-  #           #puts expense.name + ' ' +expense.period.to_s + ' ' + expense.amount.to_s 
-  #           #puts ' count: ' + expense_list.count.to_s
-  #           #debugger if expense_type = :one_time
-  #           if (expense.period == expense_type) or (expense_type == :all)
-  #             #puts "made it in: " + expense.name + ' ' +expense.period.to_s + ' ' + expense.amount.to_s 
-  #             # debugger #if expense_type == :one_time
-  #             # case expense.period
-  #             # when :monthly
-  #             #   expense_result + expense.amount.to_i
-  #             # when :one_time 
-  #             #   if month(expense.date)==month_number
-  #                 #debugger if expense.amount.nil?
-  #                 expense_result + expense.amount.to_i
-  #              # end
-  #             # end
-  #           elsif (expense_type==:ranged) and (expense.ranged==true)
-  #             expense_result + expense.amount.to_i
-  #           else
-  #             expense_result + 0
-  #           end
-  #         end
-  #       end
-  #       #year_result + month_acc
-  #     end
-  #   end
-  
-  # # if you use this you'll probably need to use an instance variable?
-  #  def every_expense (&block)
-  #    @expense_projections.each do |year, month|
-  #       #loop through each month and create an expense list for that month
-  #       month.each do |expense_month, expense_list|
-  #         # should we make the object an expense or an expense builder .. maybe expense builder
-  #         #  because need ability to apply custom code with context?
-  #         # Need some way to apply the logic for the date we are on
-  #         # loop through each expense rule to check if we should move it over
-  #         @expense_builder.expense_list.each do |expense_rule|
-  #           # if within start and end dates...
-  #           #debugger
-  #           case expense_rule.period
-  #           when :monthly
-  #             # take the closure (custom code) out of this push later
-  #             expense_list.push(expense_rule) 
-  # 
-  #           end
-  # 
-  #           # need to apply custom code.  will it be executed in the context of expense or expense builder?
-  #           # perhaps three levels of context for the custom code:
-  #           #  1) context of 1 expense (allows for calcuation based on the rule itself e.g. the rule cost)
-  #           #  2) context of all expenses and expense rules for a month (mutiple rules get applied fifo)
-  #           #  3) context of 
-  #         end
-  #       end
-  #     end
-  #  end
-  #  
-  # def export_excel
-  #      #debugger
-  #      #filepath = File.dirname(__FILE__)+"/test_input.xls" 
-  #      #File.open(filepath, "w"){|f| Net::HTTP.start("kangarooit.com") { |http| resp = http.get("/test/test_input.xls"); f.write(resp.body)} }
-  # 
-  #      #spreadsheet = Spreadsheet.open(filepath)
-  #      #sheet = spreadsheet.worksheets.first
-  #      output_path = File.dirname(__FILE__) + "/expenses.xls"
-  # 
-  #      book = Spreadsheet::Workbook.new
-  #      sheet2 = book.create_worksheet
-  #      # sheet2.row(0)[0] = 1
-  #      # sheet2.row(0)[1] = 2
-  #      # sheet2.row(1)[0] = 3
-  #      # sheet2.row(1)[1] = 4
-  #      
-  #      # start on the second row
-  #   
-  #   
-  #    # maybe create a header and groups that are
-  #      # we want something like this:
-  #      
-  #      # 2011
-  #      #                January     February
-  #      # car_insurance  500         0
-  #      # rent           1000        1000
-  #      # electricity    200         225
-  #      # taxes          100         100
-  #      
-  #      #debugger
-  #      # need to loop through the whole list and get all of the expense names for each month
-  #      #  and include that list for the first column
-  #      last_month_column = -1
-  #      expense_projections.each_with_index do |(year, month_hash), year_index|
-  #        # excelname.row(rownumber)[columnnumber]
-  #      # year needs to print conditionally if a new year
-  #      #sheet2.row(0)[last_month_column + 1] = year 
-  #        #debugger
-  #        month_hash.each_with_index do |(month, expense_list), month_index|
-  #           #debugger
-  #           # always shows on the second row (for now)
-  #           #sheet2.row(2)[last_month_column + 1] = Date::MONTHNAMES[month]
-  #           #debugger
-  #           expense_list.each_with_index do |expense, expense_index|
-  #         # 2 levels below year
-  #               #debugger
-  #               sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.name
-  #               #sheet2.row(i)[1] =  expense.amount
-  #           end 
-  #           #debugger
-  #           last_month_column += 1
-  #           #exit after one listing of expense names
-  #           break
-  #        end 
-  #        #debugger
-  #      end
-  #      
-  #      
-  #      #debugger
-  #       # need to loop through the whole list and get all of the expense names for each month
-  #       #  and include that list for the first column
-  #       #last_month_column = 0
-  #       expense_projections.each_with_index do |(year, month_hash), year_index|
-  #         # excelname.row(rownumber)[columnnumber]
-  #      # year needs to print conditionally if a new year
-  #      sheet2.row(0)[last_month_column + 1] = year 
-  #        #debugger
-  #         month_hash.each_with_index do |(month, expense_list), month_index|
-  #           #debugger
-  #           # always shows on the second row (for now)
-  #            sheet2.row(1)[last_month_column + 1] = Date::MONTHNAMES[month].dup
-  #            expense_list.each_with_index do |expense, expense_index|
-  #         # 2 levels below year
-  #             # check month against ranged start and end dates
-  #             # if incremental check duration and expense *rule* start date
-  #               #debugger
-  #                sheet2.row(expense_index + 2)[last_month_column + 1] =  expense.amount
-  #            end 
-  #            #debugger
-  #            last_month_column += 1
-  #         end 
-  #         #debugger
-  #       end
-  #       
-  #      # 
-  #      # #numbers for each month
-  #      # expense_projections.each_with_index do |(year, month_hash), index|
-  #      #   sheet2.row(i)[0] = year
-  #      #   expense_list.each_with_index do |expense, i|
-  #      #      sheet2.row(i)[0] =  expense.name
-  #      #      sheet2.row(i)[1] =  expense.amount
-  #      #   end 
-  #      # end
-  #      #puts sheet2.row(1)[0].data.inspect
-  #      #puts sheet2.row(1)[1].data.inspect
-  #      # note that the formula in sheet2.row(1)[1].data is significantly larger than the one in sheet2.row(1)[0].data
-  #      book.write output_path
-  # 
-  #      # Not sure how to programatically test the fact that cell A2 doesn't render in excel ( on linux openoffice) - it should show 365
-  # 
-  #      # The following expectation passes which means that under the covers, the formula is essentially correct:
-  #      # Spreadsheet.open(output_path).worksheets.first.row(1)[0].value.should eql(365.0)
-  #      #puts Spreadsheet.open(output_path).worksheets.first.row(1)[0].data.inspect
-  # 
-  #    end
   
 end
 
 class Expense
   
   include ProjectionRule
-  # attr_accessor :name
-  # attr_accessor :period
-  # attr_accessor :date
-  # attr_accessor :ranged
-  # attr_accessor :range_start_date
-  # attr_accessor :range_end_date
   attr_accessor :amount
   attr_accessor :chance
-  # attr_accessor :custom_code
-  
-  # def initialize
-  #    @period = :monthly
-  #     @date = Date.new
-  #     #@end_date = @start_date + 11.months # 1 year default
-  #  end
-  
-
   
 end
 

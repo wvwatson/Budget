@@ -164,35 +164,6 @@ module Projection
     end
   end
   
-  # # if you use this you'll probably need to use an instance variable?
-  #  def every_expense (&block)
-  #    @projection.each do |year, month|
-  #       #loop through each month and create an expense list for that month
-  #       month.each do |expense_month, expense_list|
-  #         # should we make the object an expense or an expense builder .. maybe expense builder
-  #         #  because need ability to apply custom code with context?
-  #         # Need some way to apply the logic for the date we are on
-  #         # loop through each expense rule to check if we should move it over
-  #         @rule_builder.expense_list.each do |expense_rule|
-  #           # if within start and end dates...
-  #           #debugger
-  #           case expense_rule.period
-  #           when :monthly
-  #             # take the closure (custom code) out of this push later
-  #             expense_list.push(expense_rule) 
-  # 
-  #           end
-  # 
-  #           # need to apply custom code.  will it be executed in the context of expense or expense builder?
-  #           # perhaps three levels of context for the custom code:
-  #           #  1) context of 1 expense (allows for calcuation based on the rule itself e.g. the rule cost)
-  #           #  2) context of all expenses and expense rules for a month (mutiple rules get applied fifo)
-  #           #  3) context of 
-  #         end
-  #       end
-  #     end
-  #  end
-  #  
   def export_excel
      #debugger
      #filepath = File.dirname(__FILE__)+"/test_input.xls" 
@@ -239,7 +210,7 @@ module Projection
           rule_list.each_with_index do |rule, rule_index|
 			  # 2 levels below year
 			        #debugger
-              sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.name
+              sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.name # need a callback here
               #sheet2.row(i)[1] =  expense.amount
           end 
           #debugger
@@ -269,7 +240,7 @@ module Projection
  			      # check month against ranged start and end dates
  			      # if incremental check duration and expense *rule* start date
  			        #debugger
-               sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.amount
+               sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.amount # need a call back here
            end 
            #debugger
            last_month_column += 1
