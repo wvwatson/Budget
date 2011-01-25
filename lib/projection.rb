@@ -57,7 +57,7 @@ module Projection
     @projection = build_projection_hash(@rule_builder.start_date, @rule_builder.end_date)
     @projection.each do |projecion_year, projection_month_hash|
       #loop through each month and create an expense list for that month
-      projection_month_hash.month.each do |projection_month, projection_rule_list|
+      projection_month_hash.each do |projection_month, projection_rule_list|
         # should we make the object an expense or an expense builder .. maybe expense builder
         #  because need ability to apply custom code with context?
         # Need some way to apply the logic for the date we are on

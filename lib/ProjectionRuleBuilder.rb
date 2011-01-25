@@ -7,7 +7,7 @@ module ProjectionRuleBuilder
   # maybe execute block inside the context of an income statement  (which includes expenses and income)
   # attr_accessor :budget_builder #ref to parent, be careful here
   #  #maybe shadow all expense fields to make them available to blocks
-  #  attr_accessor :expense_list
+   attr_accessor :rule_list
    attr_accessor :period 
    attr_accessor :start_date
    attr_accessor :end_date
@@ -16,6 +16,8 @@ module ProjectionRuleBuilder
    attr_accessor :range_end_date
    attr_accessor :one_time_date
    attr_accessor :increment
+   
+   
   #  #length of the projection. Could be a budget cycle, a calendar year, or a couple months
   #  attr_accessor :duration
   #  attr_accessor :cost
