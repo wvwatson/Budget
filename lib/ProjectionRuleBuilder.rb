@@ -90,6 +90,7 @@ module ProjectionRuleBuilder
       @increment=date
     end
     instance_eval &block
+    cleanup
   end
 
   def from (start_date, end_date, &block)
@@ -99,6 +100,7 @@ module ProjectionRuleBuilder
     @range_start_date=Date.strptime(start_date, @date_type)
     @range_end_date=Date.strptime(end_date, @date_type)
     instance_eval &block
+    cleanup
   end
 
   def on (date, &block)
@@ -108,6 +110,7 @@ module ProjectionRuleBuilder
     @period=:one_time
     @one_time_date=Date.strptime(date, @date_type)
     instance_eval &block
+    cleanup
   end
 
   # # dynamically define expenses
@@ -139,7 +142,26 @@ module ProjectionRuleBuilder
     @period = :monthly
     @ranged = nil
     self.instance_eval &block
+    cleanup
   end
+  # when a rule is done executing we need to clean up the context
+  # we need to assume that when an internal block is finally done executing
+  # the external calling blocks dont need the context's variables i.e. @period anymore
+  def cleanup
+    @period = :monthly
+    @ranged = nil
+    @range_start_date = nil
+    @range_end_date = nil
+    @one_time_date = nil
+    @increment = nil
+  end
+  
+  def load_file(filelocation="rule_list.rb")
+    @period = :monthly
+    @ranged = nil
+    contents = File.open(filelocation, 'rb') { |f| f.read }
+    self.instance_eval contents
+  end   
 
   def initialize
 	  #debugger

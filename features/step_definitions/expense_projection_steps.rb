@@ -45,6 +45,8 @@ end
 
 Then /^I should get a total of \$(\d+) expenses for the year$/ do |arg1|
   #pending # express the regexp above with the code you wish you had
+  #debugger
+  #@expense_projection.export_excel #great for debugging
   @expense_projection.projection_total.should == arg1.to_i
 end
 

@@ -119,6 +119,7 @@ class ExpenseBuilder
     # run block before adding that code to the expense
     yield if block_given?
     @expense_list.last.custom_code=block
+    #cleanup here?
   end
   
   def total
@@ -161,6 +162,10 @@ class ExpenseBuilder
 	  @end_date = @start_date + 11.months # 1 year default
 	  @date_type = '%m/%d/%Y'
   end
+  
+  def load_expenses(filelocation="/../../expense_list.rb")
+    load_file filelocation
+  end   
    
 end
 
