@@ -10,6 +10,7 @@
 
 require 'revenue'
 require 'expenses'
+require 'income'
 
 class Journal
 end
