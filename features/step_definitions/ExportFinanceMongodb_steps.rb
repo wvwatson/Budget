@@ -12,7 +12,7 @@ Before do
 end
 When /^I export the expenses to mongodb$/ do
   #pending # express the regexp above with the code you wish you had
-  debugger
+  #debugger
   @expense_projection.expense_builder=@my
   @expense_projection.build_projection
   @expensedb = ExpenseMongo.create(@expense_projection.export_to_hash)
