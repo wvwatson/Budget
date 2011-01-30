@@ -4,7 +4,7 @@
 
 # hours per day are the default
 
-family_web_site 1
+family_web_site 1.hours
 
 # also can explicitly use hours type
 day_job 8.hours
@@ -19,11 +19,11 @@ end
 
 # one time project
 on 8/3/2011 do
-  medical_checkup 4
+  medical_checkup 4.hours
 end
 
 # or it can look like this
-medical_checkup 4, date => 8/3/2011
+medical_checkup 4.hours, date => 8/3/2011
 
 # change a day's hours to another change time
 on 8/3/2011 do

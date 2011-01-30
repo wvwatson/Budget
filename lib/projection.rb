@@ -164,6 +164,27 @@ module Projection
     end
   end
   
+  
+  def export_to_hash
+      projection_hash = {}
+      projection.each_with_index do |(year, month_hash), year_index|
+        projection_hash[year.to_s]={} 
+ 	     #debugger
+        month_hash.each_with_index do |(month, rule_list), month_index|
+          projection_hash[year.to_s][Date::MONTHNAMES[month].dup]={}
+ 	        #debugger
+           rule_list.each_with_index do |rule, rule_index|
+ 			        #debugger
+ 			        projection_hash[year.to_s][Date::MONTHNAMES[month].dup][rule.name]={}
+ 			        projection_hash[year.to_s][Date::MONTHNAMES[month].dup][rule.name]["Amount"] = rule.amount
+           end 
+           #debugger
+        end 
+        #debugger
+      end
+      projection_hash
+   end
+  
   def export_excel
      #debugger
      #filepath = File.dirname(__FILE__)+"/test_input.xls" 
@@ -202,6 +223,7 @@ module Projection
 	   # year needs to print conditionally if a new year
 	   #sheet2.row(0)[last_month_column + 1] = year 
 	     #debugger
+	
        month_hash.each_with_index do |(month, rule_list), month_index|
 	        #debugger
 		      # always shows on the second row (for now)

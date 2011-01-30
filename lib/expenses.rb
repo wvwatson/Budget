@@ -49,6 +49,7 @@ require 'spreadsheet'
 require 'ProjectionRule'
 require 'Projection'
 require 'ProjectionRuleBuilder'
+require 'mongoid'
   
 # something you owe
 class Liability
@@ -58,6 +59,7 @@ end
 # Build expenses from a expense language
 class ExpenseBuilder
   include ProjectionRuleBuilder
+
   
   attr_accessor :expense_list
   # remove this somehow
@@ -173,6 +175,7 @@ end
 class ExpenseProjection
   
   include Projection
+
   alias expense_builder= rule_builder=
   alias expense_builder rule_builder
   
@@ -180,17 +183,22 @@ class ExpenseProjection
   alias expense_projections projection
  
   def initialize
-      @expense_projections = {}
+    @expense_projections = {}
   end
   
 end
 
 class Expense
-  
+
   include ProjectionRule
+
   attr_accessor :amount
   attr_accessor :chance
   
+end
+
+class ExpenseMongo
+  include Mongoid::Document
 end
 
 class BudgetObject
