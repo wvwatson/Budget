@@ -15,13 +15,26 @@ When /^I export the expenses to mongodb$/ do
   #debugger
   @expense_projection.expense_builder=@my
   @expense_projection.build_projection
-  @expensedb = ExpenseMongo.create(@expense_projection.export_to_hash)
+  @expensedb = ExpenseMongo.create(@expense_projection.export_to_mongodb)
 end
 
 Then /^a mongo database should be created$/ do
-  pending # express the regexp above with the code you wish you had
+  #debugger
+  ExpenseMongo.first().should_not be_nil
+  #ExpenseMongo.first(:conditions => {:Amount=>"750"}).should_not be_nil
+  #pending # express the regexp above with the code you wish you had
+  
 end
 
 Then /^the mongodb database should have (\d+) columns filled$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  #myall = ExpenseMongo.all()
+  #myall.distinct(:month).count
+  #myall.entries
+  
+  ExpenseMongo.all.distinct(:month).count.should == arg1.to_i
+  #pending # express the regexp above with the code you wish you had
+end
+
+After do
+  ExpenseMongo.destroy_all()
 end

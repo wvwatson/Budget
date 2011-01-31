@@ -165,18 +165,31 @@ module Projection
   end
   
   
-  def export_to_hash
+  def export_to_mongodb
       projection_hash = {}
       projection.each_with_index do |(year, month_hash), year_index|
         projection_hash[year.to_s]={} 
+        projection_hash["name"]
  	     #debugger
         month_hash.each_with_index do |(month, rule_list), month_index|
           projection_hash[year.to_s][Date::MONTHNAMES[month].dup]={}
  	        #debugger
            rule_list.each_with_index do |rule, rule_index|
  			        #debugger
- 			        projection_hash[year.to_s][Date::MONTHNAMES[month].dup][rule.name]={}
- 			        projection_hash[year.to_s][Date::MONTHNAMES[month].dup][rule.name]["Amount"] = rule.amount
+ 	            # projection_hash[year.to_s][Date::MONTHNAMES[month].dup][rule.name]={}
+ 	            #               projection_hash[year.to_s][Date::MONTHNAMES[month].dup][rule.name]["Amount"] = rule.amount
+              # @expensedb = ExpenseMongo.create(:year => year.to_s,
+              #                                   :year_projection => {:month=>Date::MONTHNAMES[month].dup,
+              #                                                        :month_projection=>  {:expense=>rule.name,
+              #                                                                                           :amount=>rule.amount}
+              #                                                                     }
+              #                                 )
+ 			                                        
+ 			        @expensedb = ExpenseMongo.create(:year => year.to_s,
+ 			                                         :month=>Date::MONTHNAMES[month].dup,
+ 			                                         :expense=>rule.name,
+   			                                       :amount=>rule.amount)
+ 			        #@expensedb = ExpenseMongo.create(@expense_projection.export_to_hash)
            end 
            #debugger
         end 
