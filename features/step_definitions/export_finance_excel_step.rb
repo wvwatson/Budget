@@ -1,6 +1,7 @@
 Before do
 
   @expense_projection = ExpenseProjection.new
+  
 end
 
 When /^I export the expenses to excel$/ do

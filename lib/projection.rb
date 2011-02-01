@@ -214,13 +214,13 @@ module Projection
               #sheet2.row(i)[1] =  expense.amount
           end 
           #debugger
-          last_month_column += 1
+          # last_month_column += 1
           #exit after one listing of expense names
           break
        end 
        #debugger
      end
-     
+     last_month_column += 1 
      
      #debugger
       # need to loop through the whole list and get all of the expense names for each month

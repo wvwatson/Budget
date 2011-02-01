@@ -1,5 +1,8 @@
 Before do
   @my = ExpenseBuilder.new
+  @my.start_date = Date.strptime('2/1/2011', '%m/%d/%Y')
+  @my.end_date = @my.start_date + 11.months # 1 year default
+  
   @my_revenue = RevenueBuilder.new
   @my_budget = BudgetBuilder.new
   @my_budget.expense_builder = @my
