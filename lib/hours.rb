@@ -1,7 +1,9 @@
+require 'ProjectionRule'
+require 'Projection'
 require 'ProjectionRuleBuilder'
 
 class HoursBuilder
-  include ProjectRuleBuilder
+  include ProjectionRuleBuilder
   
   attr_accessor :hours_list
   # remove this somehow
@@ -15,7 +17,7 @@ class HoursBuilder
   end
 
   def add_hours(name, count=0, &block)
-	  hours = Expense.new
+	  hours = Hours.new
 	  hours.name = name
     hours.count = count
     hours.period = @period
@@ -90,7 +92,7 @@ class HoursBuilder
     alias hours_projections projection
 
     def initialize
-        @expense_projections = {}
+        @hours_projections = {}
     end
 
   end

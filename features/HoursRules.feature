@@ -1,3 +1,4 @@
+@hours
 Feature: Hours rules
   In order to create a daily schedule easily
   As a scheduler
