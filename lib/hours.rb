@@ -17,8 +17,9 @@ class HoursBuilder
   end
 
   def add_hours(name, count=0, &block)
-	  hours = Hours.new
-	  hours.name = name
+	hours = Hours.new
+	hours.name = name
+	count = count / 1.hour if count.is_a?(ActiveSupport::Duration)
     hours.count = count
     hours.period = @period
 
@@ -44,6 +45,7 @@ class HoursBuilder
   end
   
   def total
+	#debugger
     @hours_list.inject(0) do |result, hours| 
       result + hours.count.to_i
     end
@@ -69,11 +71,11 @@ class HoursBuilder
   def initialize
 	  #debugger
     @hours_list = []
-    @period = :monthly
-	  @start_date = Time.now
-	  @duration = 1.year # not used yet
-	  @end_date = @start_date + 11.months # 1 year default
-	  @date_type = '%m/%d/%Y'
+    @period = :hourly
+	@start_date = Time.now
+	@duration = 1.year # not used yet
+	@end_date = @start_date + 11.months # 1 year default
+	@date_type = '%m/%d/%Y'
   end
   
   def load_hours(filelocation="/../../hours_list.rb")

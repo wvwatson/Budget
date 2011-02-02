@@ -12,6 +12,7 @@ end
 
 Given /^I work on at a day job "([^"]*)" hours a day$/ do |arg1|
   @Hours.add do
+	  #debugger
       day_job 8.hours
   end
 end
