@@ -16,10 +16,15 @@ class HoursBuilder
     #should raise an error if no expense exists
   end
 
-  def add_hours(name, count=0, &block)
-	hours = Hours.new
-	hours.name = name
-	count = count / 1.hour if count.is_a?(ActiveSupport::Duration)
+  def add_hours(name, count=0, *args, &block)
+	  hours = Hours.new
+    hours.name = name
+	  #debugger
+
+	  count = count / 1.hour if count.is_a?(ActiveSupport::Duration)    
+	  if args
+	    @time = args[0][:at] if args[0].is_a?(Hash) #this for sure needs to be abstracted out!
+    end
     hours.count = count
     hours.period = @period
 
@@ -64,6 +69,9 @@ class HoursBuilder
     elsif args.count == 1 
       #debugger
       add_hours(str, args[0], &block)
+    elsif args.count == 2 
+        #debugger
+        add_hours(str, args[0], args[1], &block)
     end
     #add define method here
   end
@@ -72,10 +80,10 @@ class HoursBuilder
 	  #debugger
     @hours_list = []
     @period = :hourly
-	@start_date = Time.now
-	@duration = 1.year # not used yet
-	@end_date = @start_date + 11.months # 1 year default
-	@date_type = '%m/%d/%Y'
+	  @start_date = Time.now
+	  @duration = 1.year # not used yet
+	  @end_date = @start_date + 11.months # 1 year default
+	  @date_type = '%m/%d/%Y'
   end
   
   def load_hours(filelocation="/../../hours_list.rb")

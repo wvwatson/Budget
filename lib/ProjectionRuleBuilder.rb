@@ -16,7 +16,7 @@ module ProjectionRuleBuilder
    attr_accessor :range_end_date
    attr_accessor :one_time_date
    attr_accessor :increment
-   
+   attr_accessor :time
    
   #  #length of the projection. Could be a budget cycle, a calendar year, or a couple months
   #  attr_accessor :duration
@@ -109,6 +109,17 @@ module ProjectionRuleBuilder
     #  period is getting lost when the block is executed.
     @period=:one_time
     @one_time_date=Date.strptime(date, @date_type)
+    instance_eval &block
+    cleanup
+  end
+
+  def at (time, &block)
+    debugger
+    # something totally hosed here... need to make sure a new expense builder not created
+    #  period is getting lost when the block is executed.
+    #@period=:one_time
+    @one_time_date=Date.strptime(date, @date_type)
+    @time = time #.strptime(date, time)
     instance_eval &block
     cleanup
   end

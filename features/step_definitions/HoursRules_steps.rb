@@ -20,3 +20,11 @@ end
 Then /^the total hours for the day should be (\d+)$/ do |arg1|
    @Hours.total.should == arg1.to_i
 end
+
+Given /^I have a task named meeting for "([^"]*)" hour at "([^"]*)" every monday$/ do |arg1, arg2|
+  #pending # express the regexp above with the code you wish you had
+  #debugger
+  @Hours.every :monday do
+    meeting arg1, :at => arg2
+  end
+end
