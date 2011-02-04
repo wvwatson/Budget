@@ -23,7 +23,7 @@ on 8/3/2011 do
 end
 
 # or it can look like this
-medical_checkup 4, date => 8/3/2011
+medical_checkup 4, :date => 8/3/2011
 
 # change a day's hours to another change time
 on 8/3/2011 do

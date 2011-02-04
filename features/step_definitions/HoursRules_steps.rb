@@ -34,3 +34,18 @@ Given /^I have a one time medical checkup for "([^"]*)" hours on "([^"]*)"$/ do 
       medical_checkup arg1
   end
 end
+
+Given /^I have a one time medical checkup for "([^"]*)" hours on "([^"]*)" on one line$/ do |arg1, arg2|
+  @Hours.add do
+    medical_checkup arg1, :date => arg2
+  end
+end
+
+Given /^I have some tasks set up$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I replace all of the day's hours as a sick day$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
