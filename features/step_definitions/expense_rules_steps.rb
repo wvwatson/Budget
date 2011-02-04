@@ -45,10 +45,9 @@ Then /^total of the monthly expenses should be \$(\d+)$/ do |arg1|
 end
 
 Given /^I have a one time birthday expense of \$"([^"]*)" on "([^"]*)"$/ do |arg1, arg2|
-  # pending # express the regexp above with the code you wish you had
   @my.on arg2 do
        birthday arg1
-    end
+  end
 end
 
 Then /^the total of the one time expenses should be \$(\d+)$/ do |arg1|

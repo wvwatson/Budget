@@ -12,3 +12,7 @@ Feature: Hours rules
   Scenario: Add an incremental task
 	Given I have a task named meeting for "1" hour at "9:30" every monday
     Then the total hours for the day should be 1
+
+  Scenario: Add one time task
+	Given I have a one time medical checkup for "4" hours on "8/3/2011"
+    Then the total hours for the day should be 4

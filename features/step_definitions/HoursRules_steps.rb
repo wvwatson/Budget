@@ -28,3 +28,9 @@ Given /^I have a task named meeting for "([^"]*)" hour at "([^"]*)" every monday
     meeting arg1, :at => arg2
   end
 end
+
+Given /^I have a one time medical checkup for "([^"]*)" hours on "([^"]*)"$/ do |arg1, arg2|
+  @Hours.on arg2 do
+      medical_checkup arg1
+  end
+end

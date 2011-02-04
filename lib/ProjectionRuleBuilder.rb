@@ -114,7 +114,7 @@ module ProjectionRuleBuilder
   end
 
   def at (time, &block)
-    debugger
+    #debugger
     # something totally hosed here... need to make sure a new expense builder not created
     #  period is getting lost when the block is executed.
     #@period=:one_time
