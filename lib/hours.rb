@@ -25,6 +25,7 @@ class HoursBuilder
 	  if args
 	    @time = args[0][:at] if args[0].is_a?(Hash) #this for sure needs to be abstracted out!
  	    @date = args[0][:date] if args[0].is_a?(Hash) #this for sure needs to be abstracted out!
+ 	    #@period = args[0][:every] if args[0].is_a?(Hash) #this for sure needs to be abstracted out!
     end
     hours.count = count
     hours.period = @period

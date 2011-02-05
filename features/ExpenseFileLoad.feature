@@ -8,4 +8,4 @@ Feature: Expense file load
     Given I have an expense file named "expense_list.rb"
     And I load the "expense_list.rb" expense file
     When I generate the projected expenses
-    Then I should get a total of $28200 expenses for the year
+    Then I should get a total of $30900 expenses for the year

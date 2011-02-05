@@ -12,7 +12,7 @@ Feature: Create an expense projection
   Scenario: Total monthly expenses for the year
     Given I have expense rules set up
     When I generate the projected expenses
-    Then I should get a total of $20700 of monthly expenses for the year
+    Then I should get a total of $23400 of monthly expenses for the year
 
   Scenario: Total one time expenses for the year
     Given I have expense rules set up
@@ -27,4 +27,4 @@ Feature: Create an expense projection
   Scenario: Total expenses for the year
     Given I have expense rules set up
     When I generate the projected expenses
-    Then I should get a total of $28200 expenses for the year
+    Then I should get a total of $30900 expenses for the year

@@ -123,6 +123,7 @@ class ExpenseBuilder
   end
   
   def total
+    #debugger
     @expense_list.inject(0) do |result, expense| 
       if expense.chance
         #debugger
@@ -133,6 +134,7 @@ class ExpenseBuilder
     end
   end
   
+
   # dynamically define expenses
   def method_missing(methId, *args, &block)
     #debugger
@@ -181,6 +183,34 @@ class ExpenseProjection
  
   def initialize
       @expense_projections = {}
+  end
+  
+  def projection_total(projection_type=:all)
+    #debugger
+    super do |result, rule|
+      #result + rule.amount.to_i * 0.25
+      if rule.chance
+        #debugger
+        result + rule.amount.to_i * (rule.chance.to_f/100)
+      else
+        result + rule.amount.to_i
+      end
+    end
+  end
+  
+  def export_excel
+    #debugger
+    super do |rule, amount|
+      #result + rule.amount.to_i * 0.25
+      if rule.chance
+        #debugger
+        amount = rule.amount.to_f * (rule.chance.to_f/100)
+        #result + rule.amount.to_i * (rule.chance.to_f/100)
+      else
+        amount = rule.amount.to_f    
+        #result + rule.amount.to_i
+      end
+    end
   end
   
 end

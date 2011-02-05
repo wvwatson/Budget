@@ -25,3 +25,8 @@ Feature: Hours rules
 	Given I have some tasks set up
 	And I replace all of the day's hours as a sick day
     Then the total hours for the day should be 9 and the tasks should be assigned to sick day
+
+  Scenario: Add a ranged task
+	Given I have a side project meeting lasting "1" hour from "3/1/2011" to "5/1/2011" every monday at "10:30"
+    Then the total hours for the day should be 1
+	

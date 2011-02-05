@@ -150,7 +150,13 @@ module Projection
             # when :one_time 
             #   if month(expense.date)==month_number
                 #debugger if expense.amount.nil?
-                rule_result + rule.amount.to_i  # need a way to do a call back for this
+                #debugger if rule.name == "car_maintenance"
+                if block_given?
+                   yield rule_result, rule
+                   #debugger                 
+                else
+                  rule_result + rule.amount.to_i  # need a way to do a call back for this 
+                end
              # end
             # end
           elsif (projection_type==:ranged) and (rule.ranged==true)
@@ -239,8 +245,14 @@ module Projection
  			  # 2 levels below year
  			      # check month against ranged start and end dates
  			      # if incremental check duration and expense *rule* start date
- 			        #debugger
-               sheet2.row(rule_index + 2)[last_month_column + 1] =  rule.amount # need a call back here
+ 	            #debugger
+ 	            amount = 0.0
+              if block_given?
+                amount =  yield rule, amount 
+              else
+                amount = rule.amount
+              end 
+              sheet2.row(rule_index + 2)[last_month_column + 1] = amount.to_f 
            end 
            #debugger
            last_month_column += 1

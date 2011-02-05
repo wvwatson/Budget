@@ -58,5 +58,14 @@ end
 Then /^the total hours for the day should be (\d+) and the tasks should be assigned to sick day$/ do |arg1|
    #debugger
    @Hours.total.should == arg1.to_i and 
-     @Hours.hours_list.each {|rule| break true if rule.name == "sick_day"}.should == true
+   @Hours.hours_list.each {|rule| break true if rule.name == "sick_day"}.should == true
+end
+
+Given /^I have a side project meeting lasting "([^"]*)" hour from "([^"]*)" to "([^"]*)" every monday at "([^"]*)"$/ do |arg1, arg2, arg3, arg4|
+  # range
+  @Hours.from arg2, arg3 do
+    every :month do
+      side_project_meeting arg1, {:every => :monday, :at => arg4}
+    end
+  end
 end

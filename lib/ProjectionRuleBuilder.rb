@@ -78,9 +78,11 @@ module ProjectionRuleBuilder
   #     end
   #   end
 
+  # set up an incremental projection rule
   def every (date, &block)
     #debugger
-    @period=:incremental
+    # need a way to differentiate monthly from weekly (e.g. every monday)
+    # need a way to designate once a month (e.g. first monday or third monday)    @period=:incremental
     if (date == :monthly) or (date == :month)
       # need a way to reconcile incremental/monthly/duration
       #@period = :monthly
