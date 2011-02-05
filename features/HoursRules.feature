@@ -24,4 +24,4 @@ Feature: Hours rules
   Scenario: Replace a task's hours to another task
 	Given I have some tasks set up
 	And I replace all of the day's hours as a sick day
-    Then the total hours for the day should be 9
+    Then the total hours for the day should be 9 and the tasks should be assigned to sick day

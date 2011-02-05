@@ -42,10 +42,21 @@ Given /^I have a one time medical checkup for "([^"]*)" hours on "([^"]*)" on on
 end
 
 Given /^I have some tasks set up$/ do
-  pending # express the regexp above with the code you wish you had
+  steps %Q{
+    Given I work on a family web site "1" hour a day
+    And I work on at a day job "8" hours a day
+  }
 end
 
 Given /^I replace all of the day's hours as a sick day$/ do
-  pending # express the regexp above with the code you wish you had
+  #debugger
+  @Hours.add do
+    replace :all, :sick_day
+  end
 end
 
+Then /^the total hours for the day should be (\d+) and the tasks should be assigned to sick day$/ do |arg1|
+   #debugger
+   @Hours.total.should == arg1.to_i and 
+     @Hours.hours_list.each {|rule| break true if rule.name == "sick_day"}.should == true
+end

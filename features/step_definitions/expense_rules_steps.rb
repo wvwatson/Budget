@@ -46,7 +46,7 @@ end
 
 Given /^I have a one time birthday expense of \$"([^"]*)" on "([^"]*)"$/ do |arg1, arg2|
   @my.on arg2 do
-       birthday arg1
+    birthday arg1
   end
 end
 

@@ -143,7 +143,20 @@ module ProjectionRuleBuilder
   #    end
   #    #add define method here
   #  end
-
+  
+  # replace the rule list's tasks with 
+  def replace(from,to)
+    #debugger
+    if from = :all
+      rule_list.each {|rule| rule.name = to.to_s} 
+    else
+      rule_list.each do |rule|
+        rule.name = to.to_s if rule.name == from
+      end
+    end
+  end
+  
+  # Add a rule for the projection
   def add(&block) 
     #debugger
     #@expense_list = []
