@@ -14,25 +14,25 @@ day_job 8.hours
 
 # do something every monday
 every :monday do
-  meeting 1, :at => 9:30
+  meeting 1, :at => "9:30"
 end
 
 # one time project
-on 8/3/2011 do
+on "8/3/2011" do
   medical_checkup 4
 end
 
 # or it can look like this
-medical_checkup 4, :date => 8/3/2011
+medical_checkup 4, :date => "8/3/2011"
 
 # change a day's hours to another change time
-on 8/3/2011 do
-  replace :all, sick_day
+on "8/3/2011" do
+  replace :all, :sick_day
 end
 
 # range
-from 3/1/2011, 5/1/2011 do
+from "3/1/2011", "5/1/2011" do
   every :month do
-    side_project_meeting 1, {:every => :monday, :at => 10:30}
+    side_project_meeting 1, {:every => :monday, :at => "10:30"}
   end
 end
