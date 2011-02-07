@@ -6,7 +6,7 @@ module ProjectionRuleBuilder
   # maybe use visitor pattern
   # maybe execute block inside the context of an income statement  (which includes expenses and income)
   # attr_accessor :budget_builder #ref to parent, be careful here
-  #  #maybe shadow all expense fields to make them available to blocks
+  # maybe shadow all expense fields to make them available to blocks
    attr_accessor :rule_list
    attr_accessor :period 
    attr_accessor :start_date
@@ -149,7 +149,7 @@ module ProjectionRuleBuilder
   # replace the rule list's tasks with 
   def replace(from,to)
     #debugger
-    if from = :all
+    if from == :all
       rule_list.each {|rule| rule.name = to.to_s} 
     else
       rule_list.each do |rule|
