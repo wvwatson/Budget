@@ -1,11 +1,6 @@
-Things start as an idea.  
-As we nurse that idea we give it resources.  
-At some point we want to know just how big that idea can become.
+==Why make a financial domain specific programming language?  
+==The answer is simply so that you can to work closer to the financial problem.
 
-In the end we must keep the idea from consuming everything 
-Or vice versa
-
-Your idea -> feasability numbers -> projection -> budget
 
 expenses do
 
@@ -70,6 +65,15 @@ expenses do
 	  	  end
 	  	end
 	  end
+
+	  Things start as an idea.  
+As we nurse that idea we give it resources.  
+At some point we want to know just how big that idea can become.
+
+In the end we must keep the idea from consuming everything 
+Or vice versa
+
+Your idea -> feasability numbers -> projection -> budget
 
 First code imitates spec
 Then spec imitates code

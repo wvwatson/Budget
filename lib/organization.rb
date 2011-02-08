@@ -1,5 +1,10 @@
 class OrganizationBuilder
 
+  attr_accessor :organization_list
+  
+  def initialize
+	@organization_list = []
+  end
   
   def add_org(name, &block)
     organization = Organization.new
@@ -23,7 +28,7 @@ class OrganizationBuilder
 	  #   expense.range_end_date=@range_end_date
 	  #   expense.ranged=@ranged
 	  #        
-	  #   @expense_list.push(expense)
+	    @organization_list.push(organization)
 	  #   # run block before adding that code to the expense
       # yield if block_given?
 	  #   @expense_list.last.custom_code=block
@@ -33,7 +38,7 @@ class OrganizationBuilder
 
   # dynamically define expenses
   def method_missing(methId, *args, &block)
-    debugger
+    #debugger
     # maybe make more secure/easier to debug by requiring method to have 
     # prefix of exp_ or rev_
     str = methId.id2name
@@ -43,7 +48,7 @@ class OrganizationBuilder
     if args.count == 0 
       #debugger
       add_org(str)
-      instance_eval &block # needs to cakk with an arg
+      instance_eval &block if block_given? # needs to call with an arg
      # elsif args.count == 1 
      #   #debugger
      #   add_expense(str, args[0], &block)
@@ -57,6 +62,8 @@ class OrganizationBuilder
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
+	# debugger
+	puts "I am here"
   end 
   
 end
