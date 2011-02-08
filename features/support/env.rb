@@ -5,4 +5,5 @@ require 'budget'
 require 'budget_builder'
 require 'active_support/all'
 require 'hours'
+require 'organization'
 

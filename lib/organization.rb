@@ -1,4 +1,4 @@
-module OrganizationBuilder
+class OrganizationBuilder
 
   
   def add_org(name, &block)
@@ -52,12 +52,12 @@ module OrganizationBuilder
   end  
   
   
-  def load_file(filelocation="org_list.rb")
+  def load_organization(filelocation="/../../organization_list.rb")
     # @period = :monthly
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
-  end   
+  end 
   
 end
 
