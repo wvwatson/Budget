@@ -1,8 +1,7 @@
 Why make a financial domain specific programming language?  
-==========================================================
-
-The answer is simply so that you can to work closer to the financial problem.
------------------------------------------------------------------------------
+=========================================================
+*So that you can to work closer to the financial problem*
+--------------------------------------------------------
 
 expenses do
 
