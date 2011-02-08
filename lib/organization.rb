@@ -33,7 +33,7 @@ class OrganizationBuilder
 
   # dynamically define expenses
   def method_missing(methId, *args, &block)
-    #debugger
+    debugger
     # maybe make more secure/easier to debug by requiring method to have 
     # prefix of exp_ or rev_
     str = methId.id2name
