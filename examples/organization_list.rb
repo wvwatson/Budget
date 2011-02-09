@@ -22,5 +22,5 @@ end
 # marketing :graphic_design
 
 #bottom up
-field_sales :reports_to, :sales
-district_1 :reports_to, :field_sales
+field_sales reports_to: :sales
+district_1 reports_to: :field_sales
