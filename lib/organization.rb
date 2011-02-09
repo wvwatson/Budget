@@ -1,15 +1,29 @@
 class OrganizationBuilder
 
   attr_accessor :organization_list
+  attr_accessor :parent_stack
   
   def initialize
-	@organization_list = []
+	  @organization_list = []
+	  @parent_stack = []
   end
   
-  def add_org(name, &block)
+  def add_org(name, *args, &block)
+    
+    @organization_list.each do |org|
+      if org.name == name
+        return # exists already
+      end
+    end
+    
     organization = Organization.new
     organization.name = name
- 
+    
+    if args[0] == :reports_to
+      organization.parent_name = args[1].to_s
+    else
+      organization.parent_name = @parent_stack.last
+    end
       # expense.amount = amount
       #      expense.period = @period
 
@@ -42,16 +56,20 @@ class OrganizationBuilder
     # maybe make more secure/easier to debug by requiring method to have 
     # prefix of exp_ or rev_
     str = methId.id2name
-    #debugger
+    # debugger
     #debugger if str == 'taxes'
     #need to ensure 1 variable
     if args.count == 0 
       #debugger
       add_org(str)
+      @parent_stack.push(str) if block_given?
       instance_eval &block if block_given? # needs to call with an arg
-     # elsif args.count == 1 
-     #   #debugger
-     #   add_expense(str, args[0], &block)
+      @parent_stack.pop if block_given?
+      # debugger
+      #puts "after pop"
+    elsif args.count == 2 
+      # debugger
+      add_org(str, *args, &block)
     end
     #add define method here
   end  
@@ -62,8 +80,8 @@ class OrganizationBuilder
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
-	# debugger
-	puts "I am here"
+    # debugger
+	  puts "I am here"
   end 
   
 end

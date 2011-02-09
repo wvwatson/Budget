@@ -27,5 +27,5 @@ Given /^I load the "([^"]*)" organization file$/ do |arg1|
 end
 
 Then /^the total organizations collected should be (\d+)$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  @org_builder.organization_list.count.should==arg1.to_i
 end

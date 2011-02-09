@@ -5,16 +5,16 @@ executives do
       budgeting
       payroll
    end
-  #  :information_technology
-  #  :marketing
-  #  :sales
+  information_technology
+  marketing
+  sales
 end
 
 # reopen hierarchy
 information_technology do
-  # :help_desk
-  #  :operations
-  #  :software_development
+  help_desk
+  operations
+  software_development
 end  
 
 # single assignment/reopen
