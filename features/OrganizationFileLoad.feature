@@ -7,4 +7,4 @@ Feature: Organization file load
   Scenario: Load from organization_list.rb
     Given I have an organization file named "organization_list.rb"
     When I load the "organization_list.rb" organization file
-    Then the total organizations collected should be 12
+    Then the total organizations collected should be 13

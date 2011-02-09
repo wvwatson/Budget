@@ -26,9 +26,10 @@ class OrganizationBuilder
     if args[0].is_a?(Hash) # syntax field_sales reports_to: :sales
 			# debugger
       organization.parent_name = args[0][:reports_to].to_s
-    # elsif args[0] == :reports_to # syntax field_sales :reports_to, :sales
-      # organization.parent_name = args[1].to_s
-    else
+    elsif organization.parent_name == nil # syntax marketing :graphic_design
+       organization.name = name
+       organization.parent_name = args[0].to_s
+		else
       organization.parent_name = @parent_stack.last
     end
       # expense.amount = amount
@@ -87,8 +88,8 @@ class OrganizationBuilder
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
-     # debugger
-	  # puts "I am here"
+    #debugger
+	  #puts "I am here"
   end 
   
 end
