@@ -1,6 +1,8 @@
+# the custom logic requirement was originally made because
+# of complexity generally associated with indirect costs
 # need to provide a way of taking an object and going down its list and 
-#  from the bottom up roll everything up.
-# eventually might need a priority (order) for decendants of a tier
+#  from the bottom and roll everything up.
+# eventually might need a priority (order) for immediate decendants of a tier
 # default rollup rule is to go from child to parent, accumulating the 
 #  content
 module rollup
@@ -9,7 +11,8 @@ module rollup
   # context of the includer
   attr_accessor :before_logic 
   attr_accessor :after_logic
-  attr_accessor :rollup_list
+	# default to list of subordinates
+  attr_accessor :rollup_list 
   
   
   # should be able to do from or to or both together in a rollup_rule
