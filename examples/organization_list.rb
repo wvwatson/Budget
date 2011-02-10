@@ -18,9 +18,7 @@ information_technology do
 end  
 
 # single assignment/reopen
-
-# marketing :graphic_design
-
-#bottom up
-field_sales :reports_to, :sales
-district_1 :reports_to, :field_sales
+# bottom up
+graphic_design reports_to: :marketing 
+field_sales reports_to: :sales
+district_1 reports_to: :field_sales

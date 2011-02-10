@@ -15,13 +15,21 @@ class OrganizationBuilder
         return # exists already
       end
     end
-    
+      
     organization = Organization.new
     organization.name = name
+
+    # if args
+      # @time = args[0][:reports_to] if args[0].is_a?(Hash) 
+    # end
     
-    if args[0] == :reports_to
-      organization.parent_name = args[1].to_s
-    else
+    if args[0].is_a?(Hash) # syntax field_sales reports_to: :sales
+			# debugger
+      organization.parent_name = args[0][:reports_to].to_s
+    elsif organization.parent_name == nil # syntax marketing :graphic_design
+       organization.name = name
+       organization.parent_name = args[0].to_s
+		else
       organization.parent_name = @parent_stack.last
     end
       # expense.amount = amount
@@ -67,7 +75,7 @@ class OrganizationBuilder
       @parent_stack.pop if block_given?
       # debugger
       #puts "after pop"
-    elsif args.count == 2 
+    elsif args.count == 1 
       # debugger
       add_org(str, *args, &block)
     end
@@ -80,8 +88,8 @@ class OrganizationBuilder
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
-    # debugger
-	  puts "I am here"
+    #debugger
+	  #puts "I am here"
   end 
   
 end
