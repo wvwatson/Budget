@@ -1,6 +1,7 @@
+# a tree always has a nodes or edges
 module Hierarchy
-  attr_accessor :name
-  attr_accessor :parent_name
+  attr_accessor :name # no doubt some would want this to be id instead
+  attr_accessor :parent_name # no doubt some would like this to be parent_id instead
 end
 
 module HierarchyBuilder
