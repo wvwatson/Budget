@@ -9,7 +9,7 @@ end
 
 Given /^I load the "([^"]*)" organization file$/ do |arg1|
   input_path = File.dirname(__FILE__) + "/../../examples/" + arg1
-   debugger
+  # debugger
   @org_builder.load_organization input_path
   #@my.add {require input_path}
 

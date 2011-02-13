@@ -127,8 +127,8 @@ module HierarchyBuilder
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
-    debugger
-	  puts "I am here"
+    # debugger
+    #     puts "I am here"
   end
   
   
