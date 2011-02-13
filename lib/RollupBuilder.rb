@@ -1,15 +1,26 @@
 # move this all to the rollup file
 
-# tree example could be this:
-#  (executive (finance (budgeting payroll)) 
-#             (information_technology (helpdesk operations software_development)) 
-#              marketing sales)
+
 module RollupBuilder
   
   attr_accessor :rollup_rule_list
   
+  # tree example could be this:
+  #  (executive (finance (budgeting payroll)) 
+  #             (information_technology (helpdesk operations software_development)) 
+  #              marketing sales)
+  attr_accessor :tree_list
+  
+  
   def addrule(child)
     @rollup_rule_list.push(child)
+  end
+  
+  
+  def rollup_loop
+  end
+  
+  def execute_rollup (current_object, parent_object, rule)
   end
   
   # should we use memoization?

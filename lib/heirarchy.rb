@@ -1,13 +1,18 @@
-# a tree always has a nodes or edges
-module Hierarchy
-  attr_accessor :name # no doubt some would want this to be id instead
-  attr_accessor :parent_name # no doubt some would like this to be parent_id instead
-end
+# tree example could be this:
+#  (executive (finance (budgeting payroll)) 
+#             (information_technology (helpdesk operations software_development)) 
+#              marketing sales)
 
-module HierarchyBuilder
-  
-  attr_accessor :node_list
-  attr_accessor :parent_stack
+# one way to implement this:
+# implement an cons cell
+# this is an object that holds a pointer to the next item (parent) in the list 
+# implement an object that holds a list of cons cells
+
+# a tree always has a nodes or edges
+# acts like cons cell
+module Hierarchy
+  attr_accessor :name # no doubt some would want this to be id insteadt
+  attr_accessor :parent_name # no doubt some would like this to be parent_id instead
   attr_accessor :node_class
   
   # need to try to instantiate the right class somehow
@@ -15,12 +20,30 @@ module HierarchyBuilder
     # base.extend(ClassMethods)
     node_class=base.class
   end
+end
+
+# # Describes the path to the parent as a list of unique
+# # identifiers
+# module HierarchyList
+#   attr_accessor :path_list
+#   def initialize
+#     @path_list = []
+#   end
+# end
+
+# acts like a list of cons cells
+module HierarchyBuilder
+  
+  attr_accessor :node_list # list of 
+  attr_accessor :parent_stack
+  attr_accessor :node_class
   
   def initialize
 	  @node_list = []
 	  @parent_stack = []
   end
   
+  # add a node to the node list and the path list
   def add_node(name, *args, &block)
     
     @node_list.each do |node|
@@ -44,6 +67,7 @@ module HierarchyBuilder
        node.parent_name = args[0].to_s
 		else
       node.parent_name = @parent_stack.last
+      node
     end
       # expense.amount = amount
       #      expense.period = @period
