@@ -13,13 +13,14 @@
 module Hierarchy
   attr_accessor :name # no doubt some would want this to be id insteadt
   attr_accessor :parent_name # no doubt some would like this to be parent_id instead
-  attr_accessor :node_class
+  # attr_accessor :node_class
   
-  # need to try to instantiate the right class somehow
-  def self.included(base)
-    # base.extend(ClassMethods)
-    node_class=base.class
-  end
+  # # need to try to instantiate the right class somehow
+  # def self.included(base)
+  #   # base.extend(ClassMethods)
+  #   debugger
+  #   node_class=base.class
+  # end
 end
 
 # # Describes the path to the parent as a list of unique
@@ -51,8 +52,9 @@ module HierarchyBuilder
         return # exists already
       end
     end
-      
-    node = self.const_get(node_class).new # need to instantiate the including class somehow
+    #debugger
+    # node = self.const_get(node_class).new # need to instantiate the including class somehow
+    node = @node_class.new
     node.name = name 
 
     # if args
@@ -101,7 +103,7 @@ module HierarchyBuilder
     # maybe make more secure/easier to debug by requiring method to have 
     # prefix of exp_ or rev_
     str = methId.id2name
-    # debugger
+    #debugger
     #debugger if str == 'taxes'
     #need to ensure 1 variable
     if args.count == 0 
@@ -125,8 +127,8 @@ module HierarchyBuilder
     # @ranged = nil
     contents = File.open(filelocation, 'rb') { |f| f.read }
     self.instance_eval contents
-    #debugger
-	  #puts "I am here"
+    debugger
+	  puts "I am here"
   end
   
   
