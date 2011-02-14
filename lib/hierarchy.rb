@@ -44,13 +44,14 @@ module HierarchyBuilder
   
   def hierarchy_initialize
     # debugger
-	  @node_list = []
-	  @parent_stack = []
+	  # @node_list = []
+	  # @parent_stack = []
   end
   
   # add a node to the node list and the path list
   def add_node(name, *args, &block)
     # debugger
+		@node_list ||=[]
     @node_list.each do |node|
       if node.name == name
         return # exists already
@@ -68,9 +69,9 @@ module HierarchyBuilder
     if args[0].is_a?(Hash) # syntax field_sales reports_to: :sales
 			# debugger
       node.parent_name = args[0][:reports_to].to_s
-    elsif node.parent_name == nil # syntax marketing :graphic_design
-       node.name = name
-       node.parent_name = args[0].to_s
+    # elsif node.parent_name == nil # syntax marketing :graphic_design
+       # node.name = name
+       # node.parent_name = args[0].to_s
 		else
       node.parent_name = @parent_stack.last
       node
@@ -107,15 +108,19 @@ module HierarchyBuilder
     # maybe make more secure/easier to debug by requiring method to have 
     # prefix of exp_ or rev_
     str = methId.id2name
-    #debugger
+    # debugger
     #debugger if str == 'taxes'
     #need to ensure 1 variable
+		@parent_stack ||=[]
     if args.count == 0 
       # debugger
       add_node(str)
-      @parent_stack.push(str) if block_given?
-      instance_eval &block if block_given? # needs to call with an arg
-      @parent_stack.pop if block_given?
+      # @parent_stack.push(str) if block_given?
+      # instance_eval &block if block_given? # needs to call with an arg
+      # @parent_stack.pop if block_given?
+      @parent_stack.push(str) if block
+      instance_eval &block if block # needs to call with an arg
+      @parent_stack.pop if block			
       # debugger
       #puts "after pop"
     elsif args.count == 1 

@@ -29,8 +29,8 @@ class OrganizationBuilder
   def initialize
     # debugger
     @node_class=Organization
-    self.hierarchy_initialize
-    self.rollup_builder_initialize
+    # self.hierarchy_initialize
+    # self.rollup_builder_initialize
   end
   
   # def initialize

@@ -34,7 +34,7 @@ module RollupBuilder
   
   def rollup_builder_initialize
     # debugger
-    @rollup_rule_list=[]
+    # @rollup_rule_list=[]
     super
   end
   
@@ -51,6 +51,7 @@ module RollupBuilder
     if args[1].is_a?(Hash) # syntax field_sales reports_to: :sales
       rollup.to = args[1][:to]
     end
+		@rollup_rule_list ||=[]
     @rollup_rule_list.push(rollup)
 	  @rollup_rule_list.last.custom_code=block
   end
