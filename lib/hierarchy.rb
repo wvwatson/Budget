@@ -74,7 +74,7 @@ module HierarchyBuilder
        # node.parent_name = args[0].to_s
 		else
       node.parent_name = @parent_stack.last
-      node
+      # node
     end
       # expense.amount = amount
       #      expense.period = @period

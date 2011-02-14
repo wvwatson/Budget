@@ -168,7 +168,7 @@ module Rollup
   end
   
   # should we use memoization?
-  def rollup
+  def rollup(root_name)
     # loop through children from bottom
     # designate current object and current parent
     # probably need to use an adjacency list (list of the path) to loop from bottom
@@ -184,26 +184,35 @@ module Rollup
     #       
     # end
     debugger
-    # # path= @node_list.inject([]) do |result, node|
-    #     debugger
-    #     if self.name == node.name
-    #       result << node
-    #     elsif self.parent_name == node.name
-    #       result << node
-    #     elsif result.find{|child| child.parent_name == node}
-    #       result << node
-    #     end
-    #     # col
-    #     # make a function to handle each rule e.g. execute_rollup
-    #     debugger
-    #     # loop through the rollup rules
-    #     @rollup_rule_list.each do |rule|
-    #       # pass the real object?
-    #       rollup_object(node.name, node.parent_name, rule)
-    #     end
-    #   end 
-    debugger
-    puts "after rollup function"
+		root=[]
+		root.push(@node_list.find{|root| root.name == root_name})
+    path= @node_list.inject(root) do |result, node|
+			debugger
+			# if name == node.name
+				# result << node
+			# elsif self.parent_name == node.name
+				# result << node
+			# elsif result.find{|child| child.parent_name == node.name}
+				# result << node
+			# end
+			if @node_list.find{|root| root.name == root_name}
+				result << node
+			elsif @node_list.find{|child| child.parent_name == node.name}
+				result << node
+			elsif result.find{|child| child.parent_name == node.name}
+				result << node
+			end
+    end 
+		# col
+		# make a function to handle each rule e.g. execute_rollup
+		debugger
+		# loop through the rollup rules
+		@rollup_rule_list.each do |rule|
+			# pass the real object?
+			rollup_object(node.name, node.parent_name, rule)
+		end
+		debugger
+		puts "after rollup function"
 		# there are three kinds of matches
     #   1) a 'from' match is when the current object is the 'from' object when
 		# 	  there is no 'to' object (wildcard)
