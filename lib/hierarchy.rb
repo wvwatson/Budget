@@ -10,6 +10,7 @@
 
 # a tree always has a nodes or edges
 # acts like cons cell
+require 'DSLTools'
 module Hierarchy
   attr_accessor :name # no doubt some would want this to be id insteadt
   attr_accessor :parent_name # no doubt some would like this to be parent_id instead
@@ -35,18 +36,21 @@ end
 # acts like a list of cons cells
 module HierarchyBuilder
   
+  include DSLTools
+  
   attr_accessor :node_list # list of 
   attr_accessor :parent_stack
   attr_accessor :node_class
   
-  def initialize
+  def hierarchy_initialize
+    # debugger
 	  @node_list = []
 	  @parent_stack = []
   end
   
   # add a node to the node list and the path list
   def add_node(name, *args, &block)
-    
+    # debugger
     @node_list.each do |node|
       if node.name == name
         return # exists already
@@ -107,7 +111,7 @@ module HierarchyBuilder
     #debugger if str == 'taxes'
     #need to ensure 1 variable
     if args.count == 0 
-      #debugger
+      # debugger
       add_node(str)
       @parent_stack.push(str) if block_given?
       instance_eval &block if block_given? # needs to call with an arg
@@ -122,14 +126,7 @@ module HierarchyBuilder
   end  
   
   
-  def load_node(filelocation="/../../node_list.rb")
-    # @period = :monthly
-    # @ranged = nil
-    contents = File.open(filelocation, 'rb') { |f| f.read }
-    self.instance_eval contents
-    # debugger
-    #     puts "I am here"
-  end
+
   
   
 end

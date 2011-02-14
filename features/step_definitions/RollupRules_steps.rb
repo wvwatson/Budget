@@ -4,6 +4,14 @@ Before do
   @rollup_builder = RollupTest.new
 end
 
+
+Given /^I have organizations set up$/ do
+  steps %Q{
+    Given I have an organization file named "organization_list.rb"
+    When I load the "organization_list.rb" organization file
+  }
+end
+
 Given /^I have a rollup rules file named "([^"]*)"$/ do |arg1|
   output_path = File.dirname(__FILE__) + "/../../examples/" + arg1
   File.exists?(output_path).should == true
@@ -21,6 +29,19 @@ Then /^the total rollup rules collected should be (\d+)$/ do |arg1|
   @rollup_builder.rollup_rule_list.count.should==arg1.to_i
 end
 
+Given /^I have rollup rules set up$/ do
+  steps %Q{
+    Given I have a rollup rules file named "rollup_list.rb"
+    And I load the "rollup_list.rb" rollup file
+  }
+end
+
 Given /^I assign the "([^"]*)" organization \$(\d+)$/ do |arg1, arg2|
-	pending # express the regexp above with the code you wish you had
+  #debugger
+	@org_builder.node_list.each {|org| org.Account.dollars=arg2.to_i if org.name == arg1}
+end
+
+Then /^the rollup result should be \$(\d+)$/ do |arg1|
+  #@org_builder.rollup_rule_list=@rollup_builder.rollup_rule_list
+  @org_builder.rollup
 end

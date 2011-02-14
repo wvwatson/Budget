@@ -1,19 +1,38 @@
 require 'hierarchy'
+require 'rollup'
+
+# class AbstractOrganizationBuilder
+#   def initialize
+#     debugger
+#     @node_class=Organization
+#     # super
+#   end
+# end
+
 class OrganizationBuilder
 
   include HierarchyBuilder
-  
+  include Rollup
+  #include RollupBuilder
+    
   alias organization_list= node_list=
   alias organization_list node_list
   alias load_organization load_node
+  
+
+  
   # attr_accessor :organization_list
   #  attr_accessor :parent_stack
   
+  # @node_class=Organization
+  
   def initialize
-    #debugger
+    # debugger
     @node_class=Organization
-    super
+    self.hierarchy_initialize
+    self.rollup_builder_initialize
   end
+  
   # def initialize
   #     @organization_list = []
   #     @parent_stack = []
@@ -107,7 +126,7 @@ end
 
 class Organization
   include Hierarchy
-  # include Rollup
+
   # attr_accessor :name
   #  attr_accessor :parent_name
 end

@@ -1,4 +1,5 @@
 @org
+@rollup
 Feature: Organization file load
   In order to load a bunch of organizations easily
   As financial personnel 

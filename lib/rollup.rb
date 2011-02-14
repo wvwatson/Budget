@@ -5,6 +5,7 @@
 # eventually might need a priority (order) for immediate decendants of a tier
 # default rollup rule is to go from child to parent, accumulating the 
 #  content
+require 'DSLTools'
 class RollupRule
   
   # These both should be procs that execute in the 
@@ -21,6 +22,8 @@ end
 
 module RollupBuilder
   
+  include DSLTools
+  
   attr_accessor :rollup_rule_list
   
   # tree example could be this:
@@ -29,8 +32,10 @@ module RollupBuilder
   #              marketing sales)
 
   
-  def initialize
+  def rollup_builder_initialize
+    # debugger
     @rollup_rule_list=[]
+    super
   end
   
   
@@ -143,20 +148,20 @@ module RollupBuilder
     # end  
     # 
   
-  def load_node(filelocation="/../../rollup_list.rb")
-    # @period = :monthly
-    # @ranged = nil
-    contents = File.open(filelocation, 'rb') { |f| f.read }
-    self.instance_eval contents
-    # debugger
-    # puts "I am here"
-  end
+  # def load_node(filelocation="/../../rollup_list.rb")
+  #   # @period = :monthly
+  #   # @ranged = nil
+  #   contents = File.open(filelocation, 'rb') { |f| f.read }
+  #   self.instance_eval contents
+  #   debugger
+  #    puts "I am here"
+  # end
 
 end
 
 module Rollup
   
-  attr_accessor :tree_list #node_list from hierarchy
+  # attr_accessor :tree_list #node_list from hierarchy
   
   def rollup_object (current_object, parent_object, rule)
   end
@@ -177,25 +182,27 @@ module Rollup
     #       when self.p
     #       
     # end
-    path= @tree_list.inject([]) do |result, node|
-      debugger
-      result << element if element.parent_name
-      if self.name == node.name
-        result << node
-      elsif self.parent_name == node.name
-        result << node
-      elsif result.find{|child| child.parent_name == node}
-        result << node
-      end
-      # col
-      # make a function to handle each rule e.g. execute_rollup
-  
-  		# loop through the rollup rules
-      @rollup_rule_list.each do |rule|
-        # pass the real object?
-        rollup_object(node.name, node.parent_name, rule)
-      end
-    end 
+    debugger
+    # # path= @node_list.inject([]) do |result, node|
+    #     debugger
+    #     if self.name == node.name
+    #       result << node
+    #     elsif self.parent_name == node.name
+    #       result << node
+    #     elsif result.find{|child| child.parent_name == node}
+    #       result << node
+    #     end
+    #     # col
+    #     # make a function to handle each rule e.g. execute_rollup
+    #     debugger
+    #     # loop through the rollup rules
+    #     @rollup_rule_list.each do |rule|
+    #       # pass the real object?
+    #       rollup_object(node.name, node.parent_name, rule)
+    #     end
+    #   end 
+    debugger
+    puts "after rollup function"
 		# there are three kinds of matches
     #   1) a 'from' match is when the current object is the 'from' object when
 		# 	  there is no 'to' object (wildcard)
