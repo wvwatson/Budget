@@ -167,8 +167,58 @@ module Rollup
   def rollup_object (current_object, parent_object, rule)
   end
   
+
+  def get_root(root_name)
+    root ||=[]
+		root.push(@node_list.find{|root| root.name == root_name})
+  end
+  
+  def get_node(root_name)
+		@node_list.find{|root| root.name == root_name}
+  end
+  
+  def get_decendent (name)
+    decendent_tier ||=[]
+    decendent_tier.push(@node_list.select{|child| child.parent_name == name})
+  end
+  
+  def walk_tree (name)
+    return unless name
+    decendent_tier ||=[]
+		decendent_tier = get_decendents(get_root(name), decendent_tier)
+		decendent_tier.each do |node|
+		  # add to the list if nil
+		  #  return decendent list or nodes or check nil?
+		  tree_list.push(node) unless walk_tree(node.name)
+	  end
+    
+  end
+
+  
+  # 1) add the root as current object
+  # 2) get the direct decendents of the current object as current tier
+  # 3) if no direct decendents pop one tier off the tier stack
+	# 3) if there are decendents push them onto the tier stack
+	# 4) pop one decendent off of the tier stack
+	# 5) (2)
+	
+  #   decendent_tier = @node_list.select{|child| child.parent_name == node.name}
+  #   result << node
+  # elsif @node_list.find{|child| child.parent_name == node.name}
+  #   result << node
+  # elsif result.find{|child| child.parent_name == node.name}
+  #   result << node
+  # end
+  
   # should we use memoization?
-  def rollup(root_name)
+  def rollup(root_name=nil)
+    
+     children = walk_tree(root_name)
+		
+		# 1) add the root as current object
+ 
+		# 2) get the direct decendents of the current object as current tier
+    
     # loop through children from bottom
     # designate current object and current parent
     # probably need to use an adjacency list (list of the path) to loop from bottom
@@ -183,11 +233,12 @@ module Rollup
     #       when self.p
     #       
     # end
-    debugger
+    # debugger
 		root=[]
 		root.push(@node_list.find{|root| root.name == root_name})
+		decendent_tier =[]
     path= @node_list.inject(root) do |result, node|
-			debugger
+      # debugger
 			# if name == node.name
 				# result << node
 			# elsif self.parent_name == node.name
@@ -195,7 +246,18 @@ module Rollup
 			# elsif result.find{|child| child.parent_name == node.name}
 				# result << node
 			# end
+
+
+
+			# 3) if no direct decendents pop one tier off the tier stack
+			# 3) if there are decendents push them onto the tier stack
+			# 4) pop one decendent off of the tier stack
+			# 5) (2) 
+			
+			# 1) add the root as current object
 			if @node_list.find{|root| root.name == root_name}
+			  # 2) get the direct decendents of the current object as current tier
+			  decendent_tier = @node_list.select{|child| child.parent_name == node.name}
 				result << node
 			elsif @node_list.find{|child| child.parent_name == node.name}
 				result << node

@@ -43,5 +43,5 @@ end
 
 Then /^the rollup result should be \$(\d+)$/ do |arg1|
   #@org_builder.rollup_rule_list=@rollup_builder.rollup_rule_list
-  @org_builder.rollup
+  @org_builder.rollup.should == arg1.to_i 
 end
