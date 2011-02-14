@@ -107,6 +107,7 @@ end
 
 class Organization
   include Hierarchy
+  # include Rollup
   # attr_accessor :name
   #  attr_accessor :parent_name
 end
