@@ -174,8 +174,12 @@ module Rollup
   end
   
   def get_node(name)
-		@node_list.find{|root| root.name == name}
-		@node_list.find{|root| root.parent_name == nil} if name == :all
+    if name == :all
+      @node_list.find{|root| root.parent_name == nil}
+	  else
+ 		  @node_list.find{|root| root.name == name}
+    end
+		
   end
   
   def get_descendants (node)
@@ -187,14 +191,14 @@ module Rollup
   
   def walk_tree (name)
     return unless name || name == :all
-		# debugger
+    debugger
     descendant_tier ||=[]
-		descendant_tier = get_descendants(get_node(name)) || []
+		descendant_tier.push(get_descendants(get_node(name)))
 		descendant_tier.each do |node|
 		  # add to the list if nil
 		  #  return descendant list or nodes or check nil?
-			# debugger
-		  tree_list.push(node) unless walk_tree(node.name)
+       # debugger
+		  @tree_list.push(node) unless walk_tree(node.name)
 	  end
     
   end
@@ -218,6 +222,7 @@ module Rollup
   # should we use memoization?
   def rollup(root_name=:all)
     debugger
+     @tree_list ||=[]
      children = walk_tree(root_name)
 		 debugger
 			puts 'after walk'
