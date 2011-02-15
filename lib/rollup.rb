@@ -167,7 +167,32 @@ module Rollup
   def rollup_object (current_object, parent_object, rule)
   end
   
+# class TreeNode
+  # attr_reader :name
 
+  # def initialize(name)
+    # @name = name
+    # @children = []
+  # end
+
+  # def add_node(node)
+    # @children << node
+  # end
+
+  # def each_depth_first
+    # @children.each do |child|
+      # child.each_depth_first do |c|
+        # yield c
+      # end
+    # end
+
+    # yield self
+  # end
+# end
+
+# root.each_depth_first do |child|
+  # puts child.name
+# end
   def get_root(root_name)
     root ||=[]
 		root.push(@node_list.find{|root| root.name == root_name})
