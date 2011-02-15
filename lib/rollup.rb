@@ -191,16 +191,24 @@ module Rollup
   
   def walk_tree (name)
     return unless name || name == :all
-    debugger
-    descendant_tier ||=[]
-		descendant_tier.push(get_descendants(get_node(name)))
-		descendant_tier.each do |node|
-		  # add to the list if nil
-		  #  return descendant list or nodes or check nil?
-       # debugger
-		  @tree_list.push(node) unless walk_tree(node.name)
-	  end
-    
+    counter ||=0
+    puts 'name: ' + name.to_s
+    puts 'counter: ' + counter.to_s
+    # debugger
+    descendant_tiers ||=[] 
+		descendant_tiers.push(get_descendants(get_node(name)))
+		puts 'descendant: ' + descendant_tiers.to_s
+		tier ||=[]
+		descendant_tiers.each do |tier|
+		  puts 'tier: ' + tier.to_s
+  		tier.each do |node|
+  		  # add to the list if nil
+  		  #  return descendant list or nodes or check nil?
+         # debugger
+         puts 'node: ' + node.to_s
+  		  @tree_list.push(node) unless walk_tree(node.name)
+  	  end
+    end
   end
 
   
