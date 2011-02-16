@@ -289,6 +289,8 @@ module Rollup
       		if child.name == rule.from and rule.to.nil?
       		# 	2) a 'to' match is when the current object is the 'to' object when
       		#			there is no 'from' object (wildcard)
+      	  	debugger
+        		puts 'from rule'
       		elsif child.name == rule.to and rule.to.nil?
       		#		3) a full match is when the current object and the object's parent match the
       		#			'from' and 'to' objects respectively

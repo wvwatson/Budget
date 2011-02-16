@@ -13,7 +13,7 @@ class OrganizationBuilder
 
   include HierarchyBuilder
   include Rollup
-  #include RollupBuilder
+  include RollupBuilder
     
   alias organization_list= node_list=
   alias organization_list node_list
