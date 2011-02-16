@@ -52,6 +52,7 @@ module RollupBuilder
     if args[1].is_a?(Hash) # syntax field_sales reports_to: :sales
       rollup.to = args[1][:to]
     end
+		# debugger
 		@rollup_rule_list ||=[]
     @rollup_rule_list.push(rollup)
 	  @rollup_rule_list.last.custom_code=block
@@ -278,7 +279,7 @@ module Rollup
      #   puts child.name
      # end 
      each_depth_first(root) do |child|
-        debugger
+        # debugger
     		# loop through the rollup rules
     		@rollup_rule_list.each do |rule|
     			# pass the real object?
@@ -286,20 +287,25 @@ module Rollup
           # there are three kinds of matches
           #   1) a 'from' match is when the current object is the 'from' object when
       		# 	  there is no 'to' object (wildcard)
-      		if child.name == rule.from and rule.to.nil?
+					# debugger
+      		if child.name == rule.from.to_s and child.parent_name and rule.to.nil?
       		# 	2) a 'to' match is when the current object is the 'to' object when
       		#			there is no 'from' object (wildcard)
-      	  	debugger
+      	  	# debugger
         		puts 'from rule'
-      		elsif child.name == rule.to and rule.to.nil?
+      		elsif child.parent_name == rule.to.to_s and rule.from.nil?
       		#		3) a full match is when the current object and the object's parent match the
       		#			'from' and 'to' objects respectively
-      		elsif child.name == rule.from and child.parent_name == rule.to
+					      	  	# debugger
+        		puts 'to rule'
+      		elsif child.name == rule.from.to_s and child.parent_name == rule.to
+					  # debugger
+        		puts 'both rule'
     		  end
       		# when there is a match call the before rollup logic, then rollup logic,
       		# 	then the after rollup logic
     		end
-    		debugger
+    		# debugger
     		puts "after rollup function"
      end
 

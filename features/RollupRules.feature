@@ -12,7 +12,7 @@ Feature: Rollup rules
 
   Scenario: Rollup an organization using rollup rules
   	Given I have organizations set up
-	And I have rollup rules set up
+	And I have organizational rollup rules set up
     And I assign the "executives" organization $1000
 	And I assign the "marketing" organization $500 
 	And I assign the "software_development" organization $700 

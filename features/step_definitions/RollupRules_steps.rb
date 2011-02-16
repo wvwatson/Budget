@@ -1,5 +1,5 @@
 Before do
-  #@org_builder = OrganizationBuilder.
+  @org_builder = OrganizationBuilder.new
   class RollupTest; include RollupBuilder; end
   @rollup_builder = RollupTest.new
 end
@@ -36,12 +36,18 @@ Given /^I have rollup rules set up$/ do
   }
 end
 
+Given /^I have organizational rollup rules set up$/ do
+	input_path = File.dirname(__FILE__) + "/../../examples/" + "rollup_list.rb"
+  @org_builder.load_node input_path
+end
+
 Given /^I assign the "([^"]*)" organization \$(\d+)$/ do |arg1, arg2|
   #debugger
 	@org_builder.node_list.each {|org| org.Account.dollars=arg2.to_i if org.name == arg1}
 end
 
 Then /^the rollup result should be \$(\d+)$/ do |arg1|
+	debugger
   #@org_builder.rollup_rule_list=@rollup_builder.rollup_rule_list
   @org_builder.rollup.should == arg1.to_i 
 end
