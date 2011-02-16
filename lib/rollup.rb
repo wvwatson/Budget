@@ -165,9 +165,7 @@ module Rollup
   
   # attr_accessor :tree_list #node_list from hierarchy
   
-  def rollup_object (current_object, parent_object, rule)
-  end
-  
+
 # class TreeNode
   # attr_reader :name
 
@@ -267,15 +265,42 @@ module Rollup
   #   result << node
   # end
   
+  def rollup_object (current_object, parent_object, rule)
+  end
+  
   # should we use memoization?
   def rollup(root_name=:root)
     # debugger
      # @tree_list ||=[]
      #      children = walk_tree(root_name)
      root=get_node(root_name)
+     # each_depth_first(root) do |child|
+     #   puts child.name
+     # end 
      each_depth_first(root) do |child|
-       puts child.name
-     end 
+        debugger
+    		# loop through the rollup rules
+    		@rollup_rule_list.each do |rule|
+    			# pass the real object?
+          # rollup_object(child.name, child.parent_name, rule)
+          # there are three kinds of matches
+          #   1) a 'from' match is when the current object is the 'from' object when
+      		# 	  there is no 'to' object (wildcard)
+      		if child.name == rule.from and rule.to.nil?
+      		# 	2) a 'to' match is when the current object is the 'to' object when
+      		#			there is no 'from' object (wildcard)
+      		elsif child.name == rule.to and rule.to.nil?
+      		#		3) a full match is when the current object and the object's parent match the
+      		#			'from' and 'to' objects respectively
+      		elsif child.name == rule.from and child.parent_name == rule.to
+    		  end
+      		# when there is a match call the before rollup logic, then rollup logic,
+      		# 	then the after rollup logic
+    		end
+    		debugger
+    		puts "after rollup function"
+     end
+
      # debugger
           # puts 'after walk'
 		# 1) add the root as current object
@@ -330,14 +355,14 @@ module Rollup
     #   end 
 		# col
 		# make a function to handle each rule e.g. execute_rollup
-		debugger
-		# loop through the rollup rules
-		@rollup_rule_list.each do |rule|
-			# pass the real object?
-			rollup_object(node.name, node.parent_name, rule)
-		end
-		debugger
-		puts "after rollup function"
+    # debugger
+    # # loop through the rollup rules
+    # @rollup_rule_list.each do |rule|
+    #   # pass the real object?
+    #   rollup_object(node.name, node.parent_name, rule)
+    # end
+    # debugger
+    # puts "after rollup function"
 		# there are three kinds of matches
     #   1) a 'from' match is when the current object is the 'from' object when
 		# 	  there is no 'to' object (wildcard)
