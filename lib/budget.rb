@@ -62,7 +62,7 @@ class Organization
 	attr_accessor :Name
 	attr_accessor :LevelName
 	attr_accessor :Sub
-	attr_accessor :Account
+	attr_accessor :Account # phase this out -- kind of represents sum of all accounts
 	attr_accessor :accounts
 	attr_accessor :budget
 	attr_accessor :sourceoffunds
@@ -71,7 +71,7 @@ class Organization
 	def initialize
     @sub = []
     @sourceoffunds = []
-    @Account = Account.new
+    @Account = Account.new # phase this out -- kind of represents sum of all accounts
     @accounts = []
     @budget = 0
  end	
@@ -135,7 +135,7 @@ class Organization
        @budget += account.dollars
     end
     
-    @budget += @Account.dollars
+    @budget += @Account.dollars # phase this out -- kind of represents sum of all accounts
 	end
 	# runs calculations to see if the org is balanced.  Need  a smart way to return why not balanced
 	def balance(*tags)

@@ -40,7 +40,7 @@ module HierarchyBuilder
   
   attr_accessor :node_list # list of 
   attr_accessor :parent_stack
-  attr_accessor :node_class
+  attr_accessor :node_class # maybe add the traversal methods into this class?
   
   def hierarchy_initialize
     # debugger
@@ -104,6 +104,7 @@ module HierarchyBuilder
 
   # dynamically define expenses
   def method_missing(methId, *args, &block)
+    # have attribute to turn on/off method_missing capture
     #debugger
     # maybe make more secure/easier to debug by requiring method to have 
     # prefix of exp_ or rev_
