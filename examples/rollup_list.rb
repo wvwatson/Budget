@@ -7,7 +7,7 @@ end
 
 # applies to everything that gets rolled into finance
 to :finance do |expenses|
-  # finance is being subsidized by all of its siblings
+  # finance is being subsidizing other orgs
   expenses = expenses + (expenses * 0.02)
 end
 
