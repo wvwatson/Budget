@@ -7,12 +7,12 @@ end
 
 # applies to everything that gets rolled into finance
 to :finance do |expenses|
-  # finance is being subsidizing other orgs
+  # finance is subsidizing other orgs
   expenses = expenses + (expenses * 0.02)
 end
 
 # applies when rolling from help_desk into information_technology
 from :help_desk, to: :information_technology do |expenses|
-  # finance is covering 2% of the help_desk's expenses
+  # someone is covering 2% of the help_desk's expenses
   expenses = expenses - (expenses * 0.02)
 end
