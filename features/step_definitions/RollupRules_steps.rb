@@ -47,7 +47,7 @@ Given /^I assign the "([^"]*)" organization \$(\d+)$/ do |arg1, arg2|
 end
 
 Then /^the rollup result should be \$(\d+)$/ do |arg1|
-	debugger
+  # debugger
   #@org_builder.rollup_rule_list=@rollup_builder.rollup_rule_list
   @org_builder.rollup.should == arg1.to_i 
 end

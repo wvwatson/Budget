@@ -17,4 +17,4 @@ Feature: Rollup rules
 	And I assign the "marketing" organization $500 
 	And I assign the "software_development" organization $700 
 	And I assign the "graphic_design" organization $200
-    Then the rollup result should be $2400
+    Then the rollup result should be $2150

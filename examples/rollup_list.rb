@@ -1,12 +1,13 @@
 # applies to everything that gets rolled up from marketing
 from :marketing do |expenses|
   # amount gets matched by the red cross
+  # debugger
   expenses = expenses / 2
 end
 
 # applies to everything that gets rolled into finance
 to :finance do |expenses|
-  # finance owes the help desk a favor
+  # finance is being subsidized by all of its siblings
   expenses = expenses + (expenses * 0.02)
 end
 

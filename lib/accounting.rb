@@ -90,4 +90,17 @@ class Account
     newexp.dollars = total
     add(newexp)
   end
+  #wipes out existing expenditures and set dollars manually
+  #accept a hash that creates a new expenditure with cash  
+  def dollars!(total, exp = {})
+    @expenditures.clear
+    newexp = Expenditure.new
+    if exp["name"]
+      newexp.BudgetObject.name = exp["name"]
+    else
+      newexp.BudgetObject.name = "cash"
+    end
+    newexp.dollars = total
+    add(newexp)
+  end
 end

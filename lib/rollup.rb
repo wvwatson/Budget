@@ -278,6 +278,8 @@ module Rollup
      # each_depth_first(root) do |child|
      #   puts child.name
      # end 
+     # make this into an inject
+     amount = 0
      each_depth_first(root) do |child|
         # debugger
     		# loop through the rollup rules
@@ -286,29 +288,40 @@ module Rollup
           # rollup_object(child.name, child.parent_name, rule)
           # there are three kinds of matches
           #   1) a 'from' match is when the current object is the 'from' object when
-      		# 	  there is no 'to' object (wildcard)
+      		# 	  there is no 'to' object (wildcard). Note: we should only have 1 parent for our nodes
 					# debugger
       		if child.name == rule.from.to_s and child.parent_name and rule.to.nil?
       		# 	2) a 'to' match is when the current object is the 'to' object when
       		#			there is no 'from' object (wildcard)
-      	  	# debugger
-        		puts 'from rule'
+            # debugger
+            # apply the custom logic and change the original dollar amount
+            # possibly make a 'derived' dollar placeholder and preserve the original  
+            child.Account.dollars! rule.custom_code.call(child.Account.dollars)
+            # puts 'from rule'
+            # make the result of the proc get put into the child's amount
       		elsif child.parent_name == rule.to.to_s and rule.from.nil?
       		#		3) a full match is when the current object and the object's parent match the
       		#			'from' and 'to' objects respectively
 					      	  	# debugger
-        		puts 'to rule'
+            child.Account.dollars! rule.custom_code.call(child.Account.dollars)
+            # puts 'to rule'
       		elsif child.name == rule.from.to_s and child.parent_name == rule.to
 					  # debugger
-        		puts 'both rule'
+            child.Account.dollars! rule.custom_code.call(child.Account.dollars)
+            # puts 'both rule'
     		  end
       		# when there is a match call the before rollup logic, then rollup logic,
       		# 	then the after rollup logic
     		end
+        # puts "after rollup function"
+        # puts 'child.name: ' + child.name
+        # puts 'child.parent_name: ' + child.parent_name unless child.parent_name.nil?
+        # puts 'child.Account.dollars: ' + child.Account.dollars.to_s
+    		amount+=child.Account.dollars
     		# debugger
-    		puts "after rollup function"
-     end
 
+     end
+     amount
      # debugger
           # puts 'after walk'
 		# 1) add the root as current object
