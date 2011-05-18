@@ -66,7 +66,7 @@ expenses do
 	  	  end
 	  	end
 	  end
-``` ruby
+```
 	  Things start as an idea.  
 As we nurse that idea we give it resources.  
 At some point we want to know just how big that idea can become.
