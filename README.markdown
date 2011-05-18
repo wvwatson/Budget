@@ -2,7 +2,7 @@ Why make a financial domain specific programming language?
 --------------------------------------------------------
 *So that you can to work closer to the financial problem*
 --------------------------------------------------------
-
+```
 expenses do
 
 	  # monthly bills are the default
@@ -66,7 +66,7 @@ expenses do
 	  	  end
 	  	end
 	  end
-
+```
 	  Things start as an idea.  
 As we nurse that idea we give it resources.  
 At some point we want to know just how big that idea can become.
