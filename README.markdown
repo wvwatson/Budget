@@ -1,6 +1,8 @@
 
 This code is a brain dump of my ideas how on to make a financial DSL.  Use it at your own risk
-==
+--
+
+Example of events dsl for hourly planning.
 
 ``` ruby
 # hours per day are the default
@@ -37,7 +39,7 @@ end
 
 ```
 
-Example of an Expense DSL composed with hours DSL (for creating projections)
+Example of an Expense DSL composed with the events DSL (for creating yearly projections)
 
 ``` ruby
 # monthly bills are the default
