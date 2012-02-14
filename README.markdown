@@ -2,71 +2,143 @@
 This code is a brain dump of my ideas how on to make a financial DSL.  Use it at your own risk
 ==
 
+``` ruby
+# hours per day are the default
+
+family_web_site 1
+
+# also can explicitly use hours type
+day_job 8.hours
+
+# do something every monday
+every :monday do
+  meeting 1, :at => "9:30"
+end
+
+# one time project
+on "8/3/2011" do
+  medical_checkup 4
+end
+
+# or it can look like this
+medical_checkup 4, :date => "8/3/2011"
+
+# change a day's hours to another change time
+on "8/3/2011" do
+  replace :all, :sick_day
+end
+
+# range
+from "3/1/2011", "5/1/2011" do
+  every :month do
+    side_project_meeting 1, {:every => :monday, :at => "10:30"}
+  end
+end
+
+```
+
+Example of an Expense DSL composed with hours DSL (for creating projections)
 
 ``` ruby
-expenses do
+# monthly bills are the default
 
-	  # monthly bills are the default
+telephone 50
+cell_phone 75
+rent 750
+car_note 350
 
-	  telephone $50
-	  cell_phone $75
-	  rent $750
-	  car_note $350
+# do something every 6 months
 
-	  # do something every 6 months
+every 6.months do
+  car_insurance 600
+end
 
-	  every 6.months do
-		  car_insurance $600
-	  end
+# pay one time bill
+on '8/3/2011' do
+  birthday 250
+end
 
-	  # pay one time bill
-	  on 8/3/2011 do
-		  birthday $250
-	  end
-  
-	  # or it can look like this
-	  birthday $250, date => 8/3/2011
-  
-	  #range
-	  from 3/1/2011, 11/1/2011 do
-	    every :month do
-	  	  lawn_care $250
-	  	end
-	  end
-  
-	  # use probabilities (you don't always pay car maintenance every year)
-	  car_maintenance do
-		  cost $500
-	    chance 25%
-	  end
-	  # or it can look like this
-	  car_maintenance $500, chance => 25%
-  
-  
-	  # specialized expense calculations
-	  on 4/15/2011 do
-	    total_expenses 10000
-	  	taxes $5000 do
-	  	  # whatever code you want in here
-	  	  # needs to make sense within context of an expense
-	  	  if total_expenses > 7000
-	  	  	file_extension
-	  	  end
-	  	end
-	  end
-  
-	  # specialized calculations that span income and expenses
-	  on 4/15/2011 do
-	  	taxes $5000 do
-	  	  # whatever code you want in here
-	  	  # needs to make sense within context of a 
-	  	  #  financial statement (expense and income)
-	  	  if cash_on_hand < 10000
-	  	  	file_extension
-	    		date = date.3.months.from_now
-	  	  end
-	  	end
-	  end
+#range
+from '3/1/2011', '11/1/2011' do
+  every :month do
+    lawn_care 250
+  end
+end
+
+# use probabilities (you don't always pay car maintenance every year)
+car_maintenance do
+  cost 500
+  chance 25
+end
+
+# specialized calculations that span income and expenses
+on '4/15/2011' do
+  taxes 5000 do
+    # whatever code you want in here
+    # needs to make sense within context of an expense
+    if total.to_f > 10000
+      cost 0
+    end
+  end
+end
+```
+
+Example of an organization dsl (for setting up organizational hierarchies)
+
+``` ruby
+# top down
+# designate hierarchy
+executives do
+  :finance do
+    :budgeting
+    :payroll
+  end
+  :information_technology
+  :marketing
+  :sales
+end
+
+# reopen hierarchy
+information_technology do
+  :help_desk
+  :operations
+  :software_development
+end  
+
+# single assignment/reopen
+
+marketing :graphic_design
+
+#bottom up
+field_sales :reports_to, :sales
+district_1 :reports_to, :field_sales
+
+```
+
+Example of a rollup dsl.  During a rollup: 
+1) a sub-org accounts for its money 
+2) A 'parent' org accounts for the money of all of its sub-orgs 
+3) The parent org accounts for its own money
+
+``` ruby
+# applies to everything that gets rolled up from marketing
+from :marketing do |expenses|
+  # amount gets matched by the red cross
+  # debugger
+  expenses = expenses / 2
+end
+
+# applies to everything that gets rolled into finance
+to :finance do |expenses|
+  # finance is subsidizing other orgs
+  expenses = expenses + (expenses * 0.02)
+end
+
+# applies when rolling from help_desk into information_technology
+from :help_desk, to: :information_technology do |expenses|
+  # someone is covering 2% of the help_desk's expenses
+  expenses = expenses - (expenses * 0.02)
+end
 ```
 
 Things usually start as an idea.  
