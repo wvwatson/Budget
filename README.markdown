@@ -2,7 +2,7 @@
 This code is a brain dump of my ideas for a Financial DSL.  Use it at your own risk.  Review the test directories for more examples.
 --
 
-Example of events dsl for hourly planning.
+Example of an events dsl for hourly planning.
 
 ``` ruby
 # hours per day are the default
@@ -118,7 +118,7 @@ district_1 :reports_to, :field_sales
 ```
 
 Example of a rollup dsl.  During a rollup: 
-1) a sub-org accounts for its money 
+1) A sub-org accounts for its money 
 2) A 'parent' org accounts for the money of all of its sub-orgs 
 3) The parent org accounts for its own money
 
