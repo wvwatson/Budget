@@ -5,7 +5,7 @@ Why make a financial domain specific programming language?
 --------------------------------------------------------
 *So that you can to work closer to the financial problem*
 --------------------------------------------------------
-'''
+``` ruby
 expenses do
 
 	  # monthly bills are the default
