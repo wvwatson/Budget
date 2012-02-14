@@ -1,8 +1,11 @@
+
+==This code is a brain dump of my ideas how on to make a financial DSL.  Use it at your own risk== 
+
 Why make a financial domain specific programming language?  
 --------------------------------------------------------
 *So that you can to work closer to the financial problem*
 --------------------------------------------------------
-
+'''
 expenses do
 
 	  # monthly bills are the default
@@ -66,16 +69,12 @@ expenses do
 	  	  end
 	  	end
 	  end
+'''
 
-	  Things start as an idea.  
+Things usually start as an idea.  
 As we nurse that idea we give it resources.  
 At some point we want to know just how big that idea can become.
+It's at that point when start the balancing act of keeping the idea from consuming all of our resources, or everything else from consuming the resources from the idea.  Thats where budgets come in.
 
-In the end we must keep the idea from consuming everything 
-Or vice versa
+Your idea -> feasibility numbers -> projection -> budget
 
-Your idea -> feasability numbers -> projection -> budget
-
-First code imitates spec
-Then spec imitates code
-then spec *becomes* code	
