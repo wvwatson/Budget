@@ -1,0 +1,12 @@
+source "http://rubygems.org"
+
+
+gem "active_support"
+gem "spreadsheet"
+gem "i18n"
+
+group :development do
+  gem "ruby-debug19"
+  gem "rspec"
+  gem "cucumber"
+end
