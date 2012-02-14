@@ -72,7 +72,7 @@ expenses do
 Things usually start as an idea.  
 As we nurse that idea we give it resources.  
 At some point we want to know just how big that idea can become.
-It's at that point when start the balancing act of keeping the idea from consuming all of our resources, or everything else from consuming the resources from the idea.  Thats where budgets come in.
+It's at that point when we start the balancing act of keeping the idea from consuming all of our resources, or everything else from consuming the resources of the idea.  That's where budgets come in.
 
 Your idea -> feasibility numbers -> projection -> budget
 
