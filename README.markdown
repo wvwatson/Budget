@@ -1,10 +1,8 @@
 
-==This code is a brain dump of my ideas how on to make a financial DSL.  Use it at your own risk== 
+This code is a brain dump of my ideas how on to make a financial DSL.  Use it at your own risk
+==
 
-Why make a financial domain specific programming language?  
---------------------------------------------------------
-*So that you can to work closer to the financial problem*
---------------------------------------------------------
+
 ``` ruby
 expenses do
 
