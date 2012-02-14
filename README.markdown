@@ -1,5 +1,5 @@
 
-This code is a brain dump of my ideas how on to make a financial DSL.  Use it at your own risk
+This code is a brain dump of my ideas for a financial DSL.  Use it at your own risk
 --
 
 Example of events dsl for hourly planning.
