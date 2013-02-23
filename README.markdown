@@ -1,4 +1,4 @@
-This code is a brain dump of quick work on a Financial DSL.  Use it at your own risk.  Review the test directories for more examples.
+This code is a quick brain dump of work on a Financial DSL.  Use it at your own risk.  Review the test directories for more examples.
 --
 
 Example of an events dsl for hourly planning.
